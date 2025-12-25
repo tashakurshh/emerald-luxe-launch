@@ -39,22 +39,11 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen relative">
-      {/* Background ambient effects */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div
-          className="apple-glow w-[600px] h-[600px] -top-60 left-1/4 opacity-15"
-          style={{ background: "hsl(210, 100%, 50%)" }}
-        />
-        <div
-          className="apple-glow w-[500px] h-[500px] top-1/2 -right-40 opacity-10"
-          style={{ background: "hsl(280, 100%, 65%)" }}
-        />
-        <div
-          className="apple-glow w-[400px] h-[400px] -bottom-40 left-0 opacity-10"
-          style={{ background: "hsl(142, 71%, 45%)" }}
-        />
-      </div>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* iOS-style subtle noise overlay */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.015]" 
+           style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} 
+      />
 
       {/* Welcome Modal */}
       {showModal && <WelcomeModal onComplete={handleNameSubmit} />}
