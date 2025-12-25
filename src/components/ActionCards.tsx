@@ -1,46 +1,58 @@
-import { FileUp, PenLine, ArrowRight } from "lucide-react";
+import { FileUp, PenLine, ArrowUpRight } from "lucide-react";
 
 const ActionCards = () => {
   return (
     <div className="grid md:grid-cols-2 gap-4">
-      {/* Upload Prescription */}
-      <div className="glass-card-glow p-6 group cursor-pointer hover:scale-[1.02] transition-all duration-300">
-        <div className="flex items-start justify-between mb-4">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <FileUp className="w-7 h-7 text-primary-foreground" />
+      {/* Upload Prescription - Primary */}
+      <div className="glass-card p-6 group cursor-pointer relative overflow-hidden transition-all duration-500 hover:scale-[1.02]">
+        {/* Gradient background glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(210,100%,50%,0.15)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+        <div className="relative z-10">
+          <div className="flex items-start justify-between mb-5">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center"
+              style={{
+                background: "linear-gradient(135deg, hsl(210, 100%, 50%), hsl(280, 100%, 65%))",
+              }}
+            >
+              <FileUp className="w-7 h-7 text-foreground" />
+            </div>
+            <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
           </div>
-          <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+
+          <h3 className="text-xl font-semibold text-foreground mb-2 tracking-tight">
+            Upload Prescription
+          </h3>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            Upload your doctor's prescription and we'll deliver your medicines
+          </p>
         </div>
-        
-        <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-          Upload Prescription
-        </h3>
-        <p className="text-muted-foreground text-sm leading-relaxed">
-          Upload your doctor's prescription and we'll deliver your medicines
-        </p>
-        
-        {/* Decorative glow */}
-        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
 
-      {/* Enter Medicine Names */}
-      <div className="glass-card p-6 group cursor-pointer hover:scale-[1.02] transition-all duration-300">
-        <div className="flex items-start justify-between mb-4">
-          <div className="w-14 h-14 rounded-2xl bg-secondary flex items-center justify-center">
-            <PenLine className="w-7 h-7 text-primary" />
+      {/* Enter Medicine Names - Secondary */}
+      <div className="glass-card p-6 group cursor-pointer relative overflow-hidden transition-all duration-500 hover:scale-[1.02]">
+        {/* Gradient background glow */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(142,71%,45%,0.15)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+        <div className="relative z-10">
+          <div className="flex items-start justify-between mb-5">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center"
+              style={{ background: "hsl(142, 71%, 45%, 0.2)" }}
+            >
+              <PenLine className="w-7 h-7" style={{ color: "hsl(142, 71%, 45%)" }} />
+            </div>
+            <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
           </div>
-          <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+
+          <h3 className="text-xl font-semibold text-foreground mb-2 tracking-tight">
+            Enter Medicine Names
+          </h3>
+          <p className="text-muted-foreground text-sm leading-relaxed">
+            Don't have a prescription? Just tell us what you need
+          </p>
         </div>
-        
-        <h3 className="font-display text-xl font-semibold text-foreground mb-2">
-          Enter Medicine Names
-        </h3>
-        <p className="text-muted-foreground text-sm leading-relaxed">
-          Don't have a prescription? Just tell us what you need
-        </p>
-        
-        {/* Decorative glow */}
-        <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-accent/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
       </div>
     </div>
   );
