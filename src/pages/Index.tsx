@@ -1,94 +1,76 @@
-import { useState, useEffect } from "react";
-import WelcomeModal from "@/components/WelcomeModal";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useApp } from "@/contexts/AppContext";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
 import BottomNav from "@/components/BottomNav";
+import ParallaxBackground from "@/components/ui/ParallaxBackground";
+import WelcomeModal from "@/components/WelcomeModal";
 import HeroVisual from "@/components/HeroVisual";
 import ServicesCard from "@/components/ServicesCard";
 import ActionCards from "@/components/ActionCards";
 import FooterVisual from "@/components/FooterVisual";
-
-const USER_NAME_KEY = "medicare_user_name";
+import UploadPrescriptionModal from "@/components/modals/UploadPrescriptionModal";
+import EnterMedicineModal from "@/components/modals/EnterMedicineModal";
 
 const Index = () => {
-  const [userName, setUserName] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const storedName = localStorage.getItem(USER_NAME_KEY);
-    if (storedName) {
-      setUserName(storedName);
-    } else {
-      setShowModal(true);
-    }
-    setIsLoading(false);
-  }, []);
+  const { userName, setUserName } = useApp();
+  const [showWelcome, setShowWelcome] = useState(!userName);
+  const [showUploadModal, setShowUploadModal] = useState(false);
+  const [showMedicineModal, setShowMedicineModal] = useState(false);
 
   const handleNameSubmit = (name: string) => {
-    localStorage.setItem(USER_NAME_KEY, name);
     setUserName(name);
-    setShowModal(false);
+    setShowWelcome(false);
   };
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-      </div>
-    );
+  if (!userName && showWelcome) {
+    return <WelcomeModal onComplete={handleNameSubmit} />;
   }
 
   return (
-    <div className="min-h-screen relative overflow-hidden">
-      {/* iOS-style subtle noise overlay */}
-      <div className="fixed inset-0 pointer-events-none opacity-[0.015]" 
-           style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' }} 
-      />
-
-      {/* Welcome Modal */}
-      {showModal && <WelcomeModal onComplete={handleNameSubmit} />}
-
-      {/* Dynamic Island Navbar */}
+    <div className="page-container">
+      <ParallaxBackground />
       <DynamicIslandNav />
 
-      {/* Main Content */}
-      <main className="container mx-auto px-4 pt-28 pb-32 md:pb-16 max-w-2xl">
-        {/* Personalized Greeting */}
-        <div className="mb-10 opacity-0 animate-fade-in" style={{ animationDelay: "100ms" }}>
-          <p className="text-muted-foreground text-sm font-medium mb-1">
-            Good to see you
-          </p>
+      <main className="container mx-auto px-4 pt-28 pb-32 md:pb-16 max-w-2xl relative z-10">
+        {/* Greeting */}
+        <motion.div 
+          className="mb-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+        >
+          <p className="text-muted-foreground text-sm font-medium mb-1">Good to see you</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
             Hi, <span className="gradient-text-vibrant">{userName}</span>
           </h1>
-        </div>
+        </motion.div>
 
-        {/* Content Sections */}
         <div className="space-y-6">
-          {/* Hero Visual */}
-          <div className="opacity-0 animate-fade-in" style={{ animationDelay: "200ms" }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <HeroVisual />
-          </div>
+          </motion.div>
 
-          {/* Services Card */}
-          <div className="opacity-0 animate-fade-in" style={{ animationDelay: "300ms" }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
             <ServicesCard />
-          </div>
+          </motion.div>
 
-          {/* Action Cards */}
-          <div className="opacity-0 animate-fade-in" style={{ animationDelay: "400ms" }}>
-            <ActionCards />
-          </div>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+            <ActionCards 
+              onUploadClick={() => setShowUploadModal(true)}
+              onMedicineClick={() => setShowMedicineModal(true)}
+            />
+          </motion.div>
 
-          {/* Footer Visual */}
-          <div className="opacity-0 animate-fade-in" style={{ animationDelay: "500ms" }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
             <FooterVisual />
-          </div>
+          </motion.div>
         </div>
       </main>
 
-      {/* Mobile Bottom Nav */}
       <BottomNav />
+      <UploadPrescriptionModal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} />
+      <EnterMedicineModal isOpen={showMedicineModal} onClose={() => setShowMedicineModal(false)} />
     </div>
   );
 };
