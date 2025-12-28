@@ -9,14 +9,14 @@ import HeroVisual from "@/components/HeroVisual";
 import ServicesCard from "@/components/ServicesCard";
 import ActionCards from "@/components/ActionCards";
 import FooterVisual from "@/components/FooterVisual";
-import UploadPrescriptionModal from "@/components/modals/UploadPrescriptionModal";
-import EnterMedicineModal from "@/components/modals/EnterMedicineModal";
+import HowItWorks from "@/components/home/HowItWorks";
+import TrustSection from "@/components/home/TrustSection";
+import DeliveryPromise from "@/components/home/DeliveryPromise";
+import WhatsAppCTA from "@/components/home/WhatsAppCTA";
 
 const Index = () => {
   const { userName, setUserName } = useApp();
   const [showWelcome, setShowWelcome] = useState(!userName);
-  const [showUploadModal, setShowUploadModal] = useState(false);
-  const [showMedicineModal, setShowMedicineModal] = useState(false);
 
   const handleNameSubmit = (name: string) => {
     setUserName(name);
@@ -47,30 +47,49 @@ const Index = () => {
         </motion.div>
 
         <div className="space-y-6">
+          {/* Hero */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
             <HeroVisual />
           </motion.div>
 
+          {/* Action Cards - Upload Prescription / Enter Medicine */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+            <ActionCards />
+          </motion.div>
+
+          {/* How It Works */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
+            <HowItWorks />
+          </motion.div>
+
+          {/* Services Grid */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
             <ServicesCard />
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
-            <ActionCards 
-              onUploadClick={() => setShowUploadModal(true)}
-              onMedicineClick={() => setShowMedicineModal(true)}
-            />
+          {/* Trust Section */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}>
+            <TrustSection />
           </motion.div>
 
+          {/* Delivery Promise */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+            <DeliveryPromise />
+          </motion.div>
+
+          {/* WhatsApp CTA */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}>
+            <WhatsAppCTA />
+          </motion.div>
+
+          {/* Footer Visual */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
             <FooterVisual />
           </motion.div>
         </div>
       </main>
 
       <BottomNav />
-      <UploadPrescriptionModal isOpen={showUploadModal} onClose={() => setShowUploadModal(false)} />
-      <EnterMedicineModal isOpen={showMedicineModal} onClose={() => setShowMedicineModal(false)} />
     </div>
   );
 };
