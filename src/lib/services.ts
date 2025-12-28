@@ -228,29 +228,29 @@ export const services: ServiceData[] = [
   },
   {
     id: "instant-delivery",
-    name: "Instant Medicine Delivery",
+    name: "Fast Medicine Delivery",
     slug: "instant-delivery",
-    tagline: "Medicines in 30 minutes",
-    description: "Urgent medicines delivered super-fast",
-    longDescription: "When you need medicines urgently, we're here for you. Our instant delivery service operates 24/7 in select areas, bringing essential medicines to your doorstep in just 30 minutes. Perfect for late-night emergencies or unexpected health needs.",
+    tagline: "Medicines within 24 hours",
+    description: "Quick and reliable medicine delivery",
+    longDescription: "When you need medicines, we're here for you. Our fast delivery service operates daily, bringing essential medicines to your doorstep within 24 hours. Reliable service for all your medication needs.",
     icon: Zap,
     color: "hsl(30, 100%, 58%)",
     whoFor: [
-      "Medical emergencies requiring urgent medication",
-      "Parents with sick children at night",
+      "Anyone needing regular medication refills",
+      "Parents with sick children",
       "Patients who ran out of essential medicines",
-      "Anyone needing immediate relief"
+      "Those preferring doorstep delivery"
     ],
     whatCanOrder: [
-      "Emergency and essential medicines",
+      "Essential medicines",
       "Fever and pain relief",
       "Anti-allergy medications",
       "First-aid supplies",
       "Common OTC products"
     ],
-    deliveryInfo: "30-minute delivery in select zones. 24/7 availability. ₹50 express charge applies.",
+    deliveryInfo: "24-hour delivery across the city. Order before 2 PM for same-day delivery in select areas.",
     features: [
-      "30-minute delivery promise",
+      "24-hour delivery promise",
       "24/7 service availability",
       "Real-time order tracking",
       "Priority phone support"
