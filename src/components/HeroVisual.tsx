@@ -54,7 +54,7 @@ const HeroVisual = () => {
             </div>
             <div className="flex items-center gap-1.5 text-xs text-foreground/80 bg-background/50 backdrop-blur-sm px-3 py-1.5 rounded-full">
               <Clock className="w-3.5 h-3.5 text-[hsl(30,100%,58%)]" />
-              <span>30 Min Express</span>
+              <span>24hr Delivery</span>
             </div>
           </motion.div>
         </div>

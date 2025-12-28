@@ -26,8 +26,8 @@ const DeliveryPromise = () => {
             transition={{ delay: 0.1 }}
           >
             <Timer className="w-6 h-6 mx-auto mb-2 text-[hsl(30,100%,58%)]" />
-            <p className="text-2xl font-bold text-foreground">30 min</p>
-            <p className="text-xs text-muted-foreground">Express Delivery</p>
+            <p className="text-2xl font-bold text-foreground">24 hrs</p>
+            <p className="text-xs text-muted-foreground">Fast Delivery</p>
           </motion.div>
           
           <motion.div
