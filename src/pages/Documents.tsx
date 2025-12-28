@@ -1,12 +1,14 @@
 import { motion } from "framer-motion";
-import { FileText, Image, Download, Trash2, Upload } from "lucide-react";
-import { useApp } from "@/contexts/AppContext";
+import { FileText, Upload, MessageCircle } from "lucide-react";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
 import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
+import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 
 const Documents = () => {
-  const { documents, deleteDocument } = useApp();
+  const handleUpload = () => {
+    openWhatsApp(whatsappMessages.uploadPrescription);
+  };
 
   return (
     <div className="page-container">
@@ -17,54 +19,42 @@ const Documents = () => {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-3xl font-semibold text-foreground mb-6">Documents</h1>
 
-          {documents.length === 0 ? (
-            <div className="empty-state glass-card">
-              <div className="empty-state-icon">
-                <FileText className="w-8 h-8 text-muted-foreground" />
-              </div>
-              <p className="text-foreground font-medium mb-1">No documents yet</p>
-              <p className="text-muted-foreground text-sm">Your prescriptions and reports will appear here</p>
+          {/* Empty State */}
+          <div className="glass-card p-8 text-center mb-6">
+            <div className="w-20 h-20 mx-auto mb-4 rounded-3xl bg-[hsl(145,65%,48%,0.15)] flex items-center justify-center">
+              <FileText className="w-10 h-10 text-[hsl(145,65%,48%)]" />
             </div>
-          ) : (
-            <div className="space-y-3">
-              {documents.map((doc, index) => (
-                <motion.div
-                  key={doc.id}
-                  className="glass-card p-4 flex items-center gap-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    {doc.type === "prescription" ? (
-                      <Image className="w-6 h-6 text-primary" />
-                    ) : (
-                      <FileText className="w-6 h-6 text-primary" />
-                    )}
-                  </div>
-                  
-                  <div className="flex-1 min-w-0">
-                    <p className="text-foreground font-medium truncate">{doc.name}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {new Date(doc.uploadedAt).toLocaleDateString()}
-                    </p>
-                  </div>
+            <h2 className="text-xl font-semibold text-foreground mb-2">No documents yet</h2>
+            <p className="text-muted-foreground mb-6">
+              Share your prescriptions and reports directly via WhatsApp for a seamless ordering experience.
+            </p>
+          </div>
 
-                  <div className="flex gap-2">
-                    <button className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
-                      <Download className="w-4 h-4" />
-                    </button>
-                    <button 
-                      onClick={() => deleteDocument(doc.id)}
-                      className="w-10 h-10 rounded-xl bg-destructive/10 flex items-center justify-center text-destructive/60 hover:text-destructive transition-colors"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
+          {/* Upload CTA */}
+          <motion.div
+            className="glass-card p-5 cursor-pointer group"
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.99 }}
+            onClick={handleUpload}
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-[hsl(215,90%,58%,0.15)] flex items-center justify-center shrink-0">
+                <Upload className="w-6 h-6 text-[hsl(215,90%,58%)]" />
+              </div>
+              <div className="flex-1">
+                <h3 className="text-foreground font-semibold mb-0.5">Upload Prescription</h3>
+                <p className="text-muted-foreground text-sm">Share on WhatsApp to start your order</p>
+              </div>
+              <MessageCircle className="w-5 h-5 text-[hsl(142,70%,49%)]" />
             </div>
-          )}
+          </motion.div>
+
+          {/* Info */}
+          <div className="mt-6 p-4 rounded-2xl bg-secondary/30 text-center">
+            <p className="text-sm text-muted-foreground">
+              📱 Simply send your prescription image on WhatsApp and we'll handle the rest.
+            </p>
+          </div>
         </motion.div>
       </main>
 
