@@ -22,6 +22,20 @@ const springHover = {
   damping: 20,
 };
 
+// Apple-style section slide-in
+const sectionVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.4,
+      delay: i * 0.08,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    },
+  }),
+};
+
 const Profile = () => {
   const { userName } = useApp();
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
@@ -47,25 +61,86 @@ const Profile = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
-          {/* Profile Header */}
+          {/* Profile Header - Apple ID / iCloud style */}
           <motion.div 
-            className="glass-card p-6 mb-5 text-center"
+            className="glass-card p-6 mb-5 text-center relative overflow-hidden"
+            custom={0}
+            variants={sectionVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -1 }}
             whileTap={{ scale: 0.985 }}
             transition={springTap}
           >
-            <motion.div 
-              className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center bg-gradient-to-br from-primary to-apple-purple"
-              whileTap={{ scale: 0.92 }}
-              transition={{ duration: 0.1 }}
+            {/* Subtle gradient background */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              style={{
+                background: `linear-gradient(180deg, 
+                  hsl(var(--primary) / 0.06) 0%, 
+                  transparent 60%
+                )`,
+              }}
+            />
+            
+            {/* Avatar with glow */}
+            <div className="relative inline-block">
+              {/* Gentle glow behind avatar */}
+              <motion.div
+                className="absolute -inset-3 rounded-full pointer-events-none"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 0.6, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                style={{
+                  background: `radial-gradient(circle at 50% 50%, 
+                    hsl(var(--primary) / 0.25) 0%, 
+                    hsl(270 80% 65% / 0.15) 40%,
+                    transparent 70%
+                  )`,
+                  filter: 'blur(12px)',
+                }}
+              />
+              
+              <motion.div 
+                className="w-20 h-20 rounded-full mx-auto mb-4 flex items-center justify-center bg-gradient-to-br from-primary to-apple-purple relative z-10"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.4, delay: 0.15 }}
+                whileTap={{ scale: 0.92 }}
+              >
+                <User className="w-10 h-10 text-white" />
+              </motion.div>
+            </div>
+            
+            <motion.h1 
+              className="text-2xl font-semibold text-foreground mb-1 relative z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.25 }}
             >
-              <User className="w-10 h-10 text-white" />
-            </motion.div>
-            <h1 className="text-2xl font-semibold text-foreground mb-1">{userName || "Guest"}</h1>
-            <p className="text-muted-foreground text-sm">Welcome to Pharmih</p>
+              {userName || "Guest"}
+            </motion.h1>
+            <motion.p 
+              className="text-muted-foreground text-sm relative z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.3 }}
+            >
+              Welcome to Pharmih
+            </motion.p>
           </motion.div>
 
-          {/* Quick Actions */}
-          <div className="glass-card divide-y divide-border/50 mb-5 overflow-hidden">
+          {/* Quick Actions - System-native settings feel */}
+          <motion.div 
+            className="glass-card divide-y divide-border/50 mb-5 overflow-hidden"
+            custom={1}
+            variants={sectionVariants}
+            initial="hidden"
+            animate="visible"
+          >
             {menuItems.map((item, index) => {
               const IconComponent = item.icon;
               const isHovered = hoveredItem === item.label;
@@ -79,8 +154,8 @@ const Profile = () => {
                 >
                   <motion.div
                     className="flex items-center gap-4 p-4 relative"
-                    whileHover={{ x: 4 }}
-                    whileTap={{ scale: 0.98 }}
+                    whileHover={{ x: 4, backgroundColor: 'hsl(var(--secondary) / 0.3)' }}
+                    whileTap={{ scale: 0.98, x: 0 }}
                     transition={springTap}
                   >
                     <motion.div
@@ -112,10 +187,16 @@ const Profile = () => {
                 </Link>
               );
             })}
-          </div>
+          </motion.div>
 
           {/* Contact Support */}
-          <div className="relative">
+          <motion.div 
+            className="relative"
+            custom={2}
+            variants={sectionVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <motion.div
               className="absolute -inset-2 rounded-2xl pointer-events-none"
               animate={{
@@ -135,8 +216,8 @@ const Profile = () => {
             
             <motion.div
               className="glass-card p-5 cursor-pointer group relative overflow-hidden"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.975 }}
+              whileHover={{ y: -2, boxShadow: '0 8px 30px -8px hsl(142 60% 45% / 0.15)' }}
+              whileTap={{ scale: 0.975, y: 0 }}
               transition={springTap}
               onClick={handleSupport}
               onHoverStart={() => setIsSupportHovered(true)}
@@ -172,15 +253,34 @@ const Profile = () => {
                 </motion.div>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Delivery Area Info */}
           <motion.div 
-            className="glass-card p-5 mt-5"
+            className="glass-card p-5 mt-5 relative overflow-hidden"
+            custom={3}
+            variants={sectionVariants}
+            initial="hidden"
+            animate="visible"
+            whileHover={{ y: -1 }}
             whileTap={{ scale: 0.985 }}
             transition={springTap}
           >
-            <div className="flex items-center gap-3 mb-3">
+            {/* Soft ambient glow */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.4 }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              style={{
+                background: `radial-gradient(ellipse 60% 40% at 20% 50%, 
+                  hsl(215 70% 50% / 0.1) 0%, 
+                  transparent 60%
+                )`,
+              }}
+            />
+            
+            <div className="flex items-center gap-3 mb-3 relative z-10">
               <motion.div 
                 className="w-10 h-10 rounded-xl bg-[hsl(215,90%,58%,0.15)] flex items-center justify-center"
                 whileTap={{ scale: 0.9 }}
@@ -190,20 +290,26 @@ const Profile = () => {
               </motion.div>
               <h3 className="text-foreground font-semibold">Delivery Area</h3>
             </div>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-muted-foreground text-sm relative z-10">
               We currently deliver across the city. Message us on WhatsApp to check if your area is covered.
             </p>
           </motion.div>
 
           {/* App Info */}
-          <div className="mt-8 text-center">
+          <motion.div 
+            className="mt-8 text-center"
+            custom={4}
+            variants={sectionVariants}
+            initial="hidden"
+            animate="visible"
+          >
             <p className="text-xs text-muted-foreground">Pharmih v1.0</p>
             <motion.div whileTap={{ scale: 0.95 }} transition={{ duration: 0.1 }}>
               <Link to="/terms" className="text-xs text-primary hover:underline">
                 Terms & Conditions
               </Link>
             </motion.div>
-          </div>
+          </motion.div>
         </motion.div>
       </main>
 
