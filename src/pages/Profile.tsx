@@ -32,7 +32,7 @@ const Profile = () => {
               <User className="w-10 h-10 text-foreground" />
             </div>
             <h1 className="text-2xl font-semibold text-foreground mb-1">{userName || "Guest"}</h1>
-            <p className="text-muted-foreground text-sm">Welcome to MediCare</p>
+            <p className="text-muted-foreground text-sm">Welcome to Pharmih</p>
           </div>
 
           {/* Quick Actions */}
@@ -92,7 +92,7 @@ const Profile = () => {
 
           {/* App Info */}
           <div className="mt-8 text-center">
-            <p className="text-xs text-muted-foreground">MediCare v1.0</p>
+            <p className="text-xs text-muted-foreground">Pharmih v1.0</p>
             <Link to="/terms" className="text-xs text-primary hover:underline">
               Terms & Conditions
             </Link>

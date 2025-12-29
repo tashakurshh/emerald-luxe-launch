@@ -41,7 +41,7 @@ export default function ParallaxBackground() {
         }}
       />
       
-      {/* MID LAYER - Color diffusion (blue/teal/violet) */}
+      {/* MID LAYER - Color diffusion (blue/teal/violet) with teal hint */}
       <motion.div
         className="absolute inset-0"
         style={{ 
@@ -55,9 +55,9 @@ export default function ParallaxBackground() {
               hsl(250 25% 18% / 0.12) 0%, 
               transparent 50%
             ),
-            radial-gradient(ellipse 60% 45% at 15% 70%, 
-              hsl(190 30% 16% / 0.1) 0%, 
-              transparent 45%
+            radial-gradient(ellipse 70% 55% at 20% 75%, 
+              hsl(175 40% 18% / 0.15) 0%, 
+              transparent 50%
             )
           `
         }}
@@ -98,9 +98,24 @@ export default function ParallaxBackground() {
         }}
       />
       
-      {/* SECONDARY GLOW - Subtle warmth hint */}
+      {/* TEAL ACCENT GLOW - Subtle hint of teal */}
       <motion.div
-        className="absolute top-[40%] right-0 w-[50vw] h-[50vh]"
+        className="absolute top-[30%] left-0 w-[45vw] h-[50vh]"
+        style={{
+          y: useTransform(scrollY, [0, 800], [0, 50]),
+          background: `
+            radial-gradient(ellipse 100% 100% at 0% 50%, 
+              hsl(175 45% 20% / 0.12) 0%,
+              transparent 55%
+            )
+          `,
+          filter: 'blur(60px)',
+        }}
+      />
+      
+      {/* SECONDARY GLOW - Subtle violet hint */}
+      <motion.div
+        className="absolute top-[50%] right-0 w-[50vw] h-[50vh]"
         style={{
           y: useTransform(scrollY, [0, 800], [0, 60]),
           background: `
@@ -113,14 +128,14 @@ export default function ParallaxBackground() {
         }}
       />
       
-      {/* TERTIARY GLOW - Bottom teal hint */}
+      {/* TERTIARY GLOW - Bottom teal accent */}
       <motion.div
-        className="absolute bottom-0 left-0 w-[60vw] h-[40vh]"
+        className="absolute bottom-0 right-[20%] w-[50vw] h-[35vh]"
         style={{
           y: useTransform(scrollY, [0, 800], [0, -30]),
           background: `
-            radial-gradient(ellipse 100% 100% at 0% 100%, 
-              hsl(195 25% 16% / 0.06) 0%,
+            radial-gradient(ellipse 100% 100% at 50% 100%, 
+              hsl(180 35% 16% / 0.1) 0%,
               transparent 55%
             )
           `,
@@ -128,9 +143,47 @@ export default function ParallaxBackground() {
         }}
       />
       
+      {/* AMBIENT DRIFT ANIMATION - Ultra-slow organic movement */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            `radial-gradient(ellipse 60% 50% at 45% 40%, hsl(195 30% 18% / 0.08) 0%, transparent 50%)`,
+            `radial-gradient(ellipse 60% 50% at 55% 45%, hsl(210 30% 18% / 0.08) 0%, transparent 50%)`,
+            `radial-gradient(ellipse 60% 50% at 50% 35%, hsl(185 30% 18% / 0.08) 0%, transparent 50%)`,
+            `radial-gradient(ellipse 60% 50% at 45% 40%, hsl(195 30% 18% / 0.08) 0%, transparent 50%)`,
+          ],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        style={{ filter: 'blur(80px)' }}
+      />
+      
+      {/* SECONDARY DRIFT - Slower, offset timing */}
+      <motion.div
+        className="absolute inset-0"
+        animate={{
+          background: [
+            `radial-gradient(ellipse 50% 40% at 70% 60%, hsl(175 25% 16% / 0.06) 0%, transparent 45%)`,
+            `radial-gradient(ellipse 50% 40% at 65% 55%, hsl(190 25% 16% / 0.06) 0%, transparent 45%)`,
+            `radial-gradient(ellipse 50% 40% at 75% 65%, hsl(170 25% 16% / 0.06) 0%, transparent 45%)`,
+            `radial-gradient(ellipse 50% 40% at 70% 60%, hsl(175 25% 16% / 0.06) 0%, transparent 45%)`,
+          ],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        style={{ filter: 'blur(70px)' }}
+      />
+      
       {/* GLASS REFRACTION LAYER - Very subtle light interaction */}
       <div 
-        className="absolute inset-0 opacity-[0.015]"
+        className="absolute inset-0 opacity-[0.012]"
         style={{
           background: `
             linear-gradient(
