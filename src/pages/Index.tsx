@@ -50,8 +50,20 @@ const Index = () => {
           transition={{ ...springConfig, delay: staggerDelay }}
         >
           <p className="text-muted-foreground text-sm font-medium mb-0.5">Welcome to Pharmih</p>
-          <h1 className="text-3xl md:text-4xl font-semibold text-foreground">
-            Hi, {userName}
+          <h1 className="text-3xl md:text-4xl font-semibold">
+            <span className="text-foreground">Hi, </span>
+            <motion.span 
+              className="apple-spectrum-gradient inline-block"
+              initial={{ opacity: 0, x: -8 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ 
+                ...springConfig, 
+                delay: staggerDelay + 0.15,
+                duration: 0.5 
+              }}
+            >
+              {userName}
+            </motion.span>
           </h1>
         </motion.div>
 
