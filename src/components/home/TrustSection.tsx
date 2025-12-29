@@ -10,8 +10,8 @@ const trustPoints = [
   },
   {
     icon: Clock,
-    title: "Fast Delivery",
-    description: "Same-day delivery in most areas",
+    title: "24hr Delivery",
+    description: "Fast citywide delivery across Srinagar",
     color: "hsl(30, 100%, 58%)"
   },
   {
@@ -31,8 +31,8 @@ const trustPoints = [
 const TrustSection = () => {
   return (
     <div className="glass-card p-6">
-      <h3 className="text-lg font-semibold text-foreground mb-2 tracking-tight">Why Customers Trust Us</h3>
-      <p className="text-muted-foreground text-sm mb-6">Thousands of happy customers across the city</p>
+      <h3 className="text-lg font-semibold text-foreground mb-2 tracking-tight">Why Customers Trust Pharmih</h3>
+      <p className="text-muted-foreground text-sm mb-6">Trusted healthcare partner in Srinagar</p>
       
       <div className="grid grid-cols-2 gap-4">
         {trustPoints.map((point, index) => {

@@ -1,6 +1,6 @@
 import heroVisual from "@/assets/hero-visual.png";
 import { motion } from "framer-motion";
-import { Shield, Truck, Clock } from "lucide-react";
+import { Shield, MapPin, Gift } from "lucide-react";
 
 const HeroVisual = () => {
   return (
@@ -34,7 +34,7 @@ const HeroVisual = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            Premium healthcare at your fingertips. Trusted by thousands.
+            Premium healthcare at your fingertips. Trusted by Srinagar.
           </motion.p>
           
           {/* Trust badges */}
@@ -49,12 +49,12 @@ const HeroVisual = () => {
               <span>100% Genuine</span>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-foreground/80 bg-background/50 backdrop-blur-sm px-3 py-1.5 rounded-full">
-              <Truck className="w-3.5 h-3.5 text-[hsl(145,65%,48%)]" />
-              <span>Free Delivery</span>
+              <MapPin className="w-3.5 h-3.5 text-[hsl(145,65%,48%)]" />
+              <span>Serving Srinagar</span>
             </div>
             <div className="flex items-center gap-1.5 text-xs text-foreground/80 bg-background/50 backdrop-blur-sm px-3 py-1.5 rounded-full">
-              <Clock className="w-3.5 h-3.5 text-[hsl(30,100%,58%)]" />
-              <span>24hr Delivery</span>
+              <Gift className="w-3.5 h-3.5 text-[hsl(340,75%,62%)]" />
+              <span>Free First Delivery</span>
             </div>
           </motion.div>
         </div>
