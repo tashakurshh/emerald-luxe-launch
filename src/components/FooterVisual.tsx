@@ -1,12 +1,19 @@
 import footerVisual from "@/assets/footer-visual.png";
+import { motion } from "framer-motion";
+import { useParallax } from "@/hooks/useParallax";
 
 const FooterVisual = () => {
-  return (
-    <div className="glass-card overflow-hidden relative group">
-      {/* Ambient gradient */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-[hsl(142,71%,45%,0.1)] via-transparent to-[hsl(175,80%,40%,0.1)] z-10" />
+  const { ref, y, scale, opacity } = useParallax({ speed: 0.1, direction: "down" });
 
-      <div className="relative">
+  return (
+    <div className="glass-card overflow-hidden relative group" ref={ref}>
+      {/* Ambient gradient */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-[hsl(142,71%,45%,0.1)] via-transparent to-[hsl(175,80%,40%,0.1)] z-10 pointer-events-none" />
+
+      <motion.div 
+        className="relative"
+        style={{ y, scale, opacity }}
+      >
         <img
           src={footerVisual}
           alt="Wellness Journey"
@@ -15,28 +22,28 @@ const FooterVisual = () => {
 
         {/* Overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+      </motion.div>
 
-        {/* Content */}
-        <div className="absolute bottom-5 left-0 right-0 text-center z-20">
-          <p className="text-muted-foreground text-sm mb-2">
-            Your wellness journey starts here
-          </p>
-          <p className="text-foreground font-semibold text-lg mb-3">
-            Pharmih — Srinagar
-          </p>
-          <div className="flex items-center justify-center gap-3">
-            <span
-              className="w-2 h-2 rounded-full animate-pulse-glow"
-              style={{ background: "hsl(210, 100%, 50%)" }}
-            />
-            <span className="text-foreground/50 text-xs font-medium">
-              Always here for you
-            </span>
-            <span
-              className="w-2 h-2 rounded-full animate-pulse-glow"
-              style={{ background: "hsl(280, 100%, 65%)", animationDelay: "1s" }}
-            />
-          </div>
+      {/* Content - fixed position */}
+      <div className="absolute bottom-5 left-0 right-0 text-center z-20">
+        <p className="text-muted-foreground text-sm mb-2">
+          Your wellness journey starts here
+        </p>
+        <p className="text-foreground font-semibold text-lg mb-3">
+          Pharmih — Srinagar
+        </p>
+        <div className="flex items-center justify-center gap-3">
+          <span
+            className="w-2 h-2 rounded-full animate-pulse-glow"
+            style={{ background: "hsl(210, 100%, 50%)" }}
+          />
+          <span className="text-foreground/50 text-xs font-medium">
+            Always here for you
+          </span>
+          <span
+            className="w-2 h-2 rounded-full animate-pulse-glow"
+            style={{ background: "hsl(280, 100%, 65%)", animationDelay: "1s" }}
+          />
         </div>
       </div>
     </div>

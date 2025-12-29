@@ -4,10 +4,11 @@ import { useRef } from 'react';
 interface ParallaxOptions {
   offset?: [string, string];
   speed?: number;
+  direction?: 'up' | 'down';
 }
 
 export function useParallax(options: ParallaxOptions = {}) {
-  const { offset = ['start end', 'end start'], speed = 0.5 } = options;
+  const { offset = ['start end', 'end start'], speed = 0.15, direction = 'up' } = options;
   const ref = useRef<HTMLDivElement>(null);
   
   const { scrollYProgress } = useScroll({
@@ -15,9 +16,10 @@ export function useParallax(options: ParallaxOptions = {}) {
     offset: offset as any,
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], [speed * 100, speed * -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.6, 1, 1, 0.6]);
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.95, 1, 0.95]);
+  const multiplier = direction === 'up' ? 1 : -1;
+  const y = useTransform(scrollYProgress, [0, 1], [multiplier * speed * 100, multiplier * -speed * 100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.85, 1, 1, 0.85]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.02, 1, 1.02]);
 
   return { ref, y, opacity, scale, scrollYProgress };
 }
