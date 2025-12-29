@@ -25,7 +25,7 @@ const ServicePage = () => {
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
             <p className="text-muted-foreground mb-4">Service not found</p>
-            <Link to="/" className="text-primary hover:underline">Go back home</Link>
+            <Link to="/services" className="text-primary hover:underline">View all services</Link>
           </div>
         </div>
         <BottomNav />
@@ -43,9 +43,9 @@ const ServicePage = () => {
       <main className="container mx-auto px-4 pt-28 pb-32 md:pb-16 max-w-2xl relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           {/* Back */}
-          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors">
+          <Link to="/services" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors active:scale-95">
             <ArrowLeft className="w-4 h-4" />
-            Back to Home
+            Back to Services
           </Link>
 
           {/* Header Card */}
@@ -152,7 +152,7 @@ const ServicePage = () => {
 
           {/* WhatsApp CTA */}
           <motion.button
-            className="w-full py-4 rounded-2xl flex items-center justify-center gap-3 text-lg font-semibold text-white transition-all"
+            className="w-full py-4 rounded-2xl flex items-center justify-center gap-3 text-lg font-semibold text-white transition-all active:scale-[0.98]"
             style={{ background: "hsl(142, 70%, 49%)" }}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
@@ -163,7 +163,7 @@ const ServicePage = () => {
           </motion.button>
 
           <p className="text-center text-muted-foreground text-sm mt-4">
-            Chat with us for pricing and availability
+            Chat with Pharmih for pricing and availability
           </p>
         </motion.div>
       </main>

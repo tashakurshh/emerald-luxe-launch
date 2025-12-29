@@ -8,20 +8,20 @@ const DynamicIslandNav = () => {
 
   const navItems = [
     { name: "Home", icon: Home, href: "/" },
-    { name: "Services", icon: Grid3X3, href: "/#services" },
+    { name: "Services", icon: Grid3X3, href: "/services" },
     { name: "Terms", icon: FileText, href: "/terms" },
   ];
 
   const isActive = (href: string) => {
     if (href === "/") return location.pathname === "/";
-    return location.pathname.startsWith(href.replace("/#", "/"));
+    return location.pathname.startsWith(href);
   };
 
   return (
     <nav className="dynamic-island">
       <div className="flex items-center gap-1 px-2 py-2">
-        <Link to="/" className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[hsl(215,90%,58%)] to-[hsl(270,80%,65%)]">
-          <span className="text-sm font-bold tracking-tight">M</span>
+        <Link to="/" className="flex items-center gap-2 px-3 py-2 rounded-full bg-gradient-to-r from-[hsl(215,90%,58%)] to-[hsl(270,80%,65%)]">
+          <span className="text-sm font-bold tracking-tight text-white">Pharmih</span>
         </Link>
 
         <div className="w-px h-6 bg-border mx-1" />

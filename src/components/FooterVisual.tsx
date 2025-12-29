@@ -18,8 +18,11 @@ const FooterVisual = () => {
 
         {/* Content */}
         <div className="absolute bottom-5 left-0 right-0 text-center z-20">
-          <p className="text-muted-foreground text-sm mb-3">
+          <p className="text-muted-foreground text-sm mb-2">
             Your wellness journey starts here
+          </p>
+          <p className="text-foreground font-semibold text-lg mb-3">
+            Pharmih — Srinagar
           </p>
           <div className="flex items-center justify-center gap-3">
             <span

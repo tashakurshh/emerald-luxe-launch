@@ -24,7 +24,7 @@ const WhatsAppCTA = () => {
         
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-foreground mb-1 tracking-tight">Need Help?</h3>
-          <p className="text-muted-foreground text-sm">Chat with us on WhatsApp for instant support</p>
+          <p className="text-muted-foreground text-sm">Chat with Pharmih on WhatsApp for instant support</p>
         </div>
         
         <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />

@@ -11,7 +11,8 @@ import ActionCards from "@/components/ActionCards";
 import FooterVisual from "@/components/FooterVisual";
 import HowItWorks from "@/components/home/HowItWorks";
 import TrustSection from "@/components/home/TrustSection";
-import DeliveryPromise from "@/components/home/DeliveryPromise";
+import LocationBanner from "@/components/home/LocationBanner";
+import ServicesCTA from "@/components/home/ServicesCTA";
 import WhatsAppCTA from "@/components/home/WhatsAppCTA";
 
 const Index = () => {
@@ -40,7 +41,7 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <p className="text-muted-foreground text-sm font-medium mb-1">Good to see you</p>
+          <p className="text-muted-foreground text-sm font-medium mb-1">Welcome to Pharmih</p>
           <h1 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
             Hi, <span className="gradient-text-vibrant">{userName}</span>
           </h1>
@@ -57,33 +58,38 @@ const Index = () => {
             <ActionCards />
           </motion.div>
 
-          {/* How It Works */}
+          {/* Location & Offers Banner */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
+            <LocationBanner />
+          </motion.div>
+
+          {/* How It Works */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
             <HowItWorks />
           </motion.div>
 
           {/* Services Grid */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}>
             <ServicesCard />
           </motion.div>
 
+          {/* Services CTA */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+            <ServicesCTA />
+          </motion.div>
+
           {/* Trust Section */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}>
             <TrustSection />
           </motion.div>
 
-          {/* Delivery Promise */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
-            <DeliveryPromise />
-          </motion.div>
-
           {/* WhatsApp CTA */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
             <WhatsAppCTA />
           </motion.div>
 
           {/* Footer Visual */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}>
             <FooterVisual />
           </motion.div>
         </div>

@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import { Package, MessageCircle, ShoppingBag } from "lucide-react";
-import { Link } from "react-router-dom";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
 import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
@@ -8,11 +7,11 @@ import { openWhatsApp } from "@/lib/whatsapp";
 
 const Orders = () => {
   const handleCheckStatus = () => {
-    openWhatsApp("Hi, I want to check the status of my order. Can you help me?");
+    openWhatsApp("Hi Pharmih, I want to check the status of my order. Can you help me?");
   };
 
   const handleNewOrder = () => {
-    openWhatsApp("Hi, I want to place a new medicine order.");
+    openWhatsApp("Hi Pharmih, I want to place a new medicine order.");
   };
 
   return (
@@ -23,17 +22,6 @@ const Orders = () => {
       <main className="container mx-auto px-4 pt-28 pb-32 md:pb-16 max-w-2xl relative z-10">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
           <h1 className="text-3xl font-semibold text-foreground mb-6">Orders</h1>
-
-          {/* Empty State with CTA */}
-          <div className="glass-card p-8 text-center mb-6">
-            <div className="w-20 h-20 mx-auto mb-4 rounded-3xl bg-[hsl(270,80%,65%,0.15)] flex items-center justify-center">
-              <Package className="w-10 h-10 text-[hsl(270,80%,65%)]" />
-            </div>
-            <h2 className="text-xl font-semibold text-foreground mb-2">Your orders will appear here</h2>
-            <p className="text-muted-foreground mb-6">
-              Once you place an order via WhatsApp, you can track its status here or message us for updates.
-            </p>
-          </div>
 
           {/* Action Cards */}
           <div className="space-y-4">

@@ -1,14 +1,26 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { services } from "@/lib/services";
+import { activeServices } from "@/lib/services";
 
 const ServicesCard = () => {
+  // Show only first 4 services on home page
+  const displayServices = activeServices.slice(0, 4);
+
   return (
     <div id="services" className="glass-card p-6">
-      <h3 className="text-lg font-semibold text-foreground mb-5 tracking-tight">Our Services</h3>
+      <div className="flex items-center justify-between mb-5">
+        <h3 className="text-lg font-semibold text-foreground tracking-tight">Our Services</h3>
+        <Link 
+          to="/services" 
+          className="text-sm text-primary font-medium flex items-center gap-1 hover:gap-2 transition-all"
+        >
+          View All
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-        {services.map((service, index) => {
+        {displayServices.map((service, index) => {
           const IconComponent = service.icon;
           return (
             <motion.div
@@ -18,7 +30,7 @@ const ServicesCard = () => {
               transition={{ delay: index * 0.05 }}
             >
               <Link
-                to={`/services/${service.slug}`}
+                to="/services"
                 className="service-item flex flex-col items-center gap-2 group text-center p-3"
               >
                 <div
