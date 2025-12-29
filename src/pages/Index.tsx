@@ -15,6 +15,14 @@ import LocationBanner from "@/components/home/LocationBanner";
 import ServicesCTA from "@/components/home/ServicesCTA";
 import WhatsAppCTA from "@/components/home/WhatsAppCTA";
 
+// iOS spring physics
+const springConfig = {
+  duration: 0.4,
+  ease: [0.25, 0.46, 0.45, 0.94] as const,
+};
+
+const staggerDelay = 0.06;
+
 const Index = () => {
   const { userName, setUserName } = useApp();
   const [showWelcome, setShowWelcome] = useState(!userName);
@@ -33,63 +41,99 @@ const Index = () => {
       <ParallaxBackground />
       <DynamicIslandNav />
 
-      <main className="container mx-auto px-4 pt-28 pb-32 md:pb-16 max-w-2xl relative z-10">
-        {/* Greeting */}
+      <main className="container mx-auto px-4 pt-24 pb-28 md:pb-12 max-w-xl relative z-10">
+        {/* Greeting - minimal, confident */}
         <motion.div 
-          className="mb-10"
-          initial={{ opacity: 0, y: 20 }}
+          className="mb-8"
+          initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          transition={{ ...springConfig, delay: staggerDelay }}
         >
-          <p className="text-muted-foreground text-sm font-medium mb-1">Welcome to Pharmih</p>
-          <h1 className="text-4xl md:text-5xl font-semibold text-foreground tracking-tight">
-            Hi, <span className="gradient-text-vibrant">{userName}</span>
+          <p className="text-muted-foreground text-sm font-medium mb-0.5">Welcome to Pharmih</p>
+          <h1 className="text-3xl md:text-4xl font-semibold text-foreground">
+            Hi, {userName}
           </h1>
         </motion.div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {/* Hero */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 2 }}
+          >
             <HeroVisual />
           </motion.div>
 
-          {/* Action Cards - Upload Prescription / Enter Medicine */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }}>
+          {/* Action Cards */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 3 }}
+          >
             <ActionCards />
           </motion.div>
 
-          {/* Location & Offers Banner */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}>
+          {/* Location Banner */}
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 4 }}
+          >
             <LocationBanner />
           </motion.div>
 
           {/* How It Works */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 5 }}
+          >
             <HowItWorks />
           </motion.div>
 
           {/* Services Grid */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.45 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 6 }}
+          >
             <ServicesCard />
           </motion.div>
 
           {/* Services CTA */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 7 }}
+          >
             <ServicesCTA />
           </motion.div>
 
           {/* Trust Section */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.55 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 8 }}
+          >
             <TrustSection />
           </motion.div>
 
           {/* WhatsApp CTA */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.6 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 9 }}
+          >
             <WhatsAppCTA />
           </motion.div>
 
           {/* Footer Visual */}
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }}>
+          <motion.div 
+            initial={{ opacity: 0, y: 10 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ ...springConfig, delay: staggerDelay * 10 }}
+          >
             <FooterVisual />
           </motion.div>
         </div>
