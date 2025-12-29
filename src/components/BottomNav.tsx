@@ -1,8 +1,8 @@
+import { forwardRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Package, FileText, User } from "lucide-react";
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
-import { useCallback } from "react";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 interface NavItem {
@@ -11,7 +11,7 @@ interface NavItem {
   href: string;
 }
 
-const BottomNav = () => {
+const BottomNav = forwardRef<HTMLElement, object>(function BottomNav(_, ref) {
   const location = useLocation();
   const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
@@ -29,7 +29,7 @@ const BottomNav = () => {
   }, [triggerHaptic]);
 
   return (
-    <nav className="glass-bottom-nav md:hidden">
+    <nav ref={ref} className="glass-bottom-nav md:hidden">
       <div className="flex items-center justify-around py-2 px-2">
         {navItems.map((item) => {
           const IconComponent = item.icon;
@@ -39,30 +39,22 @@ const BottomNav = () => {
               key={item.name}
               to={item.href}
               onClick={handleNavClick}
-              className="relative flex flex-col items-center gap-0.5 px-5 py-2 rounded-2xl"
+              className="relative flex flex-col items-center gap-0.5 px-5 py-2 rounded-2xl active:scale-95 transition-transform duration-100"
             >
               <motion.div
                 whileTap={{ scale: appleScale.nav }}
                 transition={appleSpring.tap}
                 className="flex flex-col items-center gap-0.5"
               >
-                <motion.div
-                  animate={{ 
-                    scale: active ? 1 : 1,
-                    y: active ? -1 : 0,
+                <IconComponent
+                  className="w-[22px] h-[22px] transition-colors duration-100"
+                  style={{ 
+                    color: active ? "hsl(211, 100%, 50%)" : "hsl(0, 0%, 48%)" 
                   }}
-                  transition={appleSpring.tap}
-                >
-                  <IconComponent
-                    className="w-[22px] h-[22px] transition-colors duration-150"
-                    style={{ 
-                      color: active ? "hsl(211, 100%, 50%)" : "hsl(0, 0%, 48%)" 
-                    }}
-                    strokeWidth={active ? 2 : 1.5}
-                  />
-                </motion.div>
+                  strokeWidth={active ? 2 : 1.5}
+                />
                 <span
-                  className="text-[10px] font-medium transition-colors duration-150"
+                  className="text-[10px] font-medium transition-colors duration-100"
                   style={{ 
                     color: active ? "hsl(211, 100%, 50%)" : "hsl(0, 0%, 48%)" 
                   }}
@@ -76,6 +68,6 @@ const BottomNav = () => {
       </div>
     </nav>
   );
-};
+});
 
 export default BottomNav;

@@ -1,11 +1,10 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Grid3X3, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 const DynamicIslandNav = () => {
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const location = useLocation();
   const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
@@ -34,7 +33,7 @@ const DynamicIslandNav = () => {
           <Link 
             to="/" 
             onClick={handleNavClick}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary"
+            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary active:scale-95 transition-transform duration-100"
           >
             <span className="text-sm font-semibold tracking-tight text-primary-foreground">
               Pharmih
@@ -57,33 +56,14 @@ const DynamicIslandNav = () => {
                 <Link
                   to={item.href}
                   onClick={handleNavClick}
-                  onMouseEnter={() => setHoveredItem(item.name)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                  className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-colors duration-150 ${
-                    active ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-colors duration-100 active:scale-95 ${
+                    active ? "text-foreground bg-secondary" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
-                  {(active || hoveredItem === item.name) && (
-                    <motion.div
-                      layoutId="nav-pill"
-                      className="absolute inset-0 rounded-full bg-secondary"
-                      initial={false}
-                      transition={{ 
-                        type: "spring", 
-                        stiffness: 400, 
-                        damping: 30 
-                      }}
-                      style={{ opacity: active ? 1 : 0.5 }}
-                    />
+                  <IconComponent className="w-4 h-4" />
+                  {active && (
+                    <span className="text-sm font-medium">{item.name}</span>
                   )}
-                  <IconComponent className="w-4 h-4 relative z-10" />
-                  <span
-                    className={`text-sm font-medium transition-all duration-150 overflow-hidden relative z-10 ${
-                      hoveredItem === item.name || active ? "max-w-20 opacity-100" : "max-w-0 opacity-0"
-                    }`}
-                  >
-                    {item.name}
-                  </span>
                 </Link>
               </motion.div>
             );
