@@ -1,28 +1,17 @@
 import { motion } from "framer-motion";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
-import { useState } from "react";
-
-// Apple spring physics
-const springTap = {
-  type: "spring" as const,
-  stiffness: 400,
-  damping: 25,
-  mass: 0.8,
-};
-
-const springHover = {
-  type: "spring" as const,
-  stiffness: 300,
-  damping: 20,
-};
+import { useState, useCallback } from "react";
+import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 const WhatsAppCTA = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
+    triggerHaptic();
     openWhatsApp(whatsappMessages.generalInquiry);
-  };
+  }, [triggerHaptic]);
 
   return (
     <div className="relative">
@@ -33,7 +22,7 @@ const WhatsAppCTA = () => {
           opacity: isHovered ? 0.6 : 0,
           scale: isHovered ? 1.01 : 0.95,
         }}
-        transition={springHover}
+        transition={appleSpring.hover}
         style={{
           background: `radial-gradient(ellipse 80% 70% at 50% 50%, 
             hsl(142 60% 45% / 0.3) 0%, 
@@ -47,8 +36,8 @@ const WhatsAppCTA = () => {
       <motion.div 
         className="glass-card p-5 cursor-pointer group relative overflow-hidden"
         whileHover={{ y: -2 }}
-        whileTap={{ scale: 0.975 }}
-        transition={springTap}
+        whileTap={{ scale: appleScale.card }}
+        transition={appleSpring.tap}
         onClick={handleClick}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
@@ -68,9 +57,9 @@ const WhatsAppCTA = () => {
         <div className="relative z-10 flex items-center gap-4">
           <motion.div 
             className="w-12 h-12 rounded-2xl flex items-center justify-center bg-[hsl(142,70%,49%)] shrink-0"
-            whileTap={{ scale: 0.9 }}
+            whileTap={{ scale: appleScale.icon }}
             animate={{ scale: isHovered ? 1.05 : 1 }}
-            transition={springTap}
+            transition={appleSpring.tap}
           >
             <MessageCircle className="w-6 h-6 text-white" />
           </motion.div>
@@ -82,7 +71,7 @@ const WhatsAppCTA = () => {
           
           <motion.div
             animate={{ x: isHovered ? 3 : 0 }}
-            transition={springHover}
+            transition={appleSpring.hover}
           >
             <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
           </motion.div>

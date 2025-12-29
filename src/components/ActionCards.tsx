@@ -1,32 +1,22 @@
 import { FileUp, PenLine, ArrowUpRight, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
-import { useState } from "react";
-
-// Apple spring physics - immediate response, smooth release
-const springTap = {
-  type: "spring" as const,
-  stiffness: 400,
-  damping: 25,
-  mass: 0.8,
-};
-
-const springHover = {
-  type: "spring" as const,
-  stiffness: 300,
-  damping: 20,
-};
+import { useState, useCallback } from "react";
+import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 const ActionCards = () => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
-  const handleUploadClick = () => {
+  const handleUploadClick = useCallback(() => {
+    triggerHaptic();
     openWhatsApp(whatsappMessages.uploadPrescription);
-  };
+  }, [triggerHaptic]);
 
-  const handleMedicineClick = () => {
+  const handleMedicineClick = useCallback(() => {
+    triggerHaptic();
     openWhatsApp(whatsappMessages.enterMedicine);
-  };
+  }, [triggerHaptic]);
 
   return (
     <div className="grid md:grid-cols-2 gap-4">
@@ -39,7 +29,7 @@ const ActionCards = () => {
             opacity: hoveredCard === 'upload' ? 0.6 : 0,
             scale: hoveredCard === 'upload' ? 1.01 : 0.95,
           }}
-          transition={springHover}
+          transition={appleSpring.hover}
           style={{
             background: `radial-gradient(ellipse 80% 70% at 50% 50%, 
               hsl(215 70% 45% / 0.3) 0%, 
@@ -53,8 +43,8 @@ const ActionCards = () => {
         <motion.div 
           className="glass-card p-6 group cursor-pointer relative overflow-hidden"
           whileHover={{ y: -3 }}
-          whileTap={{ scale: 0.975 }}
-          transition={springTap}
+          whileTap={{ scale: appleScale.card }}
+          transition={appleSpring.tap}
           onClick={handleUploadClick}
           onHoverStart={() => setHoveredCard('upload')}
           onHoverEnd={() => setHoveredCard(null)}
@@ -71,8 +61,8 @@ const ActionCards = () => {
             <div className="flex items-start justify-between mb-5">
               <motion.div 
                 className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[hsl(215,80%,55%)] to-[hsl(260,70%,55%)]"
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.1 }}
+                whileTap={{ scale: appleScale.icon }}
+                transition={appleSpring.tap}
               >
                 <FileUp className="w-7 h-7 text-white" />
               </motion.div>
@@ -83,7 +73,7 @@ const ActionCards = () => {
                     x: hoveredCard === 'upload' ? 2 : 0,
                     y: hoveredCard === 'upload' ? -2 : 0,
                   }}
-                  transition={springHover}
+                  transition={appleSpring.hover}
                 >
                   <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors duration-150" />
                 </motion.div>
@@ -104,7 +94,7 @@ const ActionCards = () => {
             opacity: hoveredCard === 'medicine' ? 0.6 : 0,
             scale: hoveredCard === 'medicine' ? 1.01 : 0.95,
           }}
-          transition={springHover}
+          transition={appleSpring.hover}
           style={{
             background: `radial-gradient(ellipse 80% 70% at 50% 50%, 
               hsl(165 60% 40% / 0.3) 0%, 
@@ -118,8 +108,8 @@ const ActionCards = () => {
         <motion.div 
           className="glass-card p-6 group cursor-pointer relative overflow-hidden"
           whileHover={{ y: -3 }}
-          whileTap={{ scale: 0.975 }}
-          transition={springTap}
+          whileTap={{ scale: appleScale.card }}
+          transition={appleSpring.tap}
           onClick={handleMedicineClick}
           onHoverStart={() => setHoveredCard('medicine')}
           onHoverEnd={() => setHoveredCard(null)}
@@ -136,8 +126,8 @@ const ActionCards = () => {
             <div className="flex items-start justify-between mb-5">
               <motion.div 
                 className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[hsl(165,60%,45%)] to-[hsl(145,55%,40%)]"
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.1 }}
+                whileTap={{ scale: appleScale.icon }}
+                transition={appleSpring.tap}
               >
                 <PenLine className="w-7 h-7 text-white" />
               </motion.div>
@@ -148,7 +138,7 @@ const ActionCards = () => {
                     x: hoveredCard === 'medicine' ? 2 : 0,
                     y: hoveredCard === 'medicine' ? -2 : 0,
                   }}
-                  transition={springHover}
+                  transition={appleSpring.hover}
                 >
                   <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors duration-150" />
                 </motion.div>

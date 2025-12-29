@@ -1,13 +1,7 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, Award, HeartHandshake } from "lucide-react";
-
-// Apple spring physics
-const springTap = {
-  type: "spring" as const,
-  stiffness: 400,
-  damping: 25,
-  mass: 0.8,
-};
+import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import { useCallback } from "react";
 
 const trustPoints = [
   {
@@ -37,11 +31,17 @@ const trustPoints = [
 ];
 
 const TrustSection = () => {
+  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
+
+  const handlePointTap = useCallback(() => {
+    triggerHaptic();
+  }, [triggerHaptic]);
+
   return (
     <motion.div 
       className="glass-card p-5"
-      whileTap={{ scale: 0.985 }}
-      transition={springTap}
+      whileTap={{ scale: appleScale.card }}
+      transition={appleSpring.tap}
     >
       <h3 className="text-base font-semibold text-foreground mb-1 tracking-tight">Why Customers Trust Pharmih</h3>
       <p className="text-muted-foreground text-sm mb-5">Trusted healthcare partner in Srinagar</p>
@@ -52,16 +52,18 @@ const TrustSection = () => {
           return (
             <motion.div
               key={point.title}
-              className="flex items-start gap-3"
+              className="flex items-start gap-3 cursor-pointer"
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.06, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ delay: index * 0.06, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+              whileTap={{ scale: appleScale.subtle }}
+              onClick={handlePointTap}
             >
               <motion.div
                 className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                 style={{ background: `${point.color}15` }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ duration: 0.1 }}
+                whileTap={{ scale: appleScale.icon }}
+                transition={appleSpring.tap}
               >
                 <IconComponent className="w-4 h-4" style={{ color: point.color }} />
               </motion.div>
