@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Package, MessageCircle, ShoppingBag, ArrowRight } from "lucide-react";
+import { Package, MessageCircle, ShoppingBag, ArrowRight, Clock } from "lucide-react";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
 import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
@@ -18,6 +18,21 @@ const springHover = {
   type: "spring" as const,
   stiffness: 300,
   damping: 20,
+};
+
+// Apple-style sheet animation
+const sheetVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.96 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      delay: i * 0.1,
+      ease: [0.25, 0.46, 0.45, 0.94] as const,
+    },
+  }),
 };
 
 const Orders = () => {
@@ -44,10 +59,16 @@ const Orders = () => {
         >
           <h1 className="text-2xl font-semibold text-foreground mb-6">Orders</h1>
 
-          {/* Action Cards */}
+          {/* Action Cards - Apple-style sheets */}
           <div className="space-y-3">
             {/* New Order Card */}
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              custom={0}
+              variants={sheetVariants}
+              initial="hidden"
+              animate="visible"
+            >
               <motion.div
                 className="absolute -inset-2 rounded-2xl pointer-events-none"
                 animate={{
@@ -67,8 +88,8 @@ const Orders = () => {
               
               <motion.div
                 className="glass-card p-5 cursor-pointer group relative overflow-hidden"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.975 }}
+                whileHover={{ y: -2, boxShadow: '0 8px 30px -8px hsl(145 60% 45% / 0.15)' }}
+                whileTap={{ scale: 0.975, y: 0 }}
                 transition={springTap}
                 onClick={handleNewOrder}
                 onHoverStart={() => setHoveredCard('new')}
@@ -104,10 +125,16 @@ const Orders = () => {
                   </motion.div>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
 
             {/* Check Status Card */}
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              custom={1}
+              variants={sheetVariants}
+              initial="hidden"
+              animate="visible"
+            >
               <motion.div
                 className="absolute -inset-2 rounded-2xl pointer-events-none"
                 animate={{
@@ -127,8 +154,8 @@ const Orders = () => {
               
               <motion.div
                 className="glass-card p-5 cursor-pointer group relative overflow-hidden"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.975 }}
+                whileHover={{ y: -2, boxShadow: '0 8px 30px -8px hsl(215 70% 50% / 0.15)' }}
+                whileTap={{ scale: 0.975, y: 0 }}
                 transition={springTap}
                 onClick={handleCheckStatus}
                 onHoverStart={() => setHoveredCard('status')}
@@ -164,12 +191,64 @@ const Orders = () => {
                   </motion.div>
                 </div>
               </motion.div>
-            </div>
+            </motion.div>
           </div>
+
+          {/* Empty State - Reassuring design */}
+          <motion.div 
+            className="mt-6 glass-card p-6 text-center relative overflow-hidden"
+            custom={2}
+            variants={sheetVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {/* Soft ambient glow */}
+            <motion.div
+              className="absolute inset-0 pointer-events-none"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              style={{
+                background: `radial-gradient(ellipse 80% 60% at 50% 30%, 
+                  hsl(var(--primary) / 0.08) 0%, 
+                  transparent 60%
+                )`,
+              }}
+            />
+            
+            <motion.div 
+              className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-secondary/50 flex items-center justify-center relative z-10"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.4 }}
+            >
+              <Clock className="w-8 h-8 text-muted-foreground" />
+            </motion.div>
+            <motion.h3 
+              className="text-foreground font-semibold mb-1 relative z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.5 }}
+            >
+              No active orders
+            </motion.h3>
+            <motion.p 
+              className="text-muted-foreground text-sm relative z-10"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, delay: 0.55 }}
+            >
+              Your order history will appear here once you place an order.
+            </motion.p>
+          </motion.div>
 
           {/* Info */}
           <motion.div 
-            className="mt-6 p-4 rounded-2xl bg-secondary/30 text-center"
+            className="mt-4 p-4 rounded-2xl bg-secondary/30 text-center"
+            custom={3}
+            variants={sheetVariants}
+            initial="hidden"
+            animate="visible"
             whileTap={{ scale: 0.98 }}
             transition={springTap}
           >
