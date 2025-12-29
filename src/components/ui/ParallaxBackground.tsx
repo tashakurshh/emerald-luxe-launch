@@ -5,41 +5,42 @@ export default function ParallaxBackground() {
   const { y1, y2, y3 } = useBackgroundParallax();
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
-      {/* Soft ambient gradients - Apple light style */}
+    <div className="fixed inset-0 pointer-events-none overflow-hidden">
+      {/* Primary blue glow */}
       <motion.div
-        className="apple-glow w-[600px] h-[600px] -top-48 -right-32"
+        className="apple-glow w-[700px] h-[700px] -top-40 left-1/4"
         style={{ 
           y: y1,
-          background: 'radial-gradient(circle, hsl(215 80% 92%) 0%, transparent 70%)',
+          background: 'hsl(215, 90%, 50%)',
+          opacity: 0.12,
         }}
       />
       
+      {/* Purple accent glow */}
       <motion.div
-        className="apple-glow w-[500px] h-[500px] top-1/3 -left-32"
+        className="apple-glow w-[500px] h-[500px] top-1/2 -right-32"
         style={{ 
           y: y2,
-          background: 'radial-gradient(circle, hsl(270 70% 93%) 0%, transparent 70%)',
+          background: 'hsl(270, 80%, 60%)',
+          opacity: 0.08,
         }}
       />
       
+      {/* Green accent glow */}
       <motion.div
-        className="apple-glow w-[400px] h-[400px] bottom-32 right-1/4"
+        className="apple-glow w-[400px] h-[400px] -bottom-20 left-0"
         style={{ 
           y: y3,
-          background: 'radial-gradient(circle, hsl(145 60% 93%) 0%, transparent 70%)',
+          background: 'hsl(145, 65%, 45%)',
+          opacity: 0.06,
         }}
       />
 
-      {/* Subtle mesh overlay */}
+      {/* Noise overlay */}
       <div 
-        className="absolute inset-0 opacity-[0.015]" 
+        className="absolute inset-0 opacity-[0.012]" 
         style={{ 
-          backgroundImage: `
-            radial-gradient(circle at 25% 25%, hsl(215 90% 52%) 1px, transparent 1px),
-            radial-gradient(circle at 75% 75%, hsl(270 80% 60%) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 256 256\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noise\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.8\' numOctaves=\'4\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noise)\'/%3E%3C/svg%3E")' 
         }} 
       />
     </div>
