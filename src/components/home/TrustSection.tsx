@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
 import { Shield, Clock, Award, HeartHandshake } from "lucide-react";
 
+// Apple spring physics
+const springTap = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 25,
+  mass: 0.8,
+};
+
 const trustPoints = [
   {
     icon: Shield,
@@ -30,36 +38,42 @@ const trustPoints = [
 
 const TrustSection = () => {
   return (
-    <div className="glass-card p-6">
-      <h3 className="text-lg font-semibold text-foreground mb-2 tracking-tight">Why Customers Trust Pharmih</h3>
-      <p className="text-muted-foreground text-sm mb-6">Trusted healthcare partner in Srinagar</p>
+    <motion.div 
+      className="glass-card p-5"
+      whileTap={{ scale: 0.985 }}
+      transition={springTap}
+    >
+      <h3 className="text-base font-semibold text-foreground mb-1 tracking-tight">Why Customers Trust Pharmih</h3>
+      <p className="text-muted-foreground text-sm mb-5">Trusted healthcare partner in Srinagar</p>
       
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3">
         {trustPoints.map((point, index) => {
           const IconComponent = point.icon;
           return (
             <motion.div
               key={point.title}
               className="flex items-start gap-3"
-              initial={{ opacity: 0, x: -10 }}
+              initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.06, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              <div
-                className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"
+              <motion.div
+                className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0"
                 style={{ background: `${point.color}15` }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ duration: 0.1 }}
               >
-                <IconComponent className="w-5 h-5" style={{ color: point.color }} />
-              </div>
+                <IconComponent className="w-4 h-4" style={{ color: point.color }} />
+              </motion.div>
               <div>
-                <h4 className="text-sm font-semibold text-foreground mb-0.5">{point.title}</h4>
-                <p className="text-xs text-muted-foreground leading-relaxed">{point.description}</p>
+                <h4 className="text-xs font-semibold text-foreground mb-0.5">{point.title}</h4>
+                <p className="text-2xs text-muted-foreground leading-relaxed">{point.description}</p>
               </div>
             </motion.div>
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

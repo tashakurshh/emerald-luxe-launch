@@ -1,35 +1,94 @@
 import { motion } from "framer-motion";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
+import { useState } from "react";
+
+// Apple spring physics
+const springTap = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 25,
+  mass: 0.8,
+};
+
+const springHover = {
+  type: "spring" as const,
+  stiffness: 300,
+  damping: 20,
+};
 
 const WhatsAppCTA = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
   const handleClick = () => {
     openWhatsApp(whatsappMessages.generalInquiry);
   };
 
   return (
-    <motion.div 
-      className="glass-card p-6 cursor-pointer group relative overflow-hidden"
-      whileHover={{ scale: 1.01 }}
-      whileTap={{ scale: 0.99 }}
-      onClick={handleClick}
-    >
-      {/* WhatsApp green gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[hsl(142,70%,49%,0.15)] to-[hsl(142,70%,49%,0.05)] opacity-100 group-hover:opacity-100 transition-opacity" />
+    <div className="relative">
+      {/* Glow effect */}
+      <motion.div
+        className="absolute -inset-2 rounded-3xl pointer-events-none"
+        animate={{
+          opacity: isHovered ? 0.6 : 0,
+          scale: isHovered ? 1.01 : 0.95,
+        }}
+        transition={springHover}
+        style={{
+          background: `radial-gradient(ellipse 80% 70% at 50% 50%, 
+            hsl(142 60% 45% / 0.3) 0%, 
+            hsl(142 50% 40% / 0.12) 40%,
+            transparent 70%
+          )`,
+          filter: 'blur(16px)',
+        }}
+      />
       
-      <div className="relative z-10 flex items-center gap-4">
-        <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-[hsl(142,70%,49%)] shrink-0">
-          <MessageCircle className="w-7 h-7 text-white" />
-        </div>
+      <motion.div 
+        className="glass-card p-5 cursor-pointer group relative overflow-hidden"
+        whileHover={{ y: -2 }}
+        whileTap={{ scale: 0.975 }}
+        transition={springTap}
+        onClick={handleClick}
+        onHoverStart={() => setIsHovered(true)}
+        onHoverEnd={() => setIsHovered(false)}
+      >
+        {/* WhatsApp green gradient */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(142,70%,49%,0.12)] to-transparent" />
         
-        <div className="flex-1">
-          <h3 className="text-lg font-semibold text-foreground mb-1 tracking-tight">Need Help?</h3>
-          <p className="text-muted-foreground text-sm">Chat with Pharmih on WhatsApp for instant support</p>
-        </div>
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          animate={{ opacity: isHovered ? 1 : 0 }}
+          transition={{ duration: 0.2 }}
+          style={{
+            background: `linear-gradient(135deg, hsl(142 60% 45% / 0.08) 0%, transparent 50%)`,
+          }}
+        />
         
-        <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground group-hover:translate-x-1 transition-all" />
-      </div>
-    </motion.div>
+        <div className="relative z-10 flex items-center gap-4">
+          <motion.div 
+            className="w-12 h-12 rounded-2xl flex items-center justify-center bg-[hsl(142,70%,49%)] shrink-0"
+            whileTap={{ scale: 0.9 }}
+            animate={{ scale: isHovered ? 1.05 : 1 }}
+            transition={springTap}
+          >
+            <MessageCircle className="w-6 h-6 text-white" />
+          </motion.div>
+          
+          <div className="flex-1">
+            <h3 className="text-base font-semibold text-foreground mb-0.5 tracking-tight">Need Help?</h3>
+            <p className="text-muted-foreground text-sm">Chat with Pharmih on WhatsApp for instant support</p>
+          </div>
+          
+          <motion.div
+            animate={{ x: isHovered ? 3 : 0 }}
+            transition={springHover}
+          >
+            <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
   );
 };
 

@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
 import { MessageCircle, ClipboardCheck, Truck, CheckCircle } from "lucide-react";
 
+// Apple spring physics
+const springTap = {
+  type: "spring" as const,
+  stiffness: 400,
+  damping: 25,
+  mass: 0.8,
+};
+
 const steps = [
   {
     icon: MessageCircle,
@@ -30,9 +38,13 @@ const steps = [
 
 const HowItWorks = () => {
   return (
-    <div className="glass-card p-6">
-      <h3 className="text-lg font-semibold text-foreground mb-2 tracking-tight">How Ordering Works</h3>
-      <p className="text-muted-foreground text-sm mb-6">Simple WhatsApp-first ordering</p>
+    <motion.div 
+      className="glass-card p-5"
+      whileTap={{ scale: 0.985 }}
+      transition={springTap}
+    >
+      <h3 className="text-base font-semibold text-foreground mb-1 tracking-tight">How Ordering Works</h3>
+      <p className="text-muted-foreground text-sm mb-5">Simple WhatsApp-first ordering</p>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         {steps.map((step, index) => {
@@ -41,29 +53,31 @@ const HowItWorks = () => {
             <motion.div
               key={step.title}
               className="text-center"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ delay: index * 0.06, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <div className="relative mb-3">
-                <div
-                  className="w-14 h-14 mx-auto rounded-2xl flex items-center justify-center"
+                <motion.div
+                  className="w-12 h-12 mx-auto rounded-2xl flex items-center justify-center"
                   style={{ background: `${step.color}15` }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ duration: 0.1 }}
                 >
-                  <IconComponent className="w-7 h-7" style={{ color: step.color }} />
-                </div>
+                  <IconComponent className="w-6 h-6" style={{ color: step.color }} />
+                </motion.div>
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-1/2 left-[calc(50%+28px)] w-[calc(100%-56px)] h-px bg-border" />
+                  <div className="hidden md:block absolute top-1/2 left-[calc(50%+24px)] w-[calc(100%-48px)] h-px bg-border/50" />
                 )}
               </div>
-              <span className="text-xs font-semibold text-foreground/60 mb-1 block">Step {index + 1}</span>
-              <h4 className="text-sm font-semibold text-foreground mb-1">{step.title}</h4>
-              <p className="text-xs text-muted-foreground leading-relaxed">{step.description}</p>
+              <span className="text-2xs font-medium text-muted-foreground mb-0.5 block">Step {index + 1}</span>
+              <h4 className="text-xs font-semibold text-foreground mb-0.5">{step.title}</h4>
+              <p className="text-2xs text-muted-foreground leading-relaxed">{step.description}</p>
             </motion.div>
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
