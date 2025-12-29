@@ -9,6 +9,14 @@ interface NavItem {
   href: string;
 }
 
+// Apple spring physics
+const springTap = {
+  type: "spring" as const,
+  stiffness: 500,
+  damping: 30,
+  mass: 0.8,
+};
+
 const BottomNav = () => {
   const location = useLocation();
 
@@ -34,21 +42,29 @@ const BottomNav = () => {
               className="relative flex flex-col items-center gap-0.5 px-5 py-2 rounded-2xl"
             >
               <motion.div
-                whileTap={{ scale: 0.92 }}
-                transition={{ duration: 0.08 }}
+                whileTap={{ scale: 0.88 }}
+                transition={springTap}
                 className="flex flex-col items-center gap-0.5"
               >
-                <IconComponent
-                  className="w-[22px] h-[22px] transition-colors duration-180"
-                  style={{ 
-                    color: active ? "hsl(211, 100%, 50%)" : "hsl(0, 0%, 52%)" 
+                <motion.div
+                  animate={{ 
+                    scale: active ? 1 : 1,
+                    y: active ? -1 : 0,
                   }}
-                  strokeWidth={active ? 2 : 1.5}
-                />
+                  transition={springTap}
+                >
+                  <IconComponent
+                    className="w-[22px] h-[22px] transition-colors duration-150"
+                    style={{ 
+                      color: active ? "hsl(211, 100%, 50%)" : "hsl(0, 0%, 48%)" 
+                    }}
+                    strokeWidth={active ? 2 : 1.5}
+                  />
+                </motion.div>
                 <span
-                  className="text-[10px] font-medium transition-colors duration-180"
+                  className="text-[10px] font-medium transition-colors duration-150"
                   style={{ 
-                    color: active ? "hsl(211, 100%, 50%)" : "hsl(0, 0%, 52%)" 
+                    color: active ? "hsl(211, 100%, 50%)" : "hsl(0, 0%, 48%)" 
                   }}
                 >
                   {item.name}
