@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import pharmihLogo from "@/assets/pharmih-logo.png";
 
 interface SplashScreenProps {
@@ -9,15 +9,25 @@ interface SplashScreenProps {
 
 const SplashScreen = ({ onComplete, duration = 1500 }: SplashScreenProps) => {
   const [isVisible, setIsVisible] = useState(true);
+  const onCompleteRef = useRef(onComplete);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  useEffect(() => {
+    let doneTimer: number | undefined;
+
+    const timer = window.setTimeout(() => {
       setIsVisible(false);
-      setTimeout(onComplete, 300);
+      doneTimer = window.setTimeout(() => onCompleteRef.current(), 300);
     }, duration);
 
-    return () => clearTimeout(timer);
-  }, [duration, onComplete]);
+    return () => {
+      window.clearTimeout(timer);
+      if (doneTimer) window.clearTimeout(doneTimer);
+    };
+  }, [duration]);
 
   return (
     <AnimatePresence>

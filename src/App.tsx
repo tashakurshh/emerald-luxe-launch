@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -51,11 +51,11 @@ const App = () => {
     }
   }, []);
 
-  const handleSplashComplete = () => {
+  const handleSplashComplete = useCallback(() => {
     setShowSplash(false);
     setHasSeenSplash(true);
     sessionStorage.setItem('pharmih-splash-seen', 'true');
-  };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
