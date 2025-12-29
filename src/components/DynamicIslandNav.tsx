@@ -1,10 +1,10 @@
-import { useCallback } from "react";
+import { forwardRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Grid3X3, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
-const DynamicIslandNav = () => {
+const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandNav(_, ref) {
   const location = useLocation();
   const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
@@ -24,7 +24,7 @@ const DynamicIslandNav = () => {
   }, [triggerHaptic]);
 
   return (
-    <nav className="dynamic-island">
+    <nav ref={ref} className="dynamic-island">
       <div className="flex items-center gap-1.5 px-1.5 py-1.5">
         <motion.div
           whileTap={{ scale: appleScale.nav }}
@@ -72,6 +72,6 @@ const DynamicIslandNav = () => {
       </div>
     </nav>
   );
-};
+});
 
 export default DynamicIslandNav;
