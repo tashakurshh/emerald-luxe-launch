@@ -1,4 +1,5 @@
-import { useState, useEffect, KeyboardEvent } from "react";
+import { useState, KeyboardEvent } from "react";
+import { motion } from "framer-motion";
 
 interface WelcomeModalProps {
   onComplete: (name: string) => void;
@@ -6,16 +7,10 @@ interface WelcomeModalProps {
 
 const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
   const [name, setName] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setIsVisible(true), 100);
-  }, []);
 
   const handleSubmit = () => {
     if (name.trim()) {
-      setIsVisible(false);
-      setTimeout(() => onComplete(name.trim()), 300);
+      onComplete(name.trim());
     }
   };
 
@@ -26,17 +21,12 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
   };
 
   return (
-    <div className="modal-overlay">
-      {/* Ambient glows */}
-      <div className="apple-glow w-[400px] h-[400px] -top-20 left-1/4 bg-[hsl(210,100%,50%)] opacity-20" />
-      <div className="apple-glow w-[300px] h-[300px] bottom-10 right-1/4 bg-[hsl(280,100%,65%)] opacity-15" />
-
-      <div
-        className={`glass-card w-full max-w-md p-8 transition-all duration-500 ${
-          isVisible
-            ? "opacity-100 scale-100 translate-y-0"
-            : "opacity-0 scale-95 translate-y-4"
-        }`}
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/95 backdrop-blur-sm">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.2, ease: "easeOut" }}
+        className="glass-card w-full max-w-md p-8 relative"
       >
         {/* Top gradient line */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 rounded-full bg-gradient-to-r from-[hsl(210,100%,50%)] via-[hsl(280,100%,65%)] to-[hsl(340,82%,60%)]" />
@@ -57,14 +47,14 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
             onChange={(e) => setName(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder="Your name"
-            className="glass-input text-center text-lg"
+            className="glass-input text-center text-lg w-full"
             autoFocus
           />
 
           <button
             onClick={handleSubmit}
             disabled={!name.trim()}
-            className={`apple-button-primary w-full py-4 text-lg transition-all duration-300 ${
+            className={`apple-button-primary w-full py-4 text-lg active:scale-[0.98] transition-all duration-100 ${
               name.trim() ? "opacity-100" : "opacity-40 cursor-not-allowed"
             }`}
           >
@@ -75,7 +65,7 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
         <p className="text-center text-muted-foreground/50 text-sm mt-6">
           Press Enter to continue
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };
