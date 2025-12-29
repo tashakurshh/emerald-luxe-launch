@@ -1,13 +1,7 @@
 import { motion } from "framer-motion";
 import { MessageCircle, ClipboardCheck, Truck, CheckCircle } from "lucide-react";
-
-// Apple spring physics
-const springTap = {
-  type: "spring" as const,
-  stiffness: 400,
-  damping: 25,
-  mass: 0.8,
-};
+import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import { useCallback } from "react";
 
 const steps = [
   {
@@ -37,11 +31,17 @@ const steps = [
 ];
 
 const HowItWorks = () => {
+  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
+
+  const handleStepTap = useCallback(() => {
+    triggerHaptic();
+  }, [triggerHaptic]);
+
   return (
     <motion.div 
       className="glass-card p-5"
-      whileTap={{ scale: 0.985 }}
-      transition={springTap}
+      whileTap={{ scale: appleScale.card }}
+      transition={appleSpring.tap}
     >
       <h3 className="text-base font-semibold text-foreground mb-1 tracking-tight">How Ordering Works</h3>
       <p className="text-muted-foreground text-sm mb-5">Simple WhatsApp-first ordering</p>
@@ -52,17 +52,19 @@ const HowItWorks = () => {
           return (
             <motion.div
               key={step.title}
-              className="text-center"
+              className="text-center cursor-pointer"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.06, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ delay: index * 0.06, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+              whileTap={{ scale: appleScale.subtle }}
+              onClick={handleStepTap}
             >
               <div className="relative mb-3">
                 <motion.div
                   className="w-12 h-12 mx-auto rounded-2xl flex items-center justify-center"
                   style={{ background: `${step.color}15` }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ duration: 0.1 }}
+                  whileTap={{ scale: appleScale.icon }}
+                  transition={appleSpring.tap}
                 >
                   <IconComponent className="w-6 h-6" style={{ color: step.color }} />
                 </motion.div>

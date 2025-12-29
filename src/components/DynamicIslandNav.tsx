@@ -1,19 +1,13 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Grid3X3, FileText } from "lucide-react";
 import { motion } from "framer-motion";
-
-// Apple spring physics
-const springTap = {
-  type: "spring" as const,
-  stiffness: 500,
-  damping: 30,
-  mass: 0.8,
-};
+import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 const DynamicIslandNav = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
   const location = useLocation();
+  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
   const navItems = [
     { name: "Home", icon: Home, href: "/" },
@@ -26,15 +20,20 @@ const DynamicIslandNav = () => {
     return location.pathname.startsWith(href);
   };
 
+  const handleNavClick = useCallback(() => {
+    triggerHaptic();
+  }, [triggerHaptic]);
+
   return (
     <nav className="dynamic-island">
       <div className="flex items-center gap-1.5 px-1.5 py-1.5">
         <motion.div
-          whileTap={{ scale: 0.94 }}
-          transition={springTap}
+          whileTap={{ scale: appleScale.nav }}
+          transition={appleSpring.tap}
         >
           <Link 
             to="/" 
+            onClick={handleNavClick}
             className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary"
           >
             <span className="text-sm font-semibold tracking-tight text-primary-foreground">
@@ -52,11 +51,12 @@ const DynamicIslandNav = () => {
             return (
               <motion.div
                 key={item.name}
-                whileTap={{ scale: 0.92 }}
-                transition={springTap}
+                whileTap={{ scale: appleScale.nav }}
+                transition={appleSpring.tap}
               >
                 <Link
                   to={item.href}
+                  onClick={handleNavClick}
                   onMouseEnter={() => setHoveredItem(item.name)}
                   onMouseLeave={() => setHoveredItem(null)}
                   className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-colors duration-150 ${

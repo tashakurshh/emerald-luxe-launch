@@ -2,6 +2,8 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Package, FileText, User } from "lucide-react";
 import { motion } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
+import { useCallback } from "react";
+import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
 interface NavItem {
   name: string;
@@ -9,16 +11,9 @@ interface NavItem {
   href: string;
 }
 
-// Apple spring physics
-const springTap = {
-  type: "spring" as const,
-  stiffness: 500,
-  damping: 30,
-  mass: 0.8,
-};
-
 const BottomNav = () => {
   const location = useLocation();
+  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
   const navItems: NavItem[] = [
     { name: "Home", icon: Home, href: "/" },
@@ -28,6 +23,10 @@ const BottomNav = () => {
   ];
 
   const isActive = (href: string) => location.pathname === href;
+
+  const handleNavClick = useCallback(() => {
+    triggerHaptic();
+  }, [triggerHaptic]);
 
   return (
     <nav className="glass-bottom-nav md:hidden">
@@ -39,11 +38,12 @@ const BottomNav = () => {
             <Link
               key={item.name}
               to={item.href}
+              onClick={handleNavClick}
               className="relative flex flex-col items-center gap-0.5 px-5 py-2 rounded-2xl"
             >
               <motion.div
-                whileTap={{ scale: 0.88 }}
-                transition={springTap}
+                whileTap={{ scale: appleScale.nav }}
+                transition={appleSpring.tap}
                 className="flex flex-col items-center gap-0.5"
               >
                 <motion.div
@@ -51,7 +51,7 @@ const BottomNav = () => {
                     scale: active ? 1 : 1,
                     y: active ? -1 : 0,
                   }}
-                  transition={springTap}
+                  transition={appleSpring.tap}
                 >
                   <IconComponent
                     className="w-[22px] h-[22px] transition-colors duration-150"

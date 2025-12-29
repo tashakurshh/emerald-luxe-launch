@@ -1,33 +1,35 @@
 import { motion } from "framer-motion";
 import { MapPin, Gift, Truck } from "lucide-react";
-
-// Apple spring physics
-const springTap = {
-  type: "spring" as const,
-  stiffness: 400,
-  damping: 25,
-  mass: 0.8,
-};
+import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import { useCallback } from "react";
 
 const LocationBanner = () => {
+  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
+
+  const handleItemTap = useCallback(() => {
+    triggerHaptic();
+  }, [triggerHaptic]);
+
   return (
     <motion.div 
       className="glass-card p-5"
-      whileTap={{ scale: 0.985 }}
-      transition={springTap}
+      whileTap={{ scale: appleScale.card }}
+      transition={appleSpring.tap}
     >
       <div className="space-y-3">
         {/* Location */}
         <motion.div 
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 cursor-pointer"
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.05, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ delay: 0.05, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+          whileTap={{ scale: appleScale.subtle }}
+          onClick={handleItemTap}
         >
           <motion.div 
             className="w-10 h-10 rounded-xl bg-[hsl(215,90%,58%,0.15)] flex items-center justify-center shrink-0"
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.1 }}
+            whileTap={{ scale: appleScale.icon }}
+            transition={appleSpring.tap}
           >
             <MapPin className="w-5 h-5 text-[hsl(215,90%,58%)]" />
           </motion.div>
@@ -39,15 +41,17 @@ const LocationBanner = () => {
 
         {/* First Order Offer */}
         <motion.div 
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 cursor-pointer"
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.1, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ delay: 0.1, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+          whileTap={{ scale: appleScale.subtle }}
+          onClick={handleItemTap}
         >
           <motion.div 
             className="w-10 h-10 rounded-xl bg-[hsl(145,65%,48%,0.15)] flex items-center justify-center shrink-0"
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.1 }}
+            whileTap={{ scale: appleScale.icon }}
+            transition={appleSpring.tap}
           >
             <Gift className="w-5 h-5 text-[hsl(145,65%,48%)]" />
           </motion.div>
@@ -59,15 +63,17 @@ const LocationBanner = () => {
 
         {/* Delivery Promise */}
         <motion.div 
-          className="flex items-center gap-3"
+          className="flex items-center gap-3 cursor-pointer"
           initial={{ opacity: 0, x: -8 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.15, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+          transition={{ delay: 0.15, duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] as const }}
+          whileTap={{ scale: appleScale.subtle }}
+          onClick={handleItemTap}
         >
           <motion.div 
             className="w-10 h-10 rounded-xl bg-[hsl(30,100%,58%,0.15)] flex items-center justify-center shrink-0"
-            whileTap={{ scale: 0.9 }}
-            transition={{ duration: 0.1 }}
+            whileTap={{ scale: appleScale.icon }}
+            transition={appleSpring.tap}
           >
             <Truck className="w-5 h-5 text-[hsl(30,100%,58%)]" />
           </motion.div>
