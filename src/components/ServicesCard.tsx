@@ -112,7 +112,6 @@ const ServicesCard = () => {
                     whileTap={{ scale: appleScale.icon }}
                     animate={{
                       scale: isHovered ? 1.1 : 1,
-                      rotate: isHovered ? [0, -3, 3, 0] : 0,
                     }}
                     transition={appleSpring.tap}
                   >
