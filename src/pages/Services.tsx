@@ -111,7 +111,7 @@ const Services = () => {
                     whileTap={{ scale: appleScale.card }}
                     transition={springTap}
                   >
-                    <Ripple color={service.color} opacity={0.12} />
+                    <Ripple color={service.color} opacity={0.22} />
                     <div
                       className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 relative z-10"
                       style={{ background: `${service.color}15` }}
@@ -187,7 +187,7 @@ const Services = () => {
           }}
           onTouchStart={() => triggerHaptic()}
         >
-          <Ripple color="hsl(142, 70%, 49%)" opacity={0.15} />
+          <Ripple color="hsl(142, 70%, 49%)" opacity={0.28} />
           <div className="absolute inset-0 bg-apple-green/8" />
           <div className="relative z-10 flex items-center gap-3.5">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-apple-green shrink-0">

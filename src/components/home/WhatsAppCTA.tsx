@@ -45,7 +45,7 @@ const WhatsAppCTA = forwardRef<HTMLDivElement>(function WhatsAppCTA(_, ref) {
         onHoverEnd={() => setIsHovered(false)}
         style={{ WebkitTapHighlightColor: 'transparent' }}
       >
-        <Ripple color="hsl(142, 70%, 49%)" opacity={0.15} />
+        <Ripple color="hsl(142, 70%, 49%)" opacity={0.28} />
         
         {/* WhatsApp green gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-[hsl(142,70%,49%,0.12)] to-transparent" />
