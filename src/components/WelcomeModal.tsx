@@ -246,6 +246,15 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
                     }}
                   >
                     {isValid && <Ripple color="hsl(0 0% 100%)" opacity={0.3} />}
+                    {/* Shimmer effect */}
+                    {isValid && (
+                      <div 
+                        className="absolute inset-0 shimmer-effect pointer-events-none"
+                        style={{
+                          background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
+                        }}
+                      />
+                    )}
                     <span className="relative z-10">Continue</span>
                   </motion.button>
                 </div>
