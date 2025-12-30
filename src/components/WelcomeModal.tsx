@@ -29,22 +29,69 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
 
   return (
     <div 
-      className="flex flex-col w-full"
+      className="flex flex-col w-full relative overflow-hidden"
       style={{
         minHeight: '100dvh',
         paddingTop: 'max(24px, env(safe-area-inset-top, 24px))',
         paddingBottom: 'max(100px, calc(80px + env(safe-area-inset-bottom, 24px)))',
         paddingLeft: 'max(16px, env(safe-area-inset-left, 16px))',
         paddingRight: 'max(16px, env(safe-area-inset-right, 16px))',
-        background: `
-          radial-gradient(ellipse 100% 80% at 50% 0%, hsl(220 20% 12%) 0%, hsl(225 15% 7%) 70%),
-          hsl(225 15% 7%)
-        `,
+        background: 'hsl(225 15% 6%)',
       }}
     >
+      {/* Apple-style colorful ambient blurs */}
+      <motion.div
+        className="absolute top-[-20%] left-[-10%] w-[60%] h-[50%] rounded-full pointer-events-none"
+        animate={{
+          opacity: [0.4, 0.5, 0.4],
+          scale: [1, 1.05, 1],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        style={{
+          background: 'radial-gradient(circle, hsl(280 80% 55% / 0.35) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
+      <motion.div
+        className="absolute top-[10%] right-[-15%] w-[50%] h-[45%] rounded-full pointer-events-none"
+        animate={{
+          opacity: [0.35, 0.45, 0.35],
+          scale: [1, 1.08, 1],
+        }}
+        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        style={{
+          background: 'radial-gradient(circle, hsl(200 90% 50% / 0.3) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
+      <motion.div
+        className="absolute bottom-[5%] left-[20%] w-[55%] h-[40%] rounded-full pointer-events-none"
+        animate={{
+          opacity: [0.3, 0.4, 0.3],
+          scale: [1, 1.06, 1],
+        }}
+        transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        style={{
+          background: 'radial-gradient(circle, hsl(340 85% 55% / 0.25) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
+      <motion.div
+        className="absolute bottom-[20%] right-[10%] w-[40%] h-[35%] rounded-full pointer-events-none"
+        animate={{
+          opacity: [0.25, 0.35, 0.25],
+          scale: [1, 1.04, 1],
+        }}
+        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut", delay: 3 }}
+        style={{
+          background: 'radial-gradient(circle, hsl(45 90% 55% / 0.2) 0%, transparent 70%)',
+          filter: 'blur(80px)',
+        }}
+      />
+      
       {/* Subtle grain overlay */}
       <div 
-        className="fixed inset-0 -z-10 opacity-[0.015] pointer-events-none"
+        className="absolute inset-0 opacity-[0.02] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
