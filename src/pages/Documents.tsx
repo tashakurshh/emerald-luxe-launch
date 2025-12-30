@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { FileText, Upload, ArrowRight, Shield, Lock } from "lucide-react";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
-import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 import { useState } from "react";
@@ -243,8 +242,6 @@ const Documents = () => {
           </motion.div>
         </motion.div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };

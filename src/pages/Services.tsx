@@ -5,7 +5,6 @@ import { MessageCircle, ArrowRight, Clock, MapPin, Gift } from "lucide-react";
 import { activeServices, comingSoonServices } from "@/lib/services";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
-import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
@@ -193,8 +192,6 @@ const Services = () => {
           </div>
         </motion.div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };

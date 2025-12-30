@@ -3,7 +3,6 @@ import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
-import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 
 // Apple spring physics
@@ -157,8 +156,6 @@ const Terms = () => {
           </motion.div>
         </motion.div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };
