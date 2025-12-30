@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
 import { MessageCircle, ArrowRight } from "lucide-react";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
-import { useState, useCallback } from "react";
+import { useState, useCallback, forwardRef } from "react";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
 
-const WhatsAppCTA = () => {
+const WhatsAppCTA = forwardRef<HTMLDivElement>(function WhatsAppCTA(_, ref) {
   const [isHovered, setIsHovered] = useState(false);
   const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
 
@@ -14,7 +14,7 @@ const WhatsAppCTA = () => {
   }, [triggerHaptic]);
 
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
       {/* Glow effect */}
       <motion.div
         className="absolute -inset-2 rounded-3xl pointer-events-none"
@@ -79,6 +79,6 @@ const WhatsAppCTA = () => {
       </motion.div>
     </div>
   );
-};
+});
 
 export default WhatsAppCTA;
