@@ -3,9 +3,9 @@ import { ShieldCheck, MapPin } from "lucide-react";
 
 const locations = [
   { name: "Lal Chowk", delay: 0 },
-  { name: "Rajbagh", delay: 0.1 },
+  { name: "Karanagar", delay: 0.1 },
   { name: "Hyderpora", delay: 0.2 },
-  { name: "Nowgam", delay: 0.3 },
+  { name: "Nawakadal", delay: 0.3 },
 ];
 
 const TrustedPharmacies = () => {

@@ -52,12 +52,12 @@ const Index = () => {
         <div className="space-y-5">
           <HeroVisual />
           <ActionCards />
-          <TrustedPharmacies />
           <LocationBanner />
           <HowItWorks />
           <ServicesCard />
           <ServicesCTA />
           <TrustSection />
+          <TrustedPharmacies />
           <WhatsAppCTA />
           <FooterVisual />
         </div>
