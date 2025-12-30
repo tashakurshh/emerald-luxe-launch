@@ -7,7 +7,7 @@ import Ripple from "@/components/ui/Ripple";
 
 const ServicesCTA = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
+  const { triggerHaptic } = useHapticFeedback({ intensity: "medium" });
 
   const handleClick = useCallback(() => {
     triggerHaptic();
