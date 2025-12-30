@@ -35,23 +35,33 @@ const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandN
             to="/" 
             onClick={handleNavClick}
             onTouchStart={handleNavClick}
-            className="group relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary transition-all duration-100 overflow-hidden"
-            style={{ WebkitTapHighlightColor: 'transparent' }}
+            className="group relative flex items-center gap-2 px-3.5 py-2 rounded-full transition-all duration-100 overflow-hidden"
+            style={{ 
+              WebkitTapHighlightColor: 'transparent',
+              background: 'linear-gradient(135deg, hsl(280 70% 55%) 0%, hsl(330 85% 55%) 50%, hsl(20 90% 55%) 100%)',
+            }}
           >
             <Ripple color="rgba(255, 255, 255, 0.3)" opacity={0.25} />
-            {/* Subtle ambient glow behind text */}
+            {/* Shimmer effect */}
             <div 
-              className="absolute inset-0 rounded-full pointer-events-none"
+              className="absolute inset-0 rounded-full pointer-events-none shimmer-effect"
               style={{
-                background: 'radial-gradient(ellipse at center, rgba(100, 180, 255, 0.15) 0%, transparent 70%)',
-                filter: 'blur(6px)',
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
+              }}
+            />
+            {/* Ambient glow */}
+            <div 
+              className="absolute -inset-1 rounded-full pointer-events-none opacity-60"
+              style={{
+                background: 'linear-gradient(135deg, hsl(280 70% 55% / 0.5) 0%, hsl(330 85% 55% / 0.5) 50%, hsl(20 90% 55% / 0.5) 100%)',
+                filter: 'blur(8px)',
               }}
             />
             <span 
-              className="relative text-sm font-semibold tracking-tight z-10"
+              className="relative text-sm font-bold tracking-tight z-10"
               style={{
-                color: 'hsl(210, 100%, 98%)',
-                textShadow: '0 0 12px rgba(140, 200, 255, 0.25)',
+                color: 'white',
+                textShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
               }}
             >
               Pharmih
