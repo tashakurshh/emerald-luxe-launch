@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { Package, MessageCircle, ShoppingBag, ArrowRight, Clock } from "lucide-react";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
-import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import { openWhatsApp } from "@/lib/whatsapp";
 import { useState } from "react";
@@ -258,8 +257,6 @@ const Orders = () => {
           </motion.div>
         </motion.div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };

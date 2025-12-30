@@ -2,7 +2,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { useApp } from "@/contexts/AppContext";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
-import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import WelcomeModal from "@/components/WelcomeModal";
 import HeroVisual from "@/components/HeroVisual";
@@ -62,8 +61,6 @@ const Index = () => {
           <FooterVisual />
         </div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };

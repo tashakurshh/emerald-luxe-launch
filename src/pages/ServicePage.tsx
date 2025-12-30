@@ -4,7 +4,6 @@ import { ArrowLeft, Check, MessageCircle, Users, Package, Truck } from "lucide-r
 import { getServiceBySlug } from "@/lib/services";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
-import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import { useState } from "react";
 
@@ -46,7 +45,6 @@ const ServicePage = () => {
             </motion.div>
           </div>
         </div>
-        <BottomNav />
       </div>
     );
   }
@@ -255,8 +253,6 @@ const ServicePage = () => {
           </p>
         </motion.div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };

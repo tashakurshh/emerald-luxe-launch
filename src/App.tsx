@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { AppProvider } from "@/contexts/AppContext";
 import SplashScreen from "@/components/SplashScreen";
 import PageTransition from "@/components/ui/PageTransition";
+import BottomNav from "@/components/BottomNav";
 
 // Lazy load pages for code splitting
 const Index = lazy(() => import("./pages/Index"));
@@ -83,6 +84,8 @@ const App = () => {
             <Toaster />
             <Sonner />
             <AnimatedRoutes />
+            {/* Global persistent bottom nav - always visible, never re-mounts */}
+            <BottomNav />
           </AppProvider>
         </BrowserRouter>
       </TooltipProvider>

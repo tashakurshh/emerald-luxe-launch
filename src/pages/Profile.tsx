@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import { User, Package, MessageCircle, MapPin, Heart, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
-import BottomNav from "@/components/BottomNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import { useApp } from "@/contexts/AppContext";
 import { openWhatsApp } from "@/lib/whatsapp";
@@ -312,8 +311,6 @@ const Profile = () => {
           </motion.div>
         </motion.div>
       </main>
-
-      <BottomNav />
     </div>
   );
 };
