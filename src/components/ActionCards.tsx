@@ -17,14 +17,21 @@ const ActionCards = () => {
     openWhatsApp(whatsappMessages.enterMedicine);
   }, [triggerHaptic]);
 
+  // Touch start triggers haptic immediately
+  const handleTouchStart = useCallback(() => {
+    triggerHaptic();
+  }, [triggerHaptic]);
+
   return (
     <div className="grid md:grid-cols-2 gap-4">
       {/* Upload Prescription Card */}
       <motion.div 
-        className="glass-card p-6 group cursor-pointer relative overflow-hidden active:scale-[0.98] transition-transform duration-100"
+        className="glass-card p-6 group cursor-pointer relative overflow-hidden"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
         whileTap={{ scale: appleScale.card }}
         transition={appleSpring.tap}
         onClick={handleUploadClick}
+        onTouchStart={handleTouchStart}
       >
         <div className="relative z-10">
           <div className="flex items-start justify-between mb-5">
@@ -43,10 +50,12 @@ const ActionCards = () => {
 
       {/* Enter Medicine Card */}
       <motion.div 
-        className="glass-card p-6 group cursor-pointer relative overflow-hidden active:scale-[0.98] transition-transform duration-100"
+        className="glass-card p-6 group cursor-pointer relative overflow-hidden"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
         whileTap={{ scale: appleScale.card }}
         transition={appleSpring.tap}
         onClick={handleMedicineClick}
+        onTouchStart={handleTouchStart}
       >
         <div className="relative z-10">
           <div className="flex items-start justify-between mb-5">

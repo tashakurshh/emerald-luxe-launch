@@ -114,11 +114,18 @@ const BottomNav = forwardRef<HTMLElement, object>(function BottomNav(_, ref) {
               key={item.name}
               to={item.href}
               onClick={handleNavClick}
+              onTouchStart={handleNavClick}
               className="flex items-center justify-center w-14 h-10"
+              style={{ WebkitTapHighlightColor: 'transparent' }}
             >
               <motion.div
                 whileTap={{ scale: 0.82 }}
-                transition={{ type: "tween", duration: 0.08 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 500,
+                  damping: 30,
+                  mass: 0.5,
+                }}
                 className="flex items-center justify-center"
               >
                 <IconComponent
