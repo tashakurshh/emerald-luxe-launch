@@ -5,19 +5,36 @@ interface PageTransitionProps {
   children: ReactNode;
 }
 
-// Optimized transition - shorter duration for snappier feel
-const fadeTransition = {
-  duration: 0.25,
-  ease: [0.25, 0.46, 0.45, 0.94] as const,
+// Apple-style transition: fast fade with subtle vertical drift
+const pageVariants = {
+  initial: { 
+    opacity: 0, 
+    y: 6,
+  },
+  animate: { 
+    opacity: 1, 
+    y: 0,
+  },
+  exit: { 
+    opacity: 0,
+    y: -4,
+  },
+};
+
+const pageTransition = {
+  duration: 0.18,
+  ease: [0.32, 0.72, 0, 1] as [number, number, number, number],
 };
 
 const PageTransition = memo(function PageTransition({ children }: PageTransitionProps) {
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={fadeTransition}
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={pageTransition}
+      style={{ willChange: 'opacity, transform' }}
     >
       {children}
     </motion.div>
