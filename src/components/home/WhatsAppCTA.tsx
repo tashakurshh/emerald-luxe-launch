@@ -7,7 +7,7 @@ import Ripple from "@/components/ui/Ripple";
 
 const WhatsAppCTA = forwardRef<HTMLDivElement>(function WhatsAppCTA(_, ref) {
   const [isHovered, setIsHovered] = useState(false);
-  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
+  const { triggerHaptic } = useHapticFeedback({ intensity: "heavy" });
 
   const handleClick = useCallback(() => {
     triggerHaptic();

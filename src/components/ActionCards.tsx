@@ -6,7 +6,7 @@ import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFee
 import Ripple from "@/components/ui/Ripple";
 
 const ActionCards = () => {
-  const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
+  const { triggerHaptic } = useHapticFeedback({ intensity: "medium" });
 
   const handleUploadClick = useCallback(() => {
     triggerHaptic();
