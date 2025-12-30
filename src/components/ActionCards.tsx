@@ -42,7 +42,7 @@ const ActionCards = () => {
         />
         
         <motion.div 
-          className="relative p-6 group cursor-pointer overflow-hidden rounded-[20px]"
+          className="shimmer-effect relative p-6 group cursor-pointer overflow-hidden rounded-[20px]"
           style={{ 
             WebkitTapHighlightColor: 'transparent',
             background: 'linear-gradient(135deg, hsl(280 75% 55%) 0%, hsl(211 100% 55%) 50%, hsl(260 70% 50%) 100%)',
@@ -87,7 +87,7 @@ const ActionCards = () => {
         />
         
         <motion.div 
-          className="relative p-6 group cursor-pointer overflow-hidden rounded-[20px]"
+          className="shimmer-effect relative p-6 group cursor-pointer overflow-hidden rounded-[20px]"
           style={{ 
             WebkitTapHighlightColor: 'transparent',
             background: 'linear-gradient(135deg, hsl(170 75% 45%) 0%, hsl(145 70% 45%) 50%, hsl(195 80% 50%) 100%)',
