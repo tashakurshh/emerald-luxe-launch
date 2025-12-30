@@ -16,21 +16,42 @@ const WhatsAppCTA = forwardRef<HTMLDivElement>(function WhatsAppCTA(_, ref) {
 
   return (
     <div ref={ref} className="relative">
-      {/* Glow effect */}
+      {/* Pulsing glow effect - always animating for attention */}
       <motion.div
         className="absolute -inset-2 rounded-3xl pointer-events-none"
         animate={{
-          opacity: isHovered ? 0.6 : 0,
-          scale: isHovered ? 1.01 : 0.95,
+          opacity: [0.3, 0.6, 0.3],
+          scale: [0.98, 1.02, 0.98],
         }}
-        transition={appleSpring.hover}
+        transition={{
+          duration: 2.5,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
         style={{
           background: `radial-gradient(ellipse 80% 70% at 50% 50%, 
-            hsl(142 60% 45% / 0.3) 0%, 
-            hsl(142 50% 40% / 0.12) 40%,
+            hsl(142 70% 45% / 0.4) 0%, 
+            hsl(142 60% 40% / 0.15) 40%,
             transparent 70%
           )`,
           filter: 'blur(16px)',
+        }}
+      />
+      
+      {/* Extra ring pulse */}
+      <motion.div
+        className="absolute -inset-1 rounded-[26px] pointer-events-none"
+        animate={{
+          opacity: [0, 0.4, 0],
+          scale: [1, 1.05, 1.1],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeOut",
+        }}
+        style={{
+          border: '2px solid hsl(142 70% 49% / 0.3)',
         }}
       />
       
