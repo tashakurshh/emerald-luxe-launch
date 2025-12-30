@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { activeServices } from "@/lib/services";
 import { useState, useCallback } from "react";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import Ripple from "@/components/ui/Ripple";
 
 const ServicesCard = () => {
   const [hoveredService, setHoveredService] = useState<string | null>(null);
@@ -71,6 +72,8 @@ const ServicesCard = () => {
                 onMouseEnter={() => setHoveredService(service.id)}
                 onMouseLeave={() => setHoveredService(null)}
                 onClick={handleServiceClick}
+                onTouchStart={handleServiceClick}
+                style={{ WebkitTapHighlightColor: 'transparent' }}
               >
                 <motion.div
                   className="service-item flex flex-col items-center gap-2 group text-center p-3 relative overflow-hidden"
@@ -78,6 +81,7 @@ const ServicesCard = () => {
                   whileTap={{ scale: appleScale.card }}
                   transition={appleSpring.tap}
                 >
+                  <Ripple color={service.color} opacity={0.15} />
                   {/* Inner gradient on hover */}
                   <motion.div 
                     className="absolute inset-0 rounded-2xl"

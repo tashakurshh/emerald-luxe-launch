@@ -3,6 +3,7 @@ import { MessageCircle, ArrowRight } from "lucide-react";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 import { useState, useCallback, forwardRef } from "react";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import Ripple from "@/components/ui/Ripple";
 
 const WhatsAppCTA = forwardRef<HTMLDivElement>(function WhatsAppCTA(_, ref) {
   const [isHovered, setIsHovered] = useState(false);
@@ -39,9 +40,13 @@ const WhatsAppCTA = forwardRef<HTMLDivElement>(function WhatsAppCTA(_, ref) {
         whileTap={{ scale: appleScale.card }}
         transition={appleSpring.tap}
         onClick={handleClick}
+        onTouchStart={() => triggerHaptic()}
         onHoverStart={() => setIsHovered(true)}
         onHoverEnd={() => setIsHovered(false)}
+        style={{ WebkitTapHighlightColor: 'transparent' }}
       >
+        <Ripple color="hsl(142, 70%, 49%)" opacity={0.15} />
+        
         {/* WhatsApp green gradient */}
         <div className="absolute inset-0 bg-gradient-to-r from-[hsl(142,70%,49%,0.12)] to-transparent" />
         

@@ -1,8 +1,9 @@
-import { forwardRef, useCallback, useState } from "react";
+import { forwardRef, useCallback } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Grid3X3, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import Ripple from "@/components/ui/Ripple";
 
 const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandNav(_, ref) {
   const location = useLocation();
@@ -34,9 +35,10 @@ const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandN
             to="/" 
             onClick={handleNavClick}
             onTouchStart={handleNavClick}
-            className="group relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary transition-all duration-100"
+            className="group relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary transition-all duration-100 overflow-hidden"
             style={{ WebkitTapHighlightColor: 'transparent' }}
           >
+            <Ripple color="rgba(255, 255, 255, 0.3)" opacity={0.25} />
             {/* Subtle ambient glow behind text */}
             <div 
               className="absolute inset-0 rounded-full pointer-events-none"
@@ -46,7 +48,7 @@ const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandN
               }}
             />
             <span 
-              className="relative text-sm font-semibold tracking-tight"
+              className="relative text-sm font-semibold tracking-tight z-10"
               style={{
                 color: 'hsl(210, 100%, 98%)',
                 textShadow: '0 0 12px rgba(140, 200, 255, 0.25)',
@@ -73,14 +75,18 @@ const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandN
                   to={item.href}
                   onClick={handleNavClick}
                   onTouchStart={handleNavClick}
-                  className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-colors duration-100 ${
+                  className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-colors duration-100 overflow-hidden ${
                     active ? "text-foreground bg-secondary" : "text-muted-foreground hover:text-foreground"
                   }`}
                   style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
-                  <IconComponent className="w-4 h-4" />
+                  <Ripple 
+                    color={active ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))"} 
+                    opacity={0.12} 
+                  />
+                  <IconComponent className="w-4 h-4 relative z-10" />
                   {active && (
-                    <span className="text-sm font-medium">{item.name}</span>
+                    <span className="text-sm font-medium relative z-10">{item.name}</span>
                   )}
                 </Link>
               </motion.div>

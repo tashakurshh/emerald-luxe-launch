@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 import { useCallback } from "react";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import Ripple from "@/components/ui/Ripple";
 
 const ActionCards = () => {
   const { triggerHaptic } = useHapticFeedback({ intensity: "light" });
@@ -33,6 +34,7 @@ const ActionCards = () => {
         onClick={handleUploadClick}
         onTouchStart={handleTouchStart}
       >
+        <Ripple color="hsl(215, 80%, 55%)" opacity={0.15} />
         <div className="relative z-10">
           <div className="flex items-start justify-between mb-5">
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[hsl(215,80%,55%)] to-[hsl(260,70%,55%)]">
@@ -57,6 +59,7 @@ const ActionCards = () => {
         onClick={handleMedicineClick}
         onTouchStart={handleTouchStart}
       >
+        <Ripple color="hsl(165, 60%, 45%)" opacity={0.15} />
         <div className="relative z-10">
           <div className="flex items-start justify-between mb-5">
             <div className="w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br from-[hsl(165,60%,45%)] to-[hsl(145,55%,40%)]">
