@@ -33,7 +33,9 @@ const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandN
           <Link 
             to="/" 
             onClick={handleNavClick}
-            className="group relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary active:brightness-110 transition-all duration-100"
+            onTouchStart={handleNavClick}
+            className="group relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary transition-all duration-100"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
           >
             {/* Subtle ambient glow behind text */}
             <div 
@@ -70,9 +72,11 @@ const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandN
                 <Link
                   to={item.href}
                   onClick={handleNavClick}
-                  className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-colors duration-100 active:scale-95 ${
+                  onTouchStart={handleNavClick}
+                  className={`relative flex items-center gap-1.5 px-3 py-2 rounded-full transition-colors duration-100 ${
                     active ? "text-foreground bg-secondary" : "text-muted-foreground hover:text-foreground"
                   }`}
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   <IconComponent className="w-4 h-4" />
                   {active && (

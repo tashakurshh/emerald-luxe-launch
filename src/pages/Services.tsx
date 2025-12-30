@@ -101,10 +101,12 @@ const Services = () => {
                   key={service.id}
                   to={`/services/${service.slug}`}
                   onClick={() => triggerHaptic()}
+                  onTouchStart={() => triggerHaptic()}
                   className="block"
+                  style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   <motion.div
-                    className="glass-card p-3.5 flex items-center gap-3.5 group cursor-pointer active:scale-[0.98] transition-transform duration-100"
+                    className="glass-card p-3.5 flex items-center gap-3.5 group cursor-pointer"
                     whileTap={{ scale: appleScale.card }}
                     transition={springTap}
                   >
@@ -140,10 +142,12 @@ const Services = () => {
               return (
                 <div key={service.id} className="relative">
                   <motion.div
-                    className="glass-card p-3.5 flex items-center gap-3.5 opacity-50 cursor-pointer active:scale-[0.98] transition-transform duration-100"
+                    className="glass-card p-3.5 flex items-center gap-3.5 opacity-50 cursor-pointer"
+                    style={{ WebkitTapHighlightColor: 'transparent' }}
                     whileTap={{ scale: appleScale.card }}
                     transition={springTap}
                     onClick={() => handleServiceClick(service.id, service.isActive)}
+                    onTouchStart={() => triggerHaptic()}
                   >
                     <div
                       className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0"
@@ -171,13 +175,15 @@ const Services = () => {
 
         {/* WhatsApp CTA */}
         <motion.div
-          className="glass-card p-4 cursor-pointer group relative overflow-hidden active:scale-[0.98] transition-transform duration-100"
+          className="glass-card p-4 cursor-pointer group relative overflow-hidden"
+          style={{ WebkitTapHighlightColor: 'transparent' }}
           whileTap={{ scale: appleScale.card }}
           transition={springTap}
           onClick={() => {
             triggerHaptic();
             openWhatsApp(whatsappMessages.generalInquiry);
           }}
+          onTouchStart={() => triggerHaptic()}
         >
           <div className="absolute inset-0 bg-apple-green/8" />
           <div className="relative z-10 flex items-center gap-3.5">
