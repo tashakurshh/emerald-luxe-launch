@@ -67,7 +67,7 @@ const ServicesCard = () => {
               />
               
               <Link
-                to="/services"
+                to={`/services/${service.slug}`}
                 className="relative block"
                 onMouseEnter={() => setHoveredService(service.id)}
                 onMouseLeave={() => setHoveredService(null)}
