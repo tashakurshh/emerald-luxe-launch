@@ -28,29 +28,17 @@ const queryClient = new QueryClient({
   },
 });
 
-// Simple loading fallback
-function PageLoader() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="flex items-center gap-1.5">
-        {[0, 1, 2].map((i) => (
-          <div
-            key={i}
-            className="w-2 h-2 rounded-full bg-primary animate-pulse"
-            style={{ animationDelay: `${i * 150}ms` }}
-          />
-        ))}
-      </div>
-    </div>
-  );
+// Invisible fallback - no loading UI, just empty container to prevent layout shift
+function PageFallback() {
+  return <div className="min-h-screen bg-background" />;
 }
 
 function AnimatedRoutes() {
   const location = useLocation();
   
   return (
-    <Suspense fallback={<PageLoader />}>
-      <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" initial={false}>
+      <Suspense fallback={<PageFallback />}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<PageTransition><Index /></PageTransition>} />
           <Route path="/orders" element={<PageTransition><Orders /></PageTransition>} />
@@ -61,8 +49,8 @@ function AnimatedRoutes() {
           <Route path="/terms" element={<PageTransition><Terms /></PageTransition>} />
           <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
         </Routes>
-      </AnimatePresence>
-    </Suspense>
+      </Suspense>
+    </AnimatePresence>
   );
 }
 
