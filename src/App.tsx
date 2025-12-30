@@ -8,6 +8,7 @@ import { AnimatePresence } from "framer-motion";
 import { AppProvider } from "@/contexts/AppContext";
 import SplashScreen from "@/components/SplashScreen";
 import PageTransition from "@/components/ui/PageTransition";
+import ScrollToTop from "@/components/ui/ScrollToTop";
 import BottomNav from "@/components/BottomNav";
 
 // Lazy load pages for code splitting
@@ -78,6 +79,7 @@ const App = () => {
       <TooltipProvider>
         <BrowserRouter>
           <AppProvider>
+            <ScrollToTop />
             {showSplash && !hasSeenSplash && (
               <SplashScreen onComplete={handleSplashComplete} duration={1500} />
             )}

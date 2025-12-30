@@ -21,6 +21,8 @@ const springHover = {
   damping: 20,
 };
 
+const MotionLink = motion(Link);
+
 const ServicePage = () => {
   const { slug } = useParams();
   const service = getServiceBySlug(slug || "");
@@ -63,12 +65,15 @@ const ServicePage = () => {
           transition={{ duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
         >
           {/* Back */}
-          <motion.div whileTap={{ scale: 0.95 }} transition={{ duration: 0.1 }}>
-            <Link to="/services" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Services
-            </Link>
-          </motion.div>
+          <MotionLink
+            to="/services"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
+            whileTap={{ scale: 0.95 }}
+            transition={{ duration: 0.1 }}
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Services
+          </MotionLink>
 
           {/* Header Card */}
           <motion.div 
