@@ -31,31 +31,20 @@ const BottomNav = forwardRef<HTMLElement, object>(function BottomNav(_, ref) {
   return (
     <nav 
       ref={ref} 
-      className="fixed bottom-0 left-0 right-0 z-50 md:hidden"
+      className="fixed bottom-0 left-1/2 -translate-x-1/2 z-50 md:hidden"
       style={{
-        paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+        marginBottom: 'max(12px, env(safe-area-inset-bottom, 12px))',
       }}
     >
-      {/* iOS-style translucent backdrop */}
+      {/* Floating pill container */}
       <div 
-        className="absolute inset-0 backdrop-blur-xl"
+        className="relative flex items-center justify-center gap-2 px-4 py-2.5 rounded-[28px]"
         style={{
-          background: 'rgba(249, 249, 249, 0.94)',
-          borderTop: '0.5px solid rgba(0, 0, 0, 0.1)',
+          background: 'rgba(45, 45, 48, 0.75)',
+          backdropFilter: 'blur(40px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(40px) saturate(180%)',
         }}
-      />
-      
-      {/* Dark mode backdrop */}
-      <div 
-        className="absolute inset-0 backdrop-blur-xl hidden dark:block"
-        style={{
-          background: 'rgba(30, 30, 30, 0.88)',
-          borderTop: '0.5px solid rgba(255, 255, 255, 0.08)',
-        }}
-      />
-      
-      {/* Tab items container */}
-      <div className="relative flex items-end justify-around px-6 pt-2 pb-1.5">
+      >
         {navItems.map((item) => {
           const IconComponent = item.icon;
           const active = isActive(item.href);
@@ -65,37 +54,24 @@ const BottomNav = forwardRef<HTMLElement, object>(function BottomNav(_, ref) {
               key={item.name}
               to={item.href}
               onClick={handleNavClick}
-              className="flex flex-col items-center justify-center min-w-[64px] py-1"
+              className="flex items-center justify-center w-14 h-10"
             >
               <motion.div
-                whileTap={{ scale: 0.85 }}
-                transition={{ type: "tween", duration: 0.1 }}
-                className="flex flex-col items-center gap-0.5"
+                whileTap={{ scale: 0.82 }}
+                transition={{ type: "tween", duration: 0.08 }}
+                className="flex items-center justify-center"
               >
                 <IconComponent
-                  className="transition-colors duration-150"
                   style={{ 
                     color: active 
-                      ? 'hsl(211, 100%, 50%)' 
-                      : 'hsl(0, 0%, 55%)',
-                    width: 24,
-                    height: 24,
+                      ? 'hsl(211, 100%, 55%)' 
+                      : 'rgba(255, 255, 255, 0.55)',
+                    width: 26,
+                    height: 26,
+                    transition: 'color 0.12s ease',
                   }}
-                  strokeWidth={1.5}
+                  strokeWidth={active ? 1.8 : 1.5}
                 />
-                <span
-                  className="transition-colors duration-150"
-                  style={{ 
-                    color: active 
-                      ? 'hsl(211, 100%, 50%)' 
-                      : 'hsl(0, 0%, 55%)',
-                    fontSize: 10,
-                    fontWeight: 500,
-                    letterSpacing: '-0.01em',
-                  }}
-                >
-                  {item.name}
-                </span>
               </motion.div>
             </Link>
           );
