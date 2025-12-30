@@ -1,4 +1,4 @@
-import { forwardRef, useCallback } from "react";
+import { forwardRef, useCallback, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Grid3X3, FileText } from "lucide-react";
 import { motion } from "framer-motion";
@@ -33,9 +33,23 @@ const DynamicIslandNav = forwardRef<HTMLElement, object>(function DynamicIslandN
           <Link 
             to="/" 
             onClick={handleNavClick}
-            className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary active:scale-95 transition-transform duration-100"
+            className="group relative flex items-center gap-2 px-3.5 py-2 rounded-full bg-primary active:brightness-110 transition-all duration-100"
           >
-            <span className="text-sm font-semibold tracking-tight text-primary-foreground">
+            {/* Subtle ambient glow behind text */}
+            <div 
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{
+                background: 'radial-gradient(ellipse at center, rgba(100, 180, 255, 0.15) 0%, transparent 70%)',
+                filter: 'blur(6px)',
+              }}
+            />
+            <span 
+              className="relative text-sm font-semibold tracking-tight"
+              style={{
+                color: 'hsl(210, 100%, 98%)',
+                textShadow: '0 0 12px rgba(140, 200, 255, 0.25)',
+              }}
+            >
               Pharmih
             </span>
           </Link>
