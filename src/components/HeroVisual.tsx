@@ -9,8 +9,15 @@ const HeroVisual = () => {
   return (
     <motion.div 
       className="relative"
+      animate={{
+        y: [0, -8, 0],
+      }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
       whileTap={{ scale: appleScale.card }}
-      transition={appleSpring.tap}
       onClick={triggerHaptic}
     >
       <div className="glass-card-hero overflow-hidden relative group cursor-pointer">
