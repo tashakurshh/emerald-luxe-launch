@@ -40,7 +40,7 @@ export const activeServices: ServiceData[] = [
       "Antibiotics and antiviral medicines",
       "Specialty and rare medications"
     ],
-    deliveryInfo: "Citywide delivery within 24 hours across Srinagar.",
+    deliveryInfo: "Delivery within 24 hours across Srinagar.",
     features: [
       "Licensed pharmacist verification",
       "Genuine medicines from authorized sources",
@@ -71,7 +71,7 @@ export const activeServices: ServiceData[] = [
       "Baby healthcare essentials",
       "Feeding bottles and accessories"
     ],
-    deliveryInfo: "Same-day delivery for orders before 2 PM in Srinagar.",
+    deliveryInfo: "Delivery within 24 hours across Srinagar.",
     features: [
       "Only trusted baby brands",
       "Hygiene-sealed packaging",
@@ -102,7 +102,7 @@ export const activeServices: ServiceData[] = [
       "Mobility aids and orthopedic supports",
       "First-aid kits and supplies"
     ],
-    deliveryInfo: "Delivery within 24-48 hours across Srinagar.",
+    deliveryInfo: "Delivery within 24 hours across Srinagar.",
     features: [
       "Certified medical devices",
       "Demo and setup guidance",
@@ -133,7 +133,7 @@ export const activeServices: ServiceData[] = [
       "Probiotics and gut health products",
       "Herbal and Ayurvedic supplements"
     ],
-    deliveryInfo: "Regular delivery within 24 hours across Srinagar.",
+    deliveryInfo: "Delivery within 24 hours across Srinagar.",
     features: [
       "Authentic products only",
       "Personalized recommendations",
@@ -164,7 +164,7 @@ export const activeServices: ServiceData[] = [
       "Personal hygiene essentials",
       "Grooming products"
     ],
-    deliveryInfo: "Standard delivery within 24 hours across Srinagar.",
+    deliveryInfo: "Delivery within 24 hours across Srinagar.",
     features: [
       "Dermatologist-recommended options",
       "Genuine branded products",
