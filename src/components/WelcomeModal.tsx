@@ -208,31 +208,47 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
                   />
                 </div>
 
-                {/* Button with ripple */}
-                <motion.button
-                  onClick={handleSubmit}
-                  disabled={!isValid}
-                  whileTap={isValid ? { scale: appleScale.button } : {}}
-                  transition={appleSpring.tap}
-                  className="relative w-full py-3.5 text-[17px] font-semibold rounded-[12px] overflow-hidden outline-none"
-                  style={{
-                    background: isValid 
-                      ? 'hsl(211 100% 50%)' 
-                      : 'hsl(211 40% 35%)',
-                    color: isValid 
-                      ? 'hsl(0 0% 100%)' 
-                      : 'hsl(0 0% 70%)',
-                    boxShadow: isValid
-                      ? '0 4px 20px hsl(211 100% 50% / 0.35), 0 2px 8px hsl(211 100% 40% / 0.25)'
-                      : 'none',
-                    cursor: isValid ? 'pointer' : 'not-allowed',
-                    WebkitTapHighlightColor: 'transparent',
-                    transition: 'background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease',
-                  }}
-                >
-                  {isValid && <Ripple color="hsl(0 0% 100%)" opacity={0.25} />}
-                  <span className="relative z-10">Continue</span>
-                </motion.button>
+                {/* Button with colorful gradient */}
+                <div className="relative">
+                  {/* Animated glow behind button */}
+                  <motion.div
+                    className="absolute -inset-[2px] rounded-[14px] pointer-events-none"
+                    animate={{
+                      opacity: isValid ? [0.5, 0.7, 0.5] : 0,
+                      scale: isValid ? [1, 1.02, 1] : 0.98,
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    style={{
+                      background: 'linear-gradient(135deg, hsl(280 85% 55%) 0%, hsl(211 100% 55%) 50%, hsl(170 80% 45%) 100%)',
+                      filter: 'blur(12px)',
+                    }}
+                  />
+                  
+                  <motion.button
+                    onClick={handleSubmit}
+                    disabled={!isValid}
+                    whileTap={isValid ? { scale: appleScale.button } : {}}
+                    transition={appleSpring.tap}
+                    className="relative w-full py-3.5 text-[17px] font-semibold rounded-[12px] overflow-hidden outline-none"
+                    style={{
+                      background: isValid 
+                        ? 'linear-gradient(135deg, hsl(280 75% 55%) 0%, hsl(211 100% 55%) 50%, hsl(170 75% 45%) 100%)'
+                        : 'hsl(220 15% 25%)',
+                      color: isValid 
+                        ? 'hsl(0 0% 100%)' 
+                        : 'hsl(0 0% 50%)',
+                      boxShadow: isValid
+                        ? '0 4px 24px hsl(211 100% 50% / 0.4), 0 2px 8px hsl(280 80% 50% / 0.25), inset 0 1px 0 hsl(0 0% 100% / 0.15)'
+                        : 'none',
+                      cursor: isValid ? 'pointer' : 'not-allowed',
+                      WebkitTapHighlightColor: 'transparent',
+                      transition: 'background 0.3s ease, color 0.2s ease, box-shadow 0.3s ease',
+                    }}
+                  >
+                    {isValid && <Ripple color="hsl(0 0% 100%)" opacity={0.3} />}
+                    <span className="relative z-10">Continue</span>
+                  </motion.button>
+                </div>
               </motion.div>
 
               {/* Helper text */}
