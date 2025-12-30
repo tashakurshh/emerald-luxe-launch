@@ -29,32 +29,29 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="flex flex-col w-full"
       style={{
-        paddingTop: 'max(16px, env(safe-area-inset-top, 16px))',
-        paddingBottom: 'max(16px, env(safe-area-inset-bottom, 16px))',
+        minHeight: '100dvh',
+        paddingTop: 'max(24px, env(safe-area-inset-top, 24px))',
+        paddingBottom: 'max(100px, calc(80px + env(safe-area-inset-bottom, 24px)))',
         paddingLeft: 'max(16px, env(safe-area-inset-left, 16px))',
         paddingRight: 'max(16px, env(safe-area-inset-right, 16px))',
+        background: `
+          radial-gradient(ellipse 100% 80% at 50% 0%, hsl(220 20% 12%) 0%, hsl(225 15% 7%) 70%),
+          hsl(225 15% 7%)
+        `,
       }}
     >
-      {/* Background with subtle noise texture */}
-      <div 
-        className="absolute inset-0 -z-10"
-        style={{
-          background: `
-            radial-gradient(ellipse 100% 80% at 50% 0%, hsl(220 20% 12%) 0%, hsl(225 15% 7%) 70%),
-            hsl(225 15% 7%)
-          `,
-        }}
-      />
-      
       {/* Subtle grain overlay */}
       <div 
-        className="absolute inset-0 -z-10 opacity-[0.015] pointer-events-none"
+        className="fixed inset-0 -z-10 opacity-[0.015] pointer-events-none"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
+
+      {/* Flex spacer to push card to center */}
+      <div className="flex-1 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -204,6 +201,7 @@ const WelcomeModal = ({ onComplete }: WelcomeModalProps) => {
             </div>
           </div>
         </motion.div>
+      </div>
     </div>
   );
 };
