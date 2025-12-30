@@ -4,6 +4,7 @@ import { Home, Package, FileText, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { LucideIcon } from "lucide-react";
 import { useHapticFeedback } from "@/hooks/useHapticFeedback";
+import Ripple from "@/components/ui/Ripple";
 
 interface NavItem {
   name: string;
@@ -115,9 +116,13 @@ const BottomNav = forwardRef<HTMLElement, object>(function BottomNav(_, ref) {
               to={item.href}
               onClick={handleNavClick}
               onTouchStart={handleNavClick}
-              className="flex items-center justify-center w-14 h-10"
+              className="relative flex items-center justify-center w-14 h-10 overflow-hidden rounded-xl"
               style={{ WebkitTapHighlightColor: 'transparent' }}
             >
+              <Ripple 
+                color={active ? 'hsl(211, 100%, 55%)' : 'rgba(255, 255, 255, 0.4)'} 
+                opacity={0.2} 
+              />
               <motion.div
                 whileTap={{ scale: 0.82 }}
                 transition={{ 
@@ -126,7 +131,7 @@ const BottomNav = forwardRef<HTMLElement, object>(function BottomNav(_, ref) {
                   damping: 30,
                   mass: 0.5,
                 }}
-                className="flex items-center justify-center"
+                className="flex items-center justify-center relative z-10"
               >
                 <IconComponent
                   style={{ 

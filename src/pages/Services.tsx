@@ -7,6 +7,7 @@ import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import Ripple from "@/components/ui/Ripple";
 
 // Simple spring for tap feedback
 const springTap = {
@@ -106,21 +107,22 @@ const Services = () => {
                   style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   <motion.div
-                    className="glass-card p-3.5 flex items-center gap-3.5 group cursor-pointer"
+                    className="glass-card p-3.5 flex items-center gap-3.5 group cursor-pointer relative overflow-hidden"
                     whileTap={{ scale: appleScale.card }}
                     transition={springTap}
                   >
+                    <Ripple color={service.color} opacity={0.12} />
                     <div
-                      className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0"
+                      className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 relative z-10"
                       style={{ background: `${service.color}15` }}
                     >
                       <IconComponent className="w-5 h-5" style={{ color: service.color }} />
                     </div>
-                    <div className="flex-1 min-w-0">
+                    <div className="flex-1 min-w-0 relative z-10">
                       <h3 className="text-foreground font-medium text-sm mb-0.5">{service.name}</h3>
                       <p className="text-muted-foreground text-xs truncate">{service.description}</p>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0" />
+                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0 relative z-10" />
                   </motion.div>
                 </Link>
               );
@@ -185,6 +187,7 @@ const Services = () => {
           }}
           onTouchStart={() => triggerHaptic()}
         >
+          <Ripple color="hsl(142, 70%, 49%)" opacity={0.15} />
           <div className="absolute inset-0 bg-apple-green/8" />
           <div className="relative z-10 flex items-center gap-3.5">
             <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-apple-green shrink-0">

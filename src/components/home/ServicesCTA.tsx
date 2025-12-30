@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Grid3X3, ArrowRight } from "lucide-react";
 import { useState, useCallback } from "react";
 import { appleSpring, appleScale, useHapticFeedback } from "@/hooks/useHapticFeedback";
+import Ripple from "@/components/ui/Ripple";
 
 const ServicesCTA = () => {
   const [isHovered, setIsHovered] = useState(false);
@@ -13,7 +14,7 @@ const ServicesCTA = () => {
   }, [triggerHaptic]);
 
   return (
-    <Link to="/services" onClick={handleClick}>
+    <Link to="/services" onClick={handleClick} onTouchStart={handleClick}>
       <div className="relative">
         {/* Glow effect */}
         <motion.div
@@ -40,7 +41,10 @@ const ServicesCTA = () => {
           transition={appleSpring.tap}
           onHoverStart={() => setIsHovered(true)}
           onHoverEnd={() => setIsHovered(false)}
+          style={{ WebkitTapHighlightColor: 'transparent' }}
         >
+          <Ripple color="hsl(260, 60%, 50%)" opacity={0.12} />
+          
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(270,80%,65%,0.08)] to-[hsl(215,90%,58%,0.08)]" />
           
           <motion.div
