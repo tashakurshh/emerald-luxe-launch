@@ -39,25 +39,59 @@ const BottomNav = forwardRef<HTMLElement, object>(function BottomNav(_, ref) {
         marginBottom: 'max(12px, env(safe-area-inset-bottom, 12px))',
       }}
     >
-      {/* Siri-style ambient glow layers */}
-      <div 
-        className="absolute -inset-[1px] rounded-[29px] opacity-40"
+      {/* Siri-style ambient glow - primary layer with slow rotation */}
+      <motion.div 
+        className="absolute -inset-[1px] rounded-[29px]"
+        animate={{
+          background: [
+            'linear-gradient(0deg, rgba(88, 175, 255, 0.35) 0%, rgba(120, 87, 255, 0.25) 25%, rgba(255, 100, 180, 0.2) 50%, rgba(64, 224, 208, 0.25) 75%, rgba(88, 175, 255, 0.35) 100%)',
+            'linear-gradient(90deg, rgba(120, 87, 255, 0.3) 0%, rgba(255, 100, 180, 0.22) 25%, rgba(64, 224, 208, 0.25) 50%, rgba(88, 175, 255, 0.28) 75%, rgba(120, 87, 255, 0.3) 100%)',
+            'linear-gradient(180deg, rgba(255, 100, 180, 0.25) 0%, rgba(64, 224, 208, 0.28) 25%, rgba(88, 175, 255, 0.3) 50%, rgba(120, 87, 255, 0.22) 75%, rgba(255, 100, 180, 0.25) 100%)',
+            'linear-gradient(270deg, rgba(64, 224, 208, 0.28) 0%, rgba(88, 175, 255, 0.32) 25%, rgba(120, 87, 255, 0.25) 50%, rgba(255, 100, 180, 0.2) 75%, rgba(64, 224, 208, 0.28) 100%)',
+            'linear-gradient(360deg, rgba(88, 175, 255, 0.35) 0%, rgba(120, 87, 255, 0.25) 25%, rgba(255, 100, 180, 0.2) 50%, rgba(64, 224, 208, 0.25) 75%, rgba(88, 175, 255, 0.35) 100%)',
+          ],
+          opacity: isPressed ? 0.65 : 0.45,
+        }}
+        transition={{
+          background: {
+            duration: 12,
+            repeat: Infinity,
+            ease: "linear",
+          },
+          opacity: {
+            duration: 0.3,
+          },
+        }}
         style={{
-          background: 'linear-gradient(135deg, rgba(88, 175, 255, 0.35) 0%, rgba(120, 87, 255, 0.25) 25%, rgba(255, 100, 180, 0.2) 50%, rgba(64, 224, 208, 0.25) 75%, rgba(88, 175, 255, 0.35) 100%)',
           filter: 'blur(8px)',
-          transition: 'opacity 0.3s ease',
-          opacity: isPressed ? 0.6 : 0.4,
         }}
       />
       
-      {/* Secondary diffused glow */}
-      <div 
+      {/* Secondary diffused glow with counter-rotation */}
+      <motion.div 
         className="absolute -inset-[3px] rounded-[31px]"
+        animate={{
+          background: [
+            'linear-gradient(180deg, rgba(100, 180, 255, 0.18) 0%, rgba(180, 120, 255, 0.14) 33%, rgba(255, 130, 200, 0.12) 66%, rgba(80, 200, 200, 0.15) 100%)',
+            'linear-gradient(270deg, rgba(180, 120, 255, 0.16) 0%, rgba(255, 130, 200, 0.14) 33%, rgba(80, 200, 200, 0.16) 66%, rgba(100, 180, 255, 0.14) 100%)',
+            'linear-gradient(0deg, rgba(255, 130, 200, 0.14) 0%, rgba(80, 200, 200, 0.16) 33%, rgba(100, 180, 255, 0.18) 66%, rgba(180, 120, 255, 0.12) 100%)',
+            'linear-gradient(90deg, rgba(80, 200, 200, 0.16) 0%, rgba(100, 180, 255, 0.15) 33%, rgba(180, 120, 255, 0.14) 66%, rgba(255, 130, 200, 0.14) 100%)',
+            'linear-gradient(180deg, rgba(100, 180, 255, 0.18) 0%, rgba(180, 120, 255, 0.14) 33%, rgba(255, 130, 200, 0.12) 66%, rgba(80, 200, 200, 0.15) 100%)',
+          ],
+          opacity: isPressed ? 0.55 : 0.35,
+        }}
+        transition={{
+          background: {
+            duration: 16,
+            repeat: Infinity,
+            ease: "linear",
+          },
+          opacity: {
+            duration: 0.3,
+          },
+        }}
         style={{
-          background: 'linear-gradient(270deg, rgba(100, 180, 255, 0.15) 0%, rgba(180, 120, 255, 0.12) 33%, rgba(255, 130, 200, 0.1) 66%, rgba(80, 200, 200, 0.12) 100%)',
           filter: 'blur(16px)',
-          transition: 'opacity 0.3s ease',
-          opacity: isPressed ? 0.5 : 0.3,
         }}
       />
 
