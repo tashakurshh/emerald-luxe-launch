@@ -76,7 +76,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         style={{ WebkitTapHighlightColor: 'transparent' }}
         {...(props as any)}
       >
-        <Ripple color={getRippleColor(variant)} opacity={0.15} />
+        <Ripple color={getRippleColor(variant)} opacity={0.25} />
         <span className="relative z-10 flex items-center justify-center gap-2">{children}</span>
       </motion.button>
     );

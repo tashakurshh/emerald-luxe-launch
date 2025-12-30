@@ -43,7 +43,7 @@ const ServicesCTA = () => {
           onHoverEnd={() => setIsHovered(false)}
           style={{ WebkitTapHighlightColor: 'transparent' }}
         >
-          <Ripple color="hsl(260, 60%, 50%)" opacity={0.12} />
+          <Ripple color="hsl(260, 60%, 50%)" opacity={0.22} />
           
           <div className="absolute inset-0 bg-gradient-to-r from-[hsl(270,80%,65%,0.08)] to-[hsl(215,90%,58%,0.08)]" />
           

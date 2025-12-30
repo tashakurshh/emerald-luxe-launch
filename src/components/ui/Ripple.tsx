@@ -20,12 +20,6 @@ interface RippleProps {
  * 
  * Add this component inside any interactive element to get
  * a soft, expanding ripple on tap/click.
- * 
- * Usage:
- * <div className="relative overflow-hidden">
- *   <Ripple />
- *   {content}
- * </div>
  */
 export function useRipple(options: RippleProps = {}) {
   const { disabled = false } = options;
@@ -52,7 +46,7 @@ export function useRipple(options: RippleProps = {}) {
       }
 
       // Calculate ripple size to cover the element
-      const size = Math.max(rect.width, rect.height) * 2;
+      const size = Math.max(rect.width, rect.height) * 2.5;
 
       const newRipple: RippleItem = {
         id: Date.now(),
@@ -66,7 +60,7 @@ export function useRipple(options: RippleProps = {}) {
       // Remove ripple after animation
       setTimeout(() => {
         setRipples((prev) => prev.filter((r) => r.id !== newRipple.id));
-      }, 600);
+      }, 700);
     },
     [disabled]
   );
@@ -76,8 +70,8 @@ export function useRipple(options: RippleProps = {}) {
 
 export function Ripple({
   color = "currentColor",
-  opacity = 0.12,
-  duration = 0.5,
+  opacity = 0.25,
+  duration = 0.55,
   disabled = false,
 }: RippleProps) {
   const { ripples, createRipple } = useRipple({ disabled });

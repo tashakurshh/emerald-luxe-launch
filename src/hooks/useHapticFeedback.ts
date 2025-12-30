@@ -1,23 +1,19 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 // Apple-style spring physics for tactile animations
-// Press: instant, Release: smooth
 export const appleSpring = {
-  // Immediate press response
   tap: {
     type: "spring" as const,
     stiffness: 500,
     damping: 30,
     mass: 0.5,
   },
-  // Smooth release with spring physics
   release: {
     type: "spring" as const,
     stiffness: 400,
     damping: 28,
     mass: 0.8,
   },
-  // Hover transitions (desktop)
   hover: {
     type: "spring" as const,
     stiffness: 350,
@@ -25,21 +21,20 @@ export const appleSpring = {
   },
 };
 
-// Scale values for tactile feedback - Apple-style micro-compression
+// Scale values for tactile feedback
 export const appleScale = {
-  button: 0.965,      // Buttons get noticeable compression
-  card: 0.98,         // Cards get subtle compression
-  cardActive: 0.975,  // Cards when actively pressed  
-  icon: 0.88,         // Icons get deeper compression
-  nav: 0.94,          // Nav items get medium compression
-  link: 0.97,         // Links get light compression
-  subtle: 0.992,      // Very subtle for large elements
+  button: 0.965,
+  card: 0.98,
+  cardActive: 0.975,
+  icon: 0.88,
+  nav: 0.94,
+  link: 0.97,
+  subtle: 0.992,
 };
 
-// Brightness values for press feedback
 export const appleBrightness = {
-  press: 1.03,        // Slight brightness increase on press
-  active: 1.05,       // Active state brightness
+  press: 1.03,
+  active: 1.05,
 };
 
 interface HapticFeedbackOptions {
@@ -47,20 +42,87 @@ interface HapticFeedbackOptions {
   intensity?: "light" | "medium" | "heavy";
 }
 
+// Singleton AudioContext for performance
+let audioContext: AudioContext | null = null;
+
+function getAudioContext(): AudioContext | null {
+  if (typeof window === 'undefined') return null;
+  
+  if (!audioContext) {
+    try {
+      audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    } catch {
+      return null;
+    }
+  }
+  return audioContext;
+}
+
+// Play a very subtle, soft tap sound
+function playTapSound(intensity: "light" | "medium" | "heavy" = "light") {
+  const ctx = getAudioContext();
+  if (!ctx) return;
+
+  try {
+    // Resume context if suspended (required for mobile)
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
+
+    const now = ctx.currentTime;
+    
+    // Create a very short, soft click using oscillator
+    const oscillator = ctx.createOscillator();
+    const gainNode = ctx.createGain();
+    
+    // Soft sine wave for smooth sound
+    oscillator.type = 'sine';
+    
+    // Frequency based on intensity (higher = lighter feel)
+    const freq = intensity === 'light' ? 1800 : intensity === 'medium' ? 1400 : 1000;
+    oscillator.frequency.setValueAtTime(freq, now);
+    oscillator.frequency.exponentialRampToValueAtTime(freq * 0.5, now + 0.03);
+    
+    // Very low volume for subtle effect
+    const volume = intensity === 'light' ? 0.015 : intensity === 'medium' ? 0.025 : 0.035;
+    gainNode.gain.setValueAtTime(volume, now);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.04);
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(ctx.destination);
+    
+    oscillator.start(now);
+    oscillator.stop(now + 0.05);
+  } catch {
+    // Silently fail if audio not supported
+  }
+}
+
 export function useHapticFeedback(options: HapticFeedbackOptions = {}) {
-  const { intensity = "light" } = options;
+  const { intensity = "light", enableSound = true } = options;
+  const lastTriggerRef = useRef<number>(0);
 
   const triggerHaptic = useCallback(() => {
-    // Use Vibration API for mobile devices
+    // Debounce to prevent rapid-fire triggers
+    const now = Date.now();
+    if (now - lastTriggerRef.current < 50) return;
+    lastTriggerRef.current = now;
+
+    // Vibration API for mobile
     if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
       const duration = intensity === 'light' ? 8 : intensity === 'medium' ? 18 : 35;
       try {
         navigator.vibrate(duration);
       } catch {
-        // Silently fail if vibration not supported
+        // Silently fail
       }
     }
-  }, [intensity]);
+
+    // Subtle tap sound
+    if (enableSound) {
+      playTapSound(intensity);
+    }
+  }, [intensity, enableSound]);
 
   return { triggerHaptic };
 }
