@@ -1,6 +1,6 @@
 // WhatsApp redirect utility
 // Replace with your actual WhatsApp business number
-const WHATSAPP_NUMBER = "919876543210"; // Format: country code + number without +
+const WHATSAPP_NUMBER = "919419727400"; // Format: country code + number without +
 
 export const openWhatsApp = (message: string) => {
   const encodedMessage = encodeURIComponent(message);

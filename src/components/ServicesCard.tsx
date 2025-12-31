@@ -18,7 +18,29 @@ const ServicesCard = () => {
   }, [triggerHaptic]);
 
   return (
-    <div id="services" className="glass-card p-6">
+    <div id="services" className="relative p-6 rounded-2xl overflow-hidden" style={{
+      background: 'hsl(var(--card))',
+    }}>
+      {/* Animated gradient border */}
+      <div 
+        className="absolute inset-0 rounded-2xl pointer-events-none"
+        style={{
+          padding: '1px',
+          background: 'linear-gradient(135deg, hsl(280, 80%, 55%) 0%, hsl(211, 100%, 55%) 25%, hsl(170, 75%, 45%) 50%, hsl(340, 85%, 60%) 75%, hsl(280, 80%, 55%) 100%)',
+          backgroundSize: '300% 300%',
+          animation: 'gradient-shift 6s ease infinite',
+          WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+      />
+      {/* Inner glow overlay */}
+      <div 
+        className="absolute inset-0 rounded-2xl pointer-events-none opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse 80% 50% at 50% 0%, hsl(280, 80%, 55%, 0.15) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 100% 100%, hsl(170, 75%, 45%, 0.1) 0%, transparent 50%), radial-gradient(ellipse 60% 40% at 0% 100%, hsl(211, 100%, 55%, 0.1) 0%, transparent 50%)',
+        }}
+      />
       <div className="flex items-center justify-between mb-5">
         <h3 className="text-lg font-semibold text-foreground tracking-tight">Our Services</h3>
         <motion.div

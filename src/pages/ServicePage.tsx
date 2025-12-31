@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Check, MessageCircle, Users, Package, Truck } from "lucide-react";
+import { ArrowLeft, Check, MessageCircle, Users, Package, Truck, ShieldCheck } from "lucide-react";
 import { getServiceBySlug } from "@/lib/services";
 import { openWhatsApp, whatsappMessages } from "@/lib/whatsapp";
 import DynamicIslandNav from "@/components/DynamicIslandNav";
@@ -96,6 +96,21 @@ const ServicePage = () => {
               </motion.div>
               <p className="text-sm font-medium text-muted-foreground mb-1">{service.tagline}</p>
               <h1 className="text-2xl font-semibold text-foreground mb-3">{service.name}</h1>
+              {service.privacyBadge && (
+                <motion.div 
+                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-3"
+                  style={{ 
+                    background: 'linear-gradient(135deg, hsl(350, 80%, 55%, 0.15) 0%, hsl(280, 80%, 55%, 0.1) 100%)',
+                    border: '1px solid hsl(350, 80%, 55%, 0.3)'
+                  }}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <ShieldCheck className="w-4 h-4" style={{ color: 'hsl(350, 80%, 55%)' }} />
+                  <span className="text-xs font-medium" style={{ color: 'hsl(350, 80%, 65%)' }}>100% Discreet & Private</span>
+                </motion.div>
+              )}
               <p className="text-muted-foreground text-sm leading-relaxed">{service.longDescription}</p>
             </div>
           </motion.div>
