@@ -107,7 +107,7 @@ const Services = () => {
                   style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   <motion.div
-                    className="relative p-3.5 flex items-center gap-3.5 group cursor-pointer overflow-hidden rounded-2xl"
+                    className="relative p-3.5 group cursor-pointer overflow-hidden rounded-2xl"
                     style={{ background: 'hsl(var(--card))' }}
                     whileTap={{ scale: appleScale.card }}
                     transition={springTap}
@@ -133,17 +133,56 @@ const Services = () => {
                       }}
                     />
                     <Ripple color={service.color} opacity={0.22} />
-                    <div
-                      className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 relative z-10"
-                      style={{ background: `${service.color}15` }}
-                    >
-                      <IconComponent className="w-5 h-5" style={{ color: service.color }} />
+                    
+                    {/* Main content row */}
+                    <div className="flex items-center gap-3.5">
+                      <div
+                        className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 relative z-10"
+                        style={{ background: `${service.color}15` }}
+                      >
+                        <IconComponent className="w-5 h-5" style={{ color: service.color }} />
+                      </div>
+                      <div className="flex-1 min-w-0 relative z-10">
+                        <h3 className="text-foreground font-medium text-sm mb-0.5">{service.name}</h3>
+                        <p className="text-muted-foreground text-xs truncate">{service.description}</p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0 relative z-10" />
                     </div>
-                    <div className="flex-1 min-w-0 relative z-10">
-                      <h3 className="text-foreground font-medium text-sm mb-0.5">{service.name}</h3>
-                      <p className="text-muted-foreground text-xs truncate">{service.description}</p>
-                    </div>
-                    <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors shrink-0 relative z-10" />
+
+                    {/* Brand Pills Section */}
+                    {service.commonBrands && service.commonBrands.length > 0 && (
+                      <motion.div 
+                        className="mt-3 pt-3 border-t border-border/30 relative z-10"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.1 }}
+                      >
+                        <p className="text-[10px] text-muted-foreground/70 mb-2 font-medium tracking-wide uppercase">
+                          Commonly Available Brands
+                        </p>
+                        <div className="flex flex-wrap gap-1.5">
+                          {service.commonBrands.map((brand, index) => (
+                            <motion.span
+                              key={brand}
+                              initial={{ opacity: 0, y: 4 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.05 * index, duration: 0.2 }}
+                              className="inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium
+                                bg-foreground/[0.03] backdrop-blur-sm
+                                border border-foreground/[0.06]
+                                text-foreground/70
+                                hover:bg-foreground/[0.05] hover:text-foreground/80
+                                transition-colors duration-200"
+                            >
+                              {brand}
+                            </motion.span>
+                          ))}
+                        </div>
+                        <p className="text-[9px] text-muted-foreground/50 mt-2 leading-relaxed">
+                          Brand availability may vary by prescription and location.
+                        </p>
+                      </motion.div>
+                    )}
                   </motion.div>
                 </Link>
               );
