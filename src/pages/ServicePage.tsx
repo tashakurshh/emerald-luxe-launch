@@ -227,13 +227,17 @@ const ServicePage = () => {
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.05 * index, duration: 0.2 }}
-                    className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium
-                      backdrop-blur-sm text-foreground/90
-                      hover:scale-[1.02]
+                    whileHover={{ 
+                      scale: 1.03,
+                      boxShadow: `0 4px 20px -4px ${service.color}40, 0 0 12px -2px ${service.color}30`
+                    }}
+                    className="inline-flex items-center px-4 py-1.5 rounded-[20px] text-xs font-medium
+                      backdrop-blur-sm text-foreground/90 cursor-default
                       transition-all duration-200"
                     style={{
-                      background: `linear-gradient(135deg, ${service.color}15 0%, ${service.color}08 100%)`,
-                      border: `1px solid ${service.color}25`,
+                      background: `linear-gradient(135deg, ${service.color}18 0%, ${service.color}08 100%)`,
+                      border: `1px solid ${service.color}30`,
+                      boxShadow: `0 2px 8px -2px ${service.color}15`,
                     }}
                   >
                     {brand}
