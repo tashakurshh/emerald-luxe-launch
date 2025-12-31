@@ -16,6 +16,7 @@ export interface ServiceData {
   features: string[];
   isActive: boolean;
   privacyBadge?: boolean;
+  commonBrands?: string[];
 }
 
 // Active Services
@@ -48,7 +49,8 @@ export const activeServices: ServiceData[] = [
       "Temperature-controlled delivery",
       "Automatic refill reminders"
     ],
-    isActive: true
+    isActive: true,
+    commonBrands: ["Pfizer", "Cipla", "Sun Pharma", "Abbott"]
   },
   {
     id: "baby-care",
@@ -79,7 +81,8 @@ export const activeServices: ServiceData[] = [
       "Gentle and safe products",
       "Expert guidance available"
     ],
-    isActive: true
+    isActive: true,
+    commonBrands: ["Nestlé", "Johnson & Johnson", "Himalaya Baby", "Pampers"]
   },
   {
     id: "healthcare-products",
@@ -110,7 +113,8 @@ export const activeServices: ServiceData[] = [
       "Warranty support",
       "Replacement parts available"
     ],
-    isActive: true
+    isActive: true,
+    commonBrands: ["Omron", "Accu-Chek", "Dr. Morepen", "Philips"]
   },
   {
     id: "vitamin-supplements",
@@ -141,7 +145,8 @@ export const activeServices: ServiceData[] = [
       "Expert nutritionist support",
       "Quality assured"
     ],
-    isActive: true
+    isActive: true,
+    commonBrands: ["Centrum", "HealthKart", "Himalaya", "Swisse"]
   },
   {
     id: "personal-care",
@@ -172,7 +177,8 @@ export const activeServices: ServiceData[] = [
       "Sensitive skin alternatives",
       "Quality assured"
     ],
-    isActive: true
+    isActive: true,
+    commonBrands: ["Nivea", "Dove", "Cetaphil", "Himalaya"]
   },
   {
     id: "sexual-wellness",
@@ -204,7 +210,8 @@ export const activeServices: ServiceData[] = [
       "Privacy guaranteed"
     ],
     privacyBadge: true,
-    isActive: true
+    isActive: true,
+    commonBrands: ["Durex", "Manforce", "Bold Care", "K-Y"]
   }
 ];
 
