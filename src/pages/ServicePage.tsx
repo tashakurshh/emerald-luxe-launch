@@ -228,18 +228,20 @@ const ServicePage = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.05 * index, duration: 0.2 }}
                     className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium
-                      bg-foreground/[0.04] backdrop-blur-sm
-                      border border-foreground/[0.08]
-                      text-foreground/75
-                      hover:bg-foreground/[0.06] hover:text-foreground/85
-                      transition-colors duration-200"
+                      backdrop-blur-sm text-foreground/90
+                      hover:scale-[1.02]
+                      transition-all duration-200"
+                    style={{
+                      background: `linear-gradient(135deg, ${service.color}15 0%, ${service.color}08 100%)`,
+                      border: `1px solid ${service.color}25`,
+                    }}
                   >
                     {brand}
                   </motion.span>
                 ))}
               </div>
               <p className="text-[10px] text-muted-foreground/60 mt-3 leading-relaxed">
-                All other brands are also available. Brand availability may vary by prescription and location.
+                <span className="font-semibold text-foreground/70">All other brands are also available.</span> Brand availability may vary by prescription and location.
               </p>
             </motion.div>
           )}
