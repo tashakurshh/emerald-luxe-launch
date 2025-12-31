@@ -107,10 +107,31 @@ const Services = () => {
                   style={{ WebkitTapHighlightColor: 'transparent' }}
                 >
                   <motion.div
-                    className="glass-card p-3.5 flex items-center gap-3.5 group cursor-pointer relative overflow-hidden"
+                    className="relative p-3.5 flex items-center gap-3.5 group cursor-pointer overflow-hidden rounded-2xl"
+                    style={{ background: 'hsl(var(--card))' }}
                     whileTap={{ scale: appleScale.card }}
                     transition={springTap}
                   >
+                    {/* Animated gradient border */}
+                    <div 
+                      className="absolute inset-0 rounded-2xl pointer-events-none"
+                      style={{
+                        padding: '1.5px',
+                        background: 'linear-gradient(135deg, hsl(280, 80%, 55%) 0%, hsl(211, 100%, 55%) 25%, hsl(170, 75%, 45%) 50%, hsl(340, 85%, 60%) 75%, hsl(280, 80%, 55%) 100%)',
+                        backgroundSize: '300% 300%',
+                        animation: 'gradient-shift 6s ease infinite',
+                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                        WebkitMaskComposite: 'xor',
+                        maskComposite: 'exclude',
+                      }}
+                    />
+                    {/* Inner glow */}
+                    <div 
+                      className="absolute inset-0 rounded-2xl pointer-events-none opacity-20"
+                      style={{
+                        background: `radial-gradient(ellipse 60% 40% at 0% 50%, ${service.color}30 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 100% 50%, ${service.color}20 0%, transparent 60%)`,
+                      }}
+                    />
                     <Ripple color={service.color} opacity={0.22} />
                     <div
                       className="w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 relative z-10"
