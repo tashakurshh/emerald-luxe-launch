@@ -210,6 +210,40 @@ const ServicePage = () => {
             </div>
           </motion.div>
 
+          {/* Brand Pills Section */}
+          {service.commonBrands && service.commonBrands.length > 0 && (
+            <motion.div 
+              className="glass-card p-5 mb-5"
+              whileTap={{ scale: 0.985 }}
+              transition={springTap}
+            >
+              <p className="text-[11px] text-muted-foreground/70 mb-3 font-medium tracking-wide uppercase">
+                Commonly Available Brands
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {service.commonBrands.map((brand, index) => (
+                  <motion.span
+                    key={brand}
+                    initial={{ opacity: 0, y: 4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.05 * index, duration: 0.2 }}
+                    className="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium
+                      bg-foreground/[0.04] backdrop-blur-sm
+                      border border-foreground/[0.08]
+                      text-foreground/75
+                      hover:bg-foreground/[0.06] hover:text-foreground/85
+                      transition-colors duration-200"
+                  >
+                    {brand}
+                  </motion.span>
+                ))}
+              </div>
+              <p className="text-[10px] text-muted-foreground/60 mt-3 leading-relaxed">
+                All other brands are also available. Brand availability may vary by prescription and location.
+              </p>
+            </motion.div>
+          )}
+
           {/* Delivery Info */}
           <motion.div 
             className="glass-card p-5 mb-5"
