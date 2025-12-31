@@ -1,4 +1,4 @@
-import { Pill, Baby, HeartPulse, Leaf, Sparkles, TestTube2, Users, Stethoscope } from "lucide-react";
+import { Pill, Baby, HeartPulse, Leaf, Sparkles, TestTube2, Users, Stethoscope, Heart } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export interface ServiceData {
@@ -170,6 +170,37 @@ export const activeServices: ServiceData[] = [
       "Genuine branded products",
       "Sensitive skin alternatives",
       "Quality assured"
+    ],
+    isActive: true
+  },
+  {
+    id: "sexual-wellness",
+    name: "Sexual Wellness",
+    slug: "sexual-wellness",
+    tagline: "Discreet care for intimate health",
+    description: "Intimate health products delivered with complete privacy",
+    longDescription: "We understand the importance of privacy when it comes to intimate health. Our sexual wellness range includes carefully selected products from trusted brands, delivered in discreet packaging to protect your privacy. All products are genuine and sourced from authorized distributors.",
+    icon: Heart,
+    color: "hsl(350, 80%, 55%)",
+    whoFor: [
+      "Adults seeking intimate health products",
+      "Couples looking for wellness products",
+      "Those preferring discreet home delivery",
+      "Anyone prioritizing intimate health"
+    ],
+    whatCanOrder: [
+      "Condoms and contraceptives",
+      "Lubricants and intimate care",
+      "Sexual wellness supplements",
+      "Intimate hygiene products",
+      "Reproductive health essentials"
+    ],
+    deliveryInfo: "Delivery within 24 hours across Srinagar.",
+    features: [
+      "100% discreet packaging",
+      "Genuine branded products",
+      "No product names on delivery",
+      "Privacy guaranteed"
     ],
     isActive: true
   }

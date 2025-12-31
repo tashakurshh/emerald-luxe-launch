@@ -32,7 +32,7 @@ const HeroVisual = () => {
             Your Health, <span className="gradient-text">Delivered</span>
           </h2>
           <p className="text-[hsl(220,10%,62%)] text-sm mb-4">
-            Premium healthcare at your fingertips. Trusted by Srinagar.
+            Care that Cares. Trusted by Srinagar.
           </p>
           
           {/* Trust badges */}
