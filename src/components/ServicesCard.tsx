@@ -25,7 +25,7 @@ const ServicesCard = () => {
       <div 
         className="absolute inset-0 rounded-2xl pointer-events-none"
         style={{
-          padding: '1px',
+          padding: '1.5px',
           background: 'linear-gradient(135deg, hsl(280, 80%, 55%) 0%, hsl(211, 100%, 55%) 25%, hsl(170, 75%, 45%) 50%, hsl(340, 85%, 60%) 75%, hsl(280, 80%, 55%) 100%)',
           backgroundSize: '300% 300%',
           animation: 'gradient-shift 6s ease infinite',
