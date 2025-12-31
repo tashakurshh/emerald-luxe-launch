@@ -27,19 +27,6 @@ const ActionCards = () => {
     <div className="grid md:grid-cols-2 gap-4">
       {/* Upload Prescription Card */}
       <div className="relative">
-        {/* Animated gradient border */}
-        <div 
-          className="absolute inset-0 rounded-[22px] pointer-events-none"
-          style={{
-            padding: '2px',
-            background: 'linear-gradient(135deg, hsl(280, 80%, 55%) 0%, hsl(211, 100%, 55%) 25%, hsl(170, 75%, 45%) 50%, hsl(340, 85%, 60%) 75%, hsl(280, 80%, 55%) 100%)',
-            backgroundSize: '300% 300%',
-            animation: 'gradient-shift 6s ease infinite',
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-            WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude',
-          }}
-        />
         {/* Animated glow behind card */}
         <motion.div
           className="absolute -inset-[2px] rounded-[22px] pointer-events-none"
@@ -85,19 +72,6 @@ const ActionCards = () => {
 
       {/* Enter Medicine Card */}
       <div className="relative">
-        {/* Animated gradient border */}
-        <div 
-          className="absolute inset-0 rounded-[22px] pointer-events-none"
-          style={{
-            padding: '2px',
-            background: 'linear-gradient(135deg, hsl(170, 80%, 45%) 0%, hsl(145, 75%, 45%) 25%, hsl(211, 100%, 55%) 50%, hsl(280, 80%, 55%) 75%, hsl(170, 80%, 45%) 100%)',
-            backgroundSize: '300% 300%',
-            animation: 'gradient-shift 6s ease infinite',
-            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-            WebkitMaskComposite: 'xor',
-            maskComposite: 'exclude',
-          }}
-        />
         {/* Animated glow behind card */}
         <motion.div
           className="absolute -inset-[2px] rounded-[22px] pointer-events-none"
