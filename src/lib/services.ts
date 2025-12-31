@@ -15,6 +15,7 @@ export interface ServiceData {
   deliveryInfo: string;
   features: string[];
   isActive: boolean;
+  privacyBadge?: boolean;
 }
 
 // Active Services
@@ -202,6 +203,7 @@ export const activeServices: ServiceData[] = [
       "No product names on delivery",
       "Privacy guaranteed"
     ],
+    privacyBadge: true,
     isActive: true
   }
 ];
