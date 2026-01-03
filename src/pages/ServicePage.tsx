@@ -23,122 +23,128 @@ const springHover = {
 
 const MotionLink = motion(Link);
 
-// Brand product data with images for each service category
+// Brand product data with actual brand logos
 const brandProductImages: Record<string, { name: string; image: string }[]> = {
   "prescription-medicines": [
-    { name: "Pfizer", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Cipla", image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Sun Pharma", image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Abbott", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Pfizer", image: "https://logo.clearbit.com/pfizer.com" },
+    { name: "Cipla", image: "https://logo.clearbit.com/cipla.com" },
+    { name: "Sun Pharma", image: "https://logo.clearbit.com/sunpharma.com" },
+    { name: "Abbott", image: "https://logo.clearbit.com/abbott.com" },
   ],
   "baby-care": [
-    { name: "Nestlé", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Johnson & Johnson", image: "https://images.unsplash.com/photo-1584839404075-a71c217cf63a?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Himalaya Baby", image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Pampers", image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Nestlé", image: "https://logo.clearbit.com/nestle.com" },
+    { name: "Johnson & Johnson", image: "https://logo.clearbit.com/jnj.com" },
+    { name: "Himalaya", image: "https://logo.clearbit.com/himalayawellness.com" },
+    { name: "Pampers", image: "https://logo.clearbit.com/pampers.com" },
   ],
   "healthcare-products": [
-    { name: "Omron", image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Accu-Chek", image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Dr. Morepen", image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Philips", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Omron", image: "https://logo.clearbit.com/omron.com" },
+    { name: "Accu-Chek", image: "https://logo.clearbit.com/accu-chek.com" },
+    { name: "Dr. Morepen", image: "https://logo.clearbit.com/drmorepen.com" },
+    { name: "Philips", image: "https://logo.clearbit.com/philips.com" },
   ],
   "vitamin-supplements": [
-    { name: "Centrum", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "HealthKart", image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Himalaya", image: "https://images.unsplash.com/photo-1577401239170-897942555fb3?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Swisse", image: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Centrum", image: "https://logo.clearbit.com/centrum.com" },
+    { name: "HealthKart", image: "https://logo.clearbit.com/healthkart.com" },
+    { name: "Himalaya", image: "https://logo.clearbit.com/himalayawellness.com" },
+    { name: "Swisse", image: "https://logo.clearbit.com/swisse.com" },
   ],
   "personal-care": [
-    { name: "Nivea", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Dove", image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Cetaphil", image: "https://images.unsplash.com/photo-1617897903246-719242758050?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Himalaya", image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Nivea", image: "https://logo.clearbit.com/nivea.com" },
+    { name: "Dove", image: "https://logo.clearbit.com/dove.com" },
+    { name: "Cetaphil", image: "https://logo.clearbit.com/cetaphil.com" },
+    { name: "Himalaya", image: "https://logo.clearbit.com/himalayawellness.com" },
   ],
   "sexual-wellness": [
-    { name: "Durex", image: "https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Manforce", image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "Bold Care", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&auto=format&q=80" },
-    { name: "K-Y", image: "https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Durex", image: "https://logo.clearbit.com/durex.com" },
+    { name: "Manforce", image: "https://logo.clearbit.com/manforcecondoms.com" },
+    { name: "Bold Care", image: "https://logo.clearbit.com/beboldcare.com" },
+    { name: "Skore", image: "https://logo.clearbit.com/skorecondoms.com" },
   ],
 };
 
-// Apple-style Brand Product Card
+// Apple-style Brand Product Card with Logo
 const BrandProductCard = ({ 
   brand, 
   index 
 }: { 
   brand: { name: string; image: string }; 
   index: number;
-}) => (
-  <motion.div
-    initial={{ opacity: 0, y: 24, scale: 0.95 }}
-    animate={{ opacity: 1, y: 0, scale: 1 }}
-    transition={{ 
-      delay: 0.1 + index * 0.08, 
-      duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94]
-    }}
-    whileHover={{ 
-      y: -6,
-      scale: 1.02,
-      transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }
-    }}
-    whileTap={{ scale: 0.98 }}
-    className="group flex-shrink-0 w-[130px] sm:w-auto cursor-pointer"
-  >
-    <div 
-      className="relative overflow-hidden rounded-[24px] p-4
-        bg-white/70 dark:bg-white/[0.06]
-        backdrop-blur-2xl backdrop-saturate-[1.8]
-        border border-white/50 dark:border-white/[0.08]
-        shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06),0_0_0_1px_rgba(255,255,255,0.1)_inset]
-        group-hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12),0_0_0_1px_rgba(255,255,255,0.15)_inset]
-        group-hover:bg-white/85 dark:group-hover:bg-white/[0.09]
-        transition-all duration-500 ease-out"
+}) => {
+  const [imgError, setImgError] = useState(false);
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ 
+        delay: 0.1 + index * 0.08, 
+        duration: 0.6,
+        ease: [0.25, 0.46, 0.45, 0.94]
+      }}
+      whileHover={{ 
+        y: -6,
+        scale: 1.02,
+        transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }
+      }}
+      whileTap={{ scale: 0.98 }}
+      className="group flex-shrink-0 w-[130px] sm:w-auto cursor-pointer"
     >
-      {/* Subtle top highlight */}
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
-      
-      {/* Product Image Container */}
-      <div className="relative aspect-square w-full mb-3 rounded-[18px] overflow-hidden
-        bg-gradient-to-br from-gray-50/80 to-gray-100/60 dark:from-gray-800/40 dark:to-gray-900/30
-        shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)]">
-        <motion.img
-          src={brand.image}
-          alt={brand.name}
-          className="w-full h-full object-cover opacity-0"
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.15 + index * 0.08 }}
-          loading="lazy"
-          onLoad={(e) => {
-            (e.target as HTMLImageElement).style.opacity = '1';
-          }}
-        />
-        
-        {/* Soft inner shadow for editorial depth */}
-        <div className="absolute inset-0 rounded-[18px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.02),inset_0_-1px_2px_rgba(255,255,255,0.5)]" />
-        
-        {/* Hover overlay */}
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-        />
-      </div>
-      
-      {/* Brand Name - SF Pro style */}
-      <p 
-        className="text-center font-medium text-[13px] tracking-[-0.01em] leading-tight
-          text-gray-700 dark:text-gray-200
-          group-hover:text-gray-900 dark:group-hover:text-white
-          transition-colors duration-300"
-        style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif' }}
+      <div 
+        className="relative overflow-hidden rounded-[24px] p-4
+          bg-white/80 dark:bg-white/[0.08]
+          backdrop-blur-2xl backdrop-saturate-[1.8]
+          border border-white/60 dark:border-white/[0.1]
+          shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08),0_0_0_1px_rgba(255,255,255,0.15)_inset]
+          group-hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15),0_0_0_1px_rgba(255,255,255,0.2)_inset]
+          group-hover:bg-white/90 dark:group-hover:bg-white/[0.12]
+          transition-all duration-500 ease-out"
       >
-        {brand.name}
-      </p>
-    </div>
-  </motion.div>
-);
+        {/* Subtle top highlight */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+        
+        {/* Logo Container - Clean white background for logos */}
+        <div className="relative aspect-square w-full mb-3 rounded-[16px] overflow-hidden
+          bg-white
+          shadow-[0_1px_3px_rgba(0,0,0,0.08),inset_0_0_0_1px_rgba(0,0,0,0.04)]
+          flex items-center justify-center p-3">
+          {!imgError ? (
+            <motion.img
+              src={brand.image}
+              alt={`${brand.name} logo`}
+              className="w-full h-full object-contain"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.15 + index * 0.08 }}
+              loading="lazy"
+              onError={() => setImgError(true)}
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
+              <span 
+                className="text-lg font-bold text-gray-400"
+                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif' }}
+              >
+                {brand.name.charAt(0)}
+              </span>
+            </div>
+          )}
+        </div>
+        
+        {/* Brand Name - SF Pro style */}
+        <p 
+          className="text-center font-semibold text-[13px] tracking-[-0.01em] leading-tight
+            text-gray-800 dark:text-gray-100
+            group-hover:text-gray-900 dark:group-hover:text-white
+            transition-colors duration-300"
+          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif' }}
+        >
+          {brand.name}
+        </p>
+      </div>
+    </motion.div>
+  );
+};
 
 const ServicePage = () => {
   const { slug } = useParams();
