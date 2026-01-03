@@ -23,56 +23,63 @@ const springHover = {
 
 const MotionLink = motion(Link);
 
-// Brand product data with actual brand logos
-const brandProductImages: Record<string, { name: string; image: string }[]> = {
+// Brand data with colors for premium styled cards
+const brandProductData: Record<string, { name: string; color: string; gradient: string }[]> = {
   "prescription-medicines": [
-    { name: "Pfizer", image: "https://logo.clearbit.com/pfizer.com" },
-    { name: "Cipla", image: "https://logo.clearbit.com/cipla.com" },
-    { name: "Sun Pharma", image: "https://logo.clearbit.com/sunpharma.com" },
-    { name: "Abbott", image: "https://logo.clearbit.com/abbott.com" },
+    { name: "Pfizer", color: "#0093D0", gradient: "from-[#0093D0] to-[#00629B]" },
+    { name: "Cipla", color: "#E31837", gradient: "from-[#E31837] to-[#B01030]" },
+    { name: "Sun Pharma", color: "#F7931E", gradient: "from-[#F7931E] to-[#E57200]" },
+    { name: "Abbott", color: "#003087", gradient: "from-[#003087] to-[#001F5C]" },
   ],
   "baby-care": [
-    { name: "Nestlé", image: "https://logo.clearbit.com/nestle.com" },
-    { name: "Johnson & Johnson", image: "https://logo.clearbit.com/jnj.com" },
-    { name: "Himalaya", image: "https://logo.clearbit.com/himalayawellness.com" },
-    { name: "Pampers", image: "https://logo.clearbit.com/pampers.com" },
+    { name: "Nestlé", color: "#7B5141", gradient: "from-[#8B6152] to-[#5C3D2E]" },
+    { name: "Johnson's", color: "#E31C3D", gradient: "from-[#E31C3D] to-[#C41230]" },
+    { name: "Himalaya", color: "#00A651", gradient: "from-[#00A651] to-[#007A3D]" },
+    { name: "Pampers", color: "#00A0D2", gradient: "from-[#00A0D2] to-[#0077A0]" },
   ],
   "healthcare-products": [
-    { name: "Omron", image: "https://logo.clearbit.com/omron.com" },
-    { name: "Accu-Chek", image: "https://logo.clearbit.com/accu-chek.com" },
-    { name: "Dr. Morepen", image: "https://logo.clearbit.com/drmorepen.com" },
-    { name: "Philips", image: "https://logo.clearbit.com/philips.com" },
+    { name: "Omron", color: "#003DA5", gradient: "from-[#003DA5] to-[#002B75]" },
+    { name: "Accu-Chek", color: "#E4002B", gradient: "from-[#E4002B] to-[#B30022]" },
+    { name: "Dr. Morepen", color: "#1E3A5F", gradient: "from-[#1E3A5F] to-[#0F1D30]" },
+    { name: "Philips", color: "#0B5ED7", gradient: "from-[#0B5ED7] to-[#0842A0]" },
   ],
   "vitamin-supplements": [
-    { name: "Centrum", image: "https://logo.clearbit.com/centrum.com" },
-    { name: "HealthKart", image: "https://logo.clearbit.com/healthkart.com" },
-    { name: "Himalaya", image: "https://logo.clearbit.com/himalayawellness.com" },
-    { name: "Swisse", image: "https://logo.clearbit.com/swisse.com" },
+    { name: "Centrum", color: "#00599C", gradient: "from-[#00599C] to-[#003D6B]" },
+    { name: "HealthKart", color: "#FF6B35", gradient: "from-[#FF6B35] to-[#E54E1B]" },
+    { name: "Himalaya", color: "#00A651", gradient: "from-[#00A651] to-[#007A3D]" },
+    { name: "Swisse", color: "#002B5C", gradient: "from-[#002B5C] to-[#001830]" },
   ],
   "personal-care": [
-    { name: "Nivea", image: "https://logo.clearbit.com/nivea.com" },
-    { name: "Dove", image: "https://logo.clearbit.com/dove.com" },
-    { name: "Cetaphil", image: "https://logo.clearbit.com/cetaphil.com" },
-    { name: "Himalaya", image: "https://logo.clearbit.com/himalayawellness.com" },
+    { name: "Nivea", color: "#001F5C", gradient: "from-[#0033A0] to-[#001F5C]" },
+    { name: "Dove", color: "#003087", gradient: "from-[#004AAD] to-[#003087]" },
+    { name: "Cetaphil", color: "#0077B6", gradient: "from-[#0077B6] to-[#005687]" },
+    { name: "Himalaya", color: "#00A651", gradient: "from-[#00A651] to-[#007A3D]" },
   ],
   "sexual-wellness": [
-    { name: "Durex", image: "https://logo.clearbit.com/durex.com" },
-    { name: "Manforce", image: "https://logo.clearbit.com/manforcecondoms.com" },
-    { name: "Bold Care", image: "https://logo.clearbit.com/beboldcare.com" },
-    { name: "Skore", image: "https://logo.clearbit.com/skorecondoms.com" },
+    { name: "Durex", color: "#003DA5", gradient: "from-[#0055B8] to-[#003DA5]" },
+    { name: "Manforce", color: "#C41E3A", gradient: "from-[#DC143C] to-[#C41E3A]" },
+    { name: "Bold Care", color: "#2D2D2D", gradient: "from-[#404040] to-[#1A1A1A]" },
+    { name: "Skore", color: "#8B0000", gradient: "from-[#B22222] to-[#8B0000]" },
   ],
 };
 
-// Apple-style Brand Product Card with Logo
+// Apple-style Brand Product Card with Gradient Logo
 const BrandProductCard = ({ 
   brand, 
   index 
 }: { 
-  brand: { name: string; image: string }; 
+  brand: { name: string; color: string; gradient: string }; 
   index: number;
 }) => {
-  const [imgError, setImgError] = useState(false);
-  
+  // Get initials (up to 2 characters)
+  const getInitials = (name: string) => {
+    const words = name.split(/[\s&]+/).filter(w => w.length > 0);
+    if (words.length >= 2) {
+      return (words[0][0] + words[1][0]).toUpperCase();
+    }
+    return name.substring(0, 2).toUpperCase();
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 24, scale: 0.95 }}
@@ -103,33 +110,37 @@ const BrandProductCard = ({
         {/* Subtle top highlight */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
         
-        {/* Logo Container - Clean white background for logos */}
-        <div className="relative aspect-square w-full mb-3 rounded-[16px] overflow-hidden
-          bg-white
-          shadow-[0_1px_3px_rgba(0,0,0,0.08),inset_0_0_0_1px_rgba(0,0,0,0.04)]
-          flex items-center justify-center p-3">
-          {!imgError ? (
-            <motion.img
-              src={brand.image}
-              alt={`${brand.name} logo`}
-              className="w-full h-full object-contain"
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.15 + index * 0.08 }}
-              loading="lazy"
-              onError={() => setImgError(true)}
-            />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg">
-              <span 
-                className="text-lg font-bold text-gray-400"
-                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif' }}
-              >
-                {brand.name.charAt(0)}
-              </span>
-            </div>
-          )}
-        </div>
+        {/* Logo Container - Gradient brand initial */}
+        <motion.div 
+          className="relative aspect-square w-full mb-3 rounded-[16px] overflow-hidden
+            flex items-center justify-center"
+          initial={{ scale: 0.9 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.15 + index * 0.08 }}
+        >
+          {/* Gradient Background */}
+          <div 
+            className={`absolute inset-0 bg-gradient-to-br ${brand.gradient} opacity-95`}
+          />
+          
+          {/* Subtle shine overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-black/10" />
+          
+          {/* Inner shadow for depth */}
+          <div className="absolute inset-0 shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)]" />
+          
+          {/* Brand Initials */}
+          <span 
+            className="relative z-10 text-white font-bold text-xl tracking-tight
+              drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]"
+            style={{ 
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif',
+              textShadow: '0 1px 2px rgba(0,0,0,0.15)'
+            }}
+          >
+            {getInitials(brand.name)}
+          </span>
+        </motion.div>
         
         {/* Brand Name - SF Pro style */}
         <p 
@@ -175,7 +186,7 @@ const ServicePage = () => {
   }
 
   const IconComponent = service.icon;
-  const brandProducts = brandProductImages[service.slug] || [];
+  const brandProducts = brandProductData[service.slug] || [];
 
   return (
     <div className="page-container">
