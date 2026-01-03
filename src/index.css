@@ -396,6 +396,16 @@
     color: hsl(0 0% 92%);
     background: hsl(225 8% 13%);
   }
+
+  /* Hide scrollbar utility */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Gradient border animation */
