@@ -25,56 +25,68 @@ const MotionLink = motion(Link);
 
 type BrandAsset = {
   name: string;
-  /** Local file in /public (recommended to avoid CORS) */
   logoSrc?: string;
-  /** If the logo is dark and needs inversion in dark mode */
   darkInvert?: boolean;
+  gradient?: string;
 };
 
-// Brand data with real logo images (stored locally under /public/brand-logos)
+// Apple-inspired vibrant gradients
+const appleGradients = {
+  blue: "linear-gradient(135deg, #5AC8FA 0%, #007AFF 100%)",
+  purple: "linear-gradient(135deg, #BF5AF2 0%, #5E5CE6 100%)",
+  pink: "linear-gradient(135deg, #FF6482 0%, #FF2D55 100%)",
+  orange: "linear-gradient(135deg, #FFD60A 0%, #FF9500 100%)",
+  green: "linear-gradient(135deg, #30D158 0%, #34C759 100%)",
+  teal: "linear-gradient(135deg, #64D2FF 0%, #5AC8FA 100%)",
+  red: "linear-gradient(135deg, #FF6482 0%, #FF3B30 100%)",
+  indigo: "linear-gradient(135deg, #5E5CE6 0%, #AF52DE 100%)",
+  mint: "linear-gradient(135deg, #00C7BE 0%, #30D158 100%)",
+  coral: "linear-gradient(135deg, #FF9F0A 0%, #FF6B6B 100%)",
+  sky: "linear-gradient(135deg, #34AADC 0%, #5856D6 100%)",
+  lime: "linear-gradient(135deg, #A8E063 0%, #56AB2F 100%)",
+};
+
+// Brand data with real logo images or vibrant gradients
 const brandAssetsByService: Record<string, BrandAsset[]> = {
   "sexual-wellness": [
     { name: "Durex", logoSrc: "/brand-logos/durex.svg" },
     { name: "Manforce", logoSrc: "/brand-logos/manforce-logo.png" },
-    // Bold Care: please upload the official logo file and we'll wire it here (their domain blocks reliable fetching).
-    { name: "Bold Care" },
+    { name: "Bold Care", gradient: appleGradients.purple },
     { name: "Skore", logoSrc: "/brand-logos/skore.png", darkInvert: true },
   ],
-
-  // Keep the other services as names-only for now (they’ll render with premium initials until logos are added)
   "prescription-medicines": [
-    { name: "Pfizer" },
-    { name: "Cipla" },
-    { name: "Sun Pharma" },
-    { name: "Abbott" },
+    { name: "Pfizer", gradient: appleGradients.blue },
+    { name: "Cipla", gradient: appleGradients.red },
+    { name: "Sun Pharma", gradient: appleGradients.orange },
+    { name: "Abbott", gradient: appleGradients.teal },
   ],
   "baby-care": [
-    { name: "Nestlé" },
-    { name: "Johnson's" },
-    { name: "Himalaya" },
-    { name: "Pampers" },
+    { name: "Nestlé", gradient: appleGradients.sky },
+    { name: "Johnson's", gradient: appleGradients.pink },
+    { name: "Himalaya", gradient: appleGradients.green },
+    { name: "Pampers", gradient: appleGradients.mint },
   ],
   "healthcare-products": [
-    { name: "Omron" },
-    { name: "Accu-Chek" },
-    { name: "Dr. Morepen" },
-    { name: "Philips" },
+    { name: "Omron", gradient: appleGradients.blue },
+    { name: "Accu-Chek", gradient: appleGradients.coral },
+    { name: "Dr. Morepen", gradient: appleGradients.indigo },
+    { name: "Philips", gradient: appleGradients.teal },
   ],
   "vitamin-supplements": [
-    { name: "Centrum" },
-    { name: "HealthKart" },
-    { name: "Himalaya" },
-    { name: "Swisse" },
+    { name: "Centrum", gradient: appleGradients.orange },
+    { name: "HealthKart", gradient: appleGradients.lime },
+    { name: "Himalaya", gradient: appleGradients.green },
+    { name: "Swisse", gradient: appleGradients.purple },
   ],
   "personal-care": [
-    { name: "Nivea" },
-    { name: "Dove" },
-    { name: "Cetaphil" },
-    { name: "Himalaya" },
+    { name: "Nivea", gradient: appleGradients.blue },
+    { name: "Dove", gradient: appleGradients.pink },
+    { name: "Cetaphil", gradient: appleGradients.teal },
+    { name: "Himalaya", gradient: appleGradients.green },
   ],
 };
 
-// Apple-style Brand Product Card (real logos when available; premium initials fallback)
+// Apple-style Brand Product Card
 const BrandProductCard = ({ brand, index }: { brand: BrandAsset; index: number }) => {
   const [imgError, setImgError] = useState(false);
 
@@ -113,13 +125,13 @@ const BrandProductCard = ({ brand, index }: { brand: BrandAsset; index: number }
           className="relative aspect-square w-full mb-3 rounded-[16px] overflow-hidden
             flex items-center justify-center"
         >
-          {/* Clean plate behind the logo */}
+          {/* Clean plate behind the logo or vibrant gradient */}
           <div
             className="absolute inset-0"
             style={{
               background: showLogo
                 ? "linear-gradient(180deg, hsl(0 0% 100% / 0.92) 0%, hsl(0 0% 100% / 0.85) 100%)"
-                : "linear-gradient(180deg, hsl(var(--card) / 0.55) 0%, hsl(var(--card) / 0.35) 100%)",
+                : brand.gradient || "linear-gradient(135deg, #5AC8FA 0%, #007AFF 100%)",
             }}
           />
 
@@ -135,10 +147,10 @@ const BrandProductCard = ({ brand, index }: { brand: BrandAsset; index: number }
             />
           ) : (
             <span
-              className="relative z-10 text-foreground font-bold text-xl tracking-tight"
+              className="relative z-10 text-white font-bold text-2xl tracking-tight drop-shadow-lg"
               style={{
                 fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif',
-                textShadow: "0 1px 2px hsl(0 0% 0% / 0.2)",
+                textShadow: "0 2px 8px rgba(0,0,0,0.3)",
               }}
             >
               {getInitials(brand.name)}
