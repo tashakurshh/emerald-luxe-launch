@@ -23,81 +23,79 @@ const springHover = {
 
 const MotionLink = motion(Link);
 
-// Brand data with colors for premium styled cards
-const brandProductData: Record<string, { name: string; color: string; gradient: string }[]> = {
+type BrandAsset = {
+  name: string;
+  /** Local file in /public (recommended to avoid CORS) */
+  logoSrc?: string;
+  /** If the logo is dark and needs inversion in dark mode */
+  darkInvert?: boolean;
+};
+
+// Brand data with real logo images (stored locally under /public/brand-logos)
+const brandAssetsByService: Record<string, BrandAsset[]> = {
+  "sexual-wellness": [
+    { name: "Durex", logoSrc: "/brand-logos/durex.svg" },
+    { name: "Manforce", logoSrc: "/brand-logos/manforce-logo.png" },
+    // Bold Care: please upload the official logo file and we'll wire it here (their domain blocks reliable fetching).
+    { name: "Bold Care" },
+    { name: "Skore", logoSrc: "/brand-logos/skore.png", darkInvert: true },
+  ],
+
+  // Keep the other services as names-only for now (they’ll render with premium initials until logos are added)
   "prescription-medicines": [
-    { name: "Pfizer", color: "#0093D0", gradient: "from-[#0093D0] to-[#00629B]" },
-    { name: "Cipla", color: "#E31837", gradient: "from-[#E31837] to-[#B01030]" },
-    { name: "Sun Pharma", color: "#F7931E", gradient: "from-[#F7931E] to-[#E57200]" },
-    { name: "Abbott", color: "#003087", gradient: "from-[#003087] to-[#001F5C]" },
+    { name: "Pfizer" },
+    { name: "Cipla" },
+    { name: "Sun Pharma" },
+    { name: "Abbott" },
   ],
   "baby-care": [
-    { name: "Nestlé", color: "#7B5141", gradient: "from-[#8B6152] to-[#5C3D2E]" },
-    { name: "Johnson's", color: "#E31C3D", gradient: "from-[#E31C3D] to-[#C41230]" },
-    { name: "Himalaya", color: "#00A651", gradient: "from-[#00A651] to-[#007A3D]" },
-    { name: "Pampers", color: "#00A0D2", gradient: "from-[#00A0D2] to-[#0077A0]" },
+    { name: "Nestlé" },
+    { name: "Johnson's" },
+    { name: "Himalaya" },
+    { name: "Pampers" },
   ],
   "healthcare-products": [
-    { name: "Omron", color: "#003DA5", gradient: "from-[#003DA5] to-[#002B75]" },
-    { name: "Accu-Chek", color: "#E4002B", gradient: "from-[#E4002B] to-[#B30022]" },
-    { name: "Dr. Morepen", color: "#1E3A5F", gradient: "from-[#1E3A5F] to-[#0F1D30]" },
-    { name: "Philips", color: "#0B5ED7", gradient: "from-[#0B5ED7] to-[#0842A0]" },
+    { name: "Omron" },
+    { name: "Accu-Chek" },
+    { name: "Dr. Morepen" },
+    { name: "Philips" },
   ],
   "vitamin-supplements": [
-    { name: "Centrum", color: "#00599C", gradient: "from-[#00599C] to-[#003D6B]" },
-    { name: "HealthKart", color: "#FF6B35", gradient: "from-[#FF6B35] to-[#E54E1B]" },
-    { name: "Himalaya", color: "#00A651", gradient: "from-[#00A651] to-[#007A3D]" },
-    { name: "Swisse", color: "#002B5C", gradient: "from-[#002B5C] to-[#001830]" },
+    { name: "Centrum" },
+    { name: "HealthKart" },
+    { name: "Himalaya" },
+    { name: "Swisse" },
   ],
   "personal-care": [
-    { name: "Nivea", color: "#001F5C", gradient: "from-[#0033A0] to-[#001F5C]" },
-    { name: "Dove", color: "#003087", gradient: "from-[#004AAD] to-[#003087]" },
-    { name: "Cetaphil", color: "#0077B6", gradient: "from-[#0077B6] to-[#005687]" },
-    { name: "Himalaya", color: "#00A651", gradient: "from-[#00A651] to-[#007A3D]" },
-  ],
-  "sexual-wellness": [
-    { name: "Durex", color: "#003DA5", gradient: "from-[#0055B8] to-[#003DA5]" },
-    { name: "Manforce", color: "#C41E3A", gradient: "from-[#DC143C] to-[#C41E3A]" },
-    { name: "Bold Care", color: "#2D2D2D", gradient: "from-[#404040] to-[#1A1A1A]" },
-    { name: "Skore", color: "#8B0000", gradient: "from-[#B22222] to-[#8B0000]" },
+    { name: "Nivea" },
+    { name: "Dove" },
+    { name: "Cetaphil" },
+    { name: "Himalaya" },
   ],
 };
 
-// Apple-style Brand Product Card with Gradient Logo
-const BrandProductCard = ({ 
-  brand, 
-  index 
-}: { 
-  brand: { name: string; color: string; gradient: string }; 
-  index: number;
-}) => {
-  // Get initials (up to 2 characters)
+// Apple-style Brand Product Card (real logos when available; premium initials fallback)
+const BrandProductCard = ({ brand, index }: { brand: BrandAsset; index: number }) => {
+  const [imgError, setImgError] = useState(false);
+
   const getInitials = (name: string) => {
-    const words = name.split(/[\s&]+/).filter(w => w.length > 0);
-    if (words.length >= 2) {
-      return (words[0][0] + words[1][0]).toUpperCase();
-    }
+    const words = name.split(/[\s&]+/).filter((w) => w.length > 0);
+    if (words.length >= 2) return (words[0][0] + words[1][0]).toUpperCase();
     return name.substring(0, 2).toUpperCase();
   };
+
+  const showLogo = !!brand.logoSrc && !imgError;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 24, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ 
-        delay: 0.1 + index * 0.08, 
-        duration: 0.6,
-        ease: [0.25, 0.46, 0.45, 0.94]
-      }}
-      whileHover={{ 
-        y: -6,
-        scale: 1.02,
-        transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }
-      }}
+      transition={{ delay: 0.1 + index * 0.08, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] } }}
       whileTap={{ scale: 0.98 }}
       className="group flex-shrink-0 w-[130px] sm:w-auto cursor-pointer"
     >
-      <div 
+      <div
         className="relative overflow-hidden rounded-[24px] p-4
           bg-white/80 dark:bg-white/[0.08]
           backdrop-blur-2xl backdrop-saturate-[1.8]
@@ -109,46 +107,55 @@ const BrandProductCard = ({
       >
         {/* Subtle top highlight */}
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
-        
-        {/* Logo Container - Gradient brand initial */}
-        <motion.div 
+
+        {/* Logo / Mark */}
+        <div
           className="relative aspect-square w-full mb-3 rounded-[16px] overflow-hidden
             flex items-center justify-center"
-          initial={{ scale: 0.9 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.15 + index * 0.08 }}
         >
-          {/* Gradient Background */}
-          <div 
-            className={`absolute inset-0 bg-gradient-to-br ${brand.gradient} opacity-95`}
-          />
-          
-          {/* Subtle shine overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/25 via-transparent to-black/10" />
-          
-          {/* Inner shadow for depth */}
-          <div className="absolute inset-0 shadow-[inset_0_1px_2px_rgba(255,255,255,0.3),inset_0_-1px_2px_rgba(0,0,0,0.1)]" />
-          
-          {/* Brand Initials */}
-          <span 
-            className="relative z-10 text-white font-bold text-xl tracking-tight
-              drop-shadow-[0_1px_2px_rgba(0,0,0,0.2)]"
-            style={{ 
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif',
-              textShadow: '0 1px 2px rgba(0,0,0,0.15)'
+          {/* Clean plate behind the logo */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background: showLogo
+                ? "linear-gradient(180deg, hsl(0 0% 100% / 0.92) 0%, hsl(0 0% 100% / 0.85) 100%)"
+                : "linear-gradient(180deg, hsl(var(--card) / 0.55) 0%, hsl(var(--card) / 0.35) 100%)",
             }}
-          >
-            {getInitials(brand.name)}
-          </span>
-        </motion.div>
-        
+          />
+
+          {showLogo ? (
+            <img
+              src={brand.logoSrc}
+              alt={`${brand.name} logo`}
+              loading="lazy"
+              onError={() => setImgError(true)}
+              className={
+                "relative z-10 w-[78%] h-[78%] object-contain " + (brand.darkInvert ? "dark:invert" : "")
+              }
+            />
+          ) : (
+            <span
+              className="relative z-10 text-foreground font-bold text-xl tracking-tight"
+              style={{
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif',
+                textShadow: "0 1px 2px hsl(0 0% 0% / 0.2)",
+              }}
+            >
+              {getInitials(brand.name)}
+            </span>
+          )}
+        </div>
+
         {/* Brand Name - SF Pro style */}
-        <p 
+        <p
           className="text-center font-semibold text-[13px] tracking-[-0.01em] leading-tight
             text-gray-800 dark:text-gray-100
             group-hover:text-gray-900 dark:group-hover:text-white
             transition-colors duration-300"
-          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif' }}
+          style={{
+            fontFamily:
+              '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif',
+          }}
         >
           {brand.name}
         </p>
@@ -177,7 +184,9 @@ const ServicePage = () => {
           <div className="text-center">
             <p className="text-muted-foreground mb-4">Service not found</p>
             <motion.div whileTap={{ scale: 0.95 }} transition={{ duration: 0.1 }}>
-              <Link to="/services" className="text-primary hover:underline">View all services</Link>
+              <Link to="/services" className="text-primary hover:underline">
+                View all services
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -186,7 +195,7 @@ const ServicePage = () => {
   }
 
   const IconComponent = service.icon;
-  const brandProducts = brandProductData[service.slug] || [];
+  const brandProducts = brandAssetsByService[service.slug] || [];
 
   return (
     <div className="page-container">
