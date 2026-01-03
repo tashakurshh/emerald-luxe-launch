@@ -23,6 +23,123 @@ const springHover = {
 
 const MotionLink = motion(Link);
 
+// Brand product data with images for each service category
+const brandProductImages: Record<string, { name: string; image: string }[]> = {
+  "prescription-medicines": [
+    { name: "Pfizer", image: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Cipla", image: "https://images.unsplash.com/photo-1587854692152-cbe660dbde88?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Sun Pharma", image: "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Abbott", image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=400&fit=crop&auto=format&q=80" },
+  ],
+  "baby-care": [
+    { name: "Nestlé", image: "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Johnson & Johnson", image: "https://images.unsplash.com/photo-1584839404075-a71c217cf63a?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Himalaya Baby", image: "https://images.unsplash.com/photo-1519689680058-324335c77eba?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Pampers", image: "https://images.unsplash.com/photo-1555252333-9f8e92e65df9?w=400&h=400&fit=crop&auto=format&q=80" },
+  ],
+  "healthcare-products": [
+    { name: "Omron", image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Accu-Chek", image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Dr. Morepen", image: "https://images.unsplash.com/photo-1583947215259-38e31be8751f?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Philips", image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=400&fit=crop&auto=format&q=80" },
+  ],
+  "vitamin-supplements": [
+    { name: "Centrum", image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "HealthKart", image: "https://images.unsplash.com/photo-1607619056574-7b8d3ee536b2?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Himalaya", image: "https://images.unsplash.com/photo-1577401239170-897942555fb3?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Swisse", image: "https://images.unsplash.com/photo-1579165466741-7f35e4755660?w=400&h=400&fit=crop&auto=format&q=80" },
+  ],
+  "personal-care": [
+    { name: "Nivea", image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Dove", image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Cetaphil", image: "https://images.unsplash.com/photo-1617897903246-719242758050?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Himalaya", image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?w=400&h=400&fit=crop&auto=format&q=80" },
+  ],
+  "sexual-wellness": [
+    { name: "Durex", image: "https://images.unsplash.com/photo-1556909114-44e3e70034e2?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Manforce", image: "https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "Bold Care", image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&auto=format&q=80" },
+    { name: "K-Y", image: "https://images.unsplash.com/photo-1556909211-36987daf7b4d?w=400&h=400&fit=crop&auto=format&q=80" },
+  ],
+};
+
+// Apple-style Brand Product Card
+const BrandProductCard = ({ 
+  brand, 
+  index 
+}: { 
+  brand: { name: string; image: string }; 
+  index: number;
+}) => (
+  <motion.div
+    initial={{ opacity: 0, y: 24, scale: 0.95 }}
+    animate={{ opacity: 1, y: 0, scale: 1 }}
+    transition={{ 
+      delay: 0.1 + index * 0.08, 
+      duration: 0.6,
+      ease: [0.25, 0.46, 0.45, 0.94]
+    }}
+    whileHover={{ 
+      y: -6,
+      scale: 1.02,
+      transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }
+    }}
+    whileTap={{ scale: 0.98 }}
+    className="group flex-shrink-0 w-[130px] sm:w-auto cursor-pointer"
+  >
+    <div 
+      className="relative overflow-hidden rounded-[24px] p-4
+        bg-white/70 dark:bg-white/[0.06]
+        backdrop-blur-2xl backdrop-saturate-[1.8]
+        border border-white/50 dark:border-white/[0.08]
+        shadow-[0_4px_24px_-4px_rgba(0,0,0,0.06),0_0_0_1px_rgba(255,255,255,0.1)_inset]
+        group-hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.12),0_0_0_1px_rgba(255,255,255,0.15)_inset]
+        group-hover:bg-white/85 dark:group-hover:bg-white/[0.09]
+        transition-all duration-500 ease-out"
+    >
+      {/* Subtle top highlight */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
+      
+      {/* Product Image Container */}
+      <div className="relative aspect-square w-full mb-3 rounded-[18px] overflow-hidden
+        bg-gradient-to-br from-gray-50/80 to-gray-100/60 dark:from-gray-800/40 dark:to-gray-900/30
+        shadow-[inset_0_0_0_1px_rgba(0,0,0,0.04)]">
+        <motion.img
+          src={brand.image}
+          alt={brand.name}
+          className="w-full h-full object-cover opacity-0"
+          initial={{ scale: 1.1, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.15 + index * 0.08 }}
+          loading="lazy"
+          onLoad={(e) => {
+            (e.target as HTMLImageElement).style.opacity = '1';
+          }}
+        />
+        
+        {/* Soft inner shadow for editorial depth */}
+        <div className="absolute inset-0 rounded-[18px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.02),inset_0_-1px_2px_rgba(255,255,255,0.5)]" />
+        
+        {/* Hover overlay */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        />
+      </div>
+      
+      {/* Brand Name - SF Pro style */}
+      <p 
+        className="text-center font-medium text-[13px] tracking-[-0.01em] leading-tight
+          text-gray-700 dark:text-gray-200
+          group-hover:text-gray-900 dark:group-hover:text-white
+          transition-colors duration-300"
+        style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif' }}
+      >
+        {brand.name}
+      </p>
+    </div>
+  </motion.div>
+);
+
 const ServicePage = () => {
   const { slug } = useParams();
   const service = getServiceBySlug(slug || "");
@@ -52,6 +169,7 @@ const ServicePage = () => {
   }
 
   const IconComponent = service.icon;
+  const brandProducts = brandProductImages[service.slug] || [];
 
   return (
     <div className="page-container">
@@ -210,43 +328,71 @@ const ServicePage = () => {
             </div>
           </motion.div>
 
-          {/* Brand Pills Section */}
-          {service.commonBrands && service.commonBrands.length > 0 && (
+          {/* Brand Products Section - Apple Store Style */}
+          {brandProducts.length > 0 && (
             <motion.div 
-              className="glass-card p-5 mb-5"
-              whileTap={{ scale: 0.985 }}
-              transition={springTap}
+              className="mb-5"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
             >
-              <p className="text-[11px] text-muted-foreground/70 mb-3 font-medium tracking-wide uppercase">
-                Commonly Available Brands
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {service.commonBrands.map((brand, index) => (
-                  <motion.span
-                    key={brand}
-                    initial={{ opacity: 0, y: 4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.05 * index, duration: 0.2 }}
-                    whileHover={{ 
-                      scale: 1.03,
-                      boxShadow: `0 4px 20px -4px ${service.color}40, 0 0 12px -2px ${service.color}30`
-                    }}
-                    className="inline-flex items-center px-4 py-1.5 rounded-[20px] text-xs font-medium
-                      backdrop-blur-sm text-foreground/90 cursor-default
-                      transition-all duration-200"
-                    style={{
-                      background: `linear-gradient(135deg, ${service.color}18 0%, ${service.color}08 100%)`,
-                      border: `1px solid ${service.color}30`,
-                      boxShadow: `0 2px 8px -2px ${service.color}15`,
-                    }}
-                  >
-                    {brand}
-                  </motion.span>
+              {/* Section Header */}
+              <div className="mb-5">
+                <motion.h3 
+                  className="text-base font-semibold text-foreground mb-1"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                >
+                  Featured Brands
+                </motion.h3>
+                <motion.p 
+                  className="text-sm text-muted-foreground/80"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  Premium products from trusted manufacturers
+                </motion.p>
+              </div>
+
+              {/* Mobile: Horizontal Scroll */}
+              <div className="sm:hidden -mx-4 px-4">
+                <div 
+                  className="flex gap-3 overflow-x-auto pb-4 scrollbar-hide scroll-smooth"
+                  style={{ 
+                    scrollSnapType: 'x mandatory',
+                    WebkitOverflowScrolling: 'touch'
+                  }}
+                >
+                  {brandProducts.map((brand, index) => (
+                    <div key={brand.name} style={{ scrollSnapAlign: 'start' }}>
+                      <BrandProductCard brand={brand} index={index} />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop: Grid Layout */}
+              <div className="hidden sm:grid grid-cols-4 gap-4">
+                {brandProducts.map((brand, index) => (
+                  <BrandProductCard key={brand.name} brand={brand} index={index} />
                 ))}
               </div>
-              <p className="text-[10px] text-muted-foreground/60 mt-3 leading-relaxed">
-                <span className="font-semibold text-foreground/70">All other brands are also available.</span> Brand availability may vary by prescription and location.
-              </p>
+
+              {/* All Brands Notice */}
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="text-center text-[13px] text-muted-foreground/70 mt-5 leading-relaxed"
+                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }}
+              >
+                <span className="font-semibold text-foreground/80">All other brands are also available.</span>
+                <br className="sm:hidden" />
+                <span className="hidden sm:inline"> </span>
+                Brand availability may vary by prescription and location.
+              </motion.p>
             </motion.div>
           )}
 
