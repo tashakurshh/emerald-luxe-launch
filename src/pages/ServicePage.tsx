@@ -55,21 +55,21 @@ const brandAssetsByService: Record<string, BrandAsset[]> = {
     { name: "Skore", logoSrc: "/brand-logos/skore.png", darkInvert: true },
   ],
   "prescription-medicines": [
-    { name: "Pfizer", gradient: appleGradients.blue },
-    { name: "Cipla", gradient: appleGradients.red },
-    { name: "Sun Pharma", gradient: appleGradients.orange },
-    { name: "Abbott", gradient: appleGradients.teal },
+    { name: "Pfizer", logoSrc: "/brand-logos/pfizer.png" },
+    { name: "Cipla", logoSrc: "/brand-logos/cipla.png" },
+    { name: "Sun Pharma", logoSrc: "/brand-logos/sun-pharma.png" },
+    { name: "Abbott", logoSrc: "/brand-logos/abbott.svg" },
   ],
   "baby-care": [
-    { name: "Nestlé", gradient: appleGradients.sky },
-    { name: "Johnson's", gradient: appleGradients.pink },
+    { name: "Nestlé", logoSrc: "/brand-logos/nestle.png", darkInvert: true },
+    { name: "Johnson's", logoSrc: "/brand-logos/johnsons.png" },
     { name: "Himalaya", logoSrc: "/brand-logos/himalaya.jpg" },
-    { name: "Pampers", gradient: appleGradients.mint },
+    { name: "Pampers", logoSrc: "/brand-logos/pampers.png" },
   ],
   "healthcare-products": [
     { name: "Omron", logoSrc: "/brand-logos/omron.png" },
     { name: "Accu-Chek", logoSrc: "/brand-logos/accu-chek.png", darkInvert: true },
-    { name: "Dr. Morepen", gradient: appleGradients.indigo },
+    { name: "Dr. Morepen", logoSrc: "/brand-logos/dr-morepen.png" },
     { name: "Philips", logoSrc: "/brand-logos/philips.png" },
   ],
   "vitamin-supplements": [
@@ -100,41 +100,28 @@ const BrandProductCard = ({ brand, index }: { brand: BrandAsset; index: number }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24, scale: 0.95 }}
+      initial={{ opacity: 0, y: 20, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ delay: 0.1 + index * 0.08, duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
-      whileHover={{ y: -6, scale: 1.02, transition: { duration: 0.35, ease: [0.25, 0.46, 0.45, 0.94] } }}
-      whileTap={{ scale: 0.98 }}
-      className="group flex-shrink-0 w-[130px] sm:w-auto cursor-pointer"
+      transition={{ delay: 0.1 + index * 0.06, duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+      whileHover={{ y: -4, scale: 1.02, transition: { duration: 0.3, ease: [0.25, 0.46, 0.45, 0.94] } }}
+      whileTap={{ scale: 0.97 }}
+      className="group flex-shrink-0 w-[120px] sm:w-auto cursor-pointer"
     >
       <div
-        className="relative overflow-hidden rounded-[24px] p-4
-          bg-white/80 dark:bg-white/[0.08]
-          backdrop-blur-2xl backdrop-saturate-[1.8]
-          border border-white/60 dark:border-white/[0.1]
-          shadow-[0_4px_24px_-4px_rgba(0,0,0,0.08),0_0_0_1px_rgba(255,255,255,0.15)_inset]
-          group-hover:shadow-[0_20px_50px_-12px_rgba(0,0,0,0.15),0_0_0_1px_rgba(255,255,255,0.2)_inset]
-          group-hover:bg-white/90 dark:group-hover:bg-white/[0.12]
-          transition-all duration-500 ease-out"
+        className="relative overflow-hidden rounded-3xl p-3.5
+          bg-white/90 dark:bg-zinc-900/80
+          backdrop-blur-xl
+          border border-zinc-200/50 dark:border-zinc-700/50
+          shadow-[0_2px_12px_-2px_rgba(0,0,0,0.06)]
+          group-hover:shadow-[0_12px_32px_-8px_rgba(0,0,0,0.12)]
+          group-hover:border-zinc-300/60 dark:group-hover:border-zinc-600/60
+          transition-all duration-400 ease-out"
       >
-        {/* Subtle top highlight */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
-
-        {/* Logo / Mark */}
+        {/* Logo Container */}
         <div
-          className="relative aspect-square w-full mb-3 rounded-[16px] overflow-hidden
-            flex items-center justify-center"
+          className="relative aspect-square w-full mb-2.5 rounded-2xl overflow-hidden
+            flex items-center justify-center bg-zinc-50 dark:bg-zinc-800/60"
         >
-          {/* Clean plate behind the logo or vibrant gradient */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: showLogo
-                ? "linear-gradient(180deg, hsl(0 0% 100% / 0.92) 0%, hsl(0 0% 100% / 0.85) 100%)"
-                : brand.gradient || "linear-gradient(135deg, #5AC8FA 0%, #007AFF 100%)",
-            }}
-          />
-
           {showLogo ? (
             <img
               src={brand.logoSrc}
@@ -142,32 +129,31 @@ const BrandProductCard = ({ brand, index }: { brand: BrandAsset; index: number }
               loading="lazy"
               onError={() => setImgError(true)}
               className={
-                "relative z-10 w-[78%] h-[78%] object-contain " + (brand.darkInvert ? "dark:invert" : "")
+                "relative z-10 w-[72%] h-[72%] object-contain " + (brand.darkInvert ? "dark:invert" : "")
               }
             />
           ) : (
-            <span
-              className="relative z-10 text-white font-bold text-2xl tracking-tight drop-shadow-lg"
-              style={{
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif',
-                textShadow: "0 2px 8px rgba(0,0,0,0.3)",
-              }}
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ background: brand.gradient || appleGradients.blue }}
             >
-              {getInitials(brand.name)}
-            </span>
+              <span
+                className="text-white font-semibold text-xl tracking-tight"
+                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif' }}
+              >
+                {getInitials(brand.name)}
+              </span>
+            </div>
           )}
         </div>
 
-        {/* Brand Name - SF Pro style */}
+        {/* Brand Name */}
         <p
-          className="text-center font-semibold text-[13px] tracking-[-0.01em] leading-tight
-            text-gray-800 dark:text-gray-100
-            group-hover:text-gray-900 dark:group-hover:text-white
-            transition-colors duration-300"
-          style={{
-            fontFamily:
-              '-apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif',
-          }}
+          className="text-center font-medium text-[12px] tracking-[-0.01em] leading-snug
+            text-zinc-700 dark:text-zinc-300
+            group-hover:text-zinc-900 dark:group-hover:text-white
+            transition-colors duration-200"
+          style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif' }}
         >
           {brand.name}
         </p>
