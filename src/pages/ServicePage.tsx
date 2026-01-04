@@ -51,7 +51,7 @@ const brandAssetsByService: Record<string, BrandAsset[]> = {
   "sexual-wellness": [
     { name: "Durex", logoSrc: "/brand-logos/durex.svg" },
     { name: "Manforce", logoSrc: "/brand-logos/manforce-logo.png" },
-    { name: "Bold Care", gradient: appleGradients.purple },
+    { name: "Bold Care", logoSrc: "/brand-logos/boldcare.png" },
     { name: "Skore", logoSrc: "/brand-logos/skore.png", darkInvert: true },
   ],
   "prescription-medicines": [
@@ -63,26 +63,26 @@ const brandAssetsByService: Record<string, BrandAsset[]> = {
   "baby-care": [
     { name: "Nestlé", gradient: appleGradients.sky },
     { name: "Johnson's", gradient: appleGradients.pink },
-    { name: "Himalaya", gradient: appleGradients.green },
+    { name: "Himalaya", logoSrc: "/brand-logos/himalaya.jpg" },
     { name: "Pampers", gradient: appleGradients.mint },
   ],
   "healthcare-products": [
-    { name: "Omron", gradient: appleGradients.blue },
-    { name: "Accu-Chek", gradient: appleGradients.coral },
+    { name: "Omron", logoSrc: "/brand-logos/omron.png" },
+    { name: "Accu-Chek", logoSrc: "/brand-logos/accu-chek.png", darkInvert: true },
     { name: "Dr. Morepen", gradient: appleGradients.indigo },
-    { name: "Philips", gradient: appleGradients.teal },
+    { name: "Philips", logoSrc: "/brand-logos/philips.png" },
   ],
   "vitamin-supplements": [
-    { name: "Centrum", gradient: appleGradients.orange },
-    { name: "HealthKart", gradient: appleGradients.lime },
-    { name: "Himalaya", gradient: appleGradients.green },
+    { name: "Centrum", logoSrc: "/brand-logos/centrum.png" },
+    { name: "HealthKart", logoSrc: "/brand-logos/healthkart.png" },
+    { name: "Himalaya", logoSrc: "/brand-logos/himalaya.jpg" },
     { name: "Swisse", gradient: appleGradients.purple },
   ],
   "personal-care": [
-    { name: "Nivea", gradient: appleGradients.blue },
-    { name: "Dove", gradient: appleGradients.pink },
-    { name: "Cetaphil", gradient: appleGradients.teal },
-    { name: "Himalaya", gradient: appleGradients.green },
+    { name: "Nivea", logoSrc: "/brand-logos/nivea.png", darkInvert: true },
+    { name: "Dove", logoSrc: "/brand-logos/dove.png" },
+    { name: "Cetaphil", logoSrc: "/brand-logos/cetaphil.png" },
+    { name: "Himalaya", logoSrc: "/brand-logos/himalaya.jpg" },
   ],
 };
 
