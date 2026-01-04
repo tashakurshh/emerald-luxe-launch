@@ -76,7 +76,7 @@ const brandAssetsByService: Record<string, BrandAsset[]> = {
     { name: "Centrum", logoSrc: "/brand-logos/centrum.png" },
     { name: "HealthKart", logoSrc: "/brand-logos/healthkart.png" },
     { name: "Himalaya", logoSrc: "/brand-logos/himalaya.jpg" },
-    { name: "Swisse", gradient: appleGradients.purple },
+    { name: "Swisse", logoSrc: "/brand-logos/swisse.png" },
   ],
   "personal-care": [
     { name: "Nivea", logoSrc: "/brand-logos/nivea.png", darkInvert: true },
