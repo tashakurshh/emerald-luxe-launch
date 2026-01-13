@@ -14,6 +14,7 @@ import TrustedPharmacies from "@/components/home/TrustedPharmacies";
 import LocationBanner from "@/components/home/LocationBanner";
 import ServicesCTA from "@/components/home/ServicesCTA";
 import WhatsAppCTA from "@/components/home/WhatsAppCTA";
+import OfferSection from "@/components/home/OfferSection";
 // Simplified animation config
 const fadeIn = {
   initial: { opacity: 0 },
@@ -51,6 +52,7 @@ const Index = () => {
 
         <div className="space-y-5">
           <HeroVisual />
+          <OfferSection />
           <ActionCards />
           <LocationBanner />
           <HowItWorks />
