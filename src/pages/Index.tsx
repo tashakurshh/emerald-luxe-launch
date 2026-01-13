@@ -5,16 +5,16 @@ import DynamicIslandNav from "@/components/DynamicIslandNav";
 import ParallaxBackground from "@/components/ui/ParallaxBackground";
 import WelcomeModal from "@/components/WelcomeModal";
 import HeroVisual from "@/components/HeroVisual";
-import ServicesCard from "@/components/ServicesCard";
 import ActionCards from "@/components/ActionCards";
 import FooterVisual from "@/components/FooterVisual";
 import HowItWorks from "@/components/home/HowItWorks";
 import TrustSection from "@/components/home/TrustSection";
 import TrustedPharmacies from "@/components/home/TrustedPharmacies";
 import LocationBanner from "@/components/home/LocationBanner";
-import ServicesCTA from "@/components/home/ServicesCTA";
 import WhatsAppCTA from "@/components/home/WhatsAppCTA";
 import OfferSection from "@/components/home/OfferSection";
+import ServicesCarousel from "@/components/home/ServicesCarousel";
+
 // Simplified animation config
 const fadeIn = {
   initial: { opacity: 0 },
@@ -54,10 +54,9 @@ const Index = () => {
           <HeroVisual />
           <OfferSection />
           <ActionCards />
+          <ServicesCarousel />
           <LocationBanner />
           <HowItWorks />
-          <ServicesCard />
-          <ServicesCTA />
           <TrustSection />
           <TrustedPharmacies />
           <WhatsAppCTA />
